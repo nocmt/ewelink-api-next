@@ -36,3 +36,7 @@ $ npm i ewelink-api-next@last
 
 ## Change Log
 [CHANGELOG.md](doc/CHANGELOG.md)
+
+## Thanks
+
+Use of mixed mode and project structure reference：https://github.com/lblblong/wechat-api-next
