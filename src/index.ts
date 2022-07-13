@@ -1,1 +1,1 @@
-export { WebAPI } from './web/WebAPI'
+export { WebAPI } from './web/WebAPI.js'

@@ -15,11 +15,34 @@ export const applyMixins = (derivedCtor: any, constructors: any[]) => {
         })
     })
 }
-// 随机8位字母数字
-export const nonce =  (): string => Math.random().toString(36).slice(5);
+// Random {size}-digit alphanumeric
+export const nonce =  (size: Number = 8): string => Math.random().toString(36).slice(-size);
 
-// Hmac-Sha256签名
-export const sign = (msg: string | object = "", appsecret: string): string => {
-    let buffer = typeof msg === "string" ? msg : Buffer.from(JSON.stringify(msg), "utf-8");
+export const fnParams2Url = (obj: any) => {
+    let aUrl = []
+    let fnAdd = function(key: string, value: string) {
+        return key + '=' + value
+    }
+    for (var k in obj) {
+        aUrl.push(fnAdd(k, obj[k]))
+    }
+    return encodeURIComponent(aUrl.join('&'))
+}
+
+// Hmac-Sha256 Sign
+export const sign = (msg: object, appsecret: string, isFormat: boolean = false): string => {
+    let buffer;
+    if (isFormat){
+        let txt: Array<string> = [];
+        Object.keys(msg).forEach((key:string)=>{
+            // Type-Expression：
+            // https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression
+            // https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions
+            txt.push(`${key}=${msg[key as keyof typeof msg]}`);
+        })
+        buffer = txt.join("&");
+    }else{
+        buffer = Buffer.from(JSON.stringify(msg), "utf-8");
+    }
     return createHmac("sha256", appsecret).update(buffer).digest("base64");
 };

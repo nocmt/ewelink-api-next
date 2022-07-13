@@ -1,5 +1,6 @@
-import { BaseWebAPI } from '../../WebAPI'
-import { nonce, sign } from '../../../utils/index'
+import { BaseWebAPI } from '../../WebAPI.js'
+import { nonce, sign } from '../../../utils/index.js'
+
 export type regionInfo = {
     // 查询区号归属区域
     areaCode: string
@@ -16,12 +17,12 @@ export class GetRegion {
         const _options = {
             countryCode: options?.areaCode.replace("+",""),
         }
-        return await this.root.request.post('https://apia.coolkit.cn/v2/utils/get-region',_options,{
+        return await this.root.request.get('https://apia.coolkit.cn/v2/utils/get-region',{
+            params: _options,
             headers: {
                 "X-CK-Appid": this.root.appid || "",
                 "X-CK-Nonce": nonce(),
-                "Authorization": `Sign ${sign(_options, this.root.appsecret || "")}`,
-                "Content-Type": "application/json",
+                "Authorization": `Sign ${sign(_options, this.root.appsecret || "", true)}`
             }
         })
     }

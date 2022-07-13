@@ -1,6 +1,6 @@
 // 本地存储配置
 const LocalStorage = require('node-localstorage').LocalStorage;
-const localStorage = new LocalStorage('./');
+const localStorage = new LocalStorage('./temp');
 
 export const storage = {
     set(key: string, value: any) {
