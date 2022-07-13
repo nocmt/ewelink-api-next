@@ -15,7 +15,7 @@
 
 ## 使用说明
 
-使用 npm, 下载 `ewelink-api-next`(node >= 14.0)
+使用 npm, 下载 `ewelink-api-next`(node >= 16.0)
 
 ```bash
 $ npm i ewelink-api-next@last
@@ -36,3 +36,11 @@ $ npm i ewelink-api-next@last
 ## 修改日志
 
 [CHANGELOG.md](CHANGELOG.md)
+
+## 致谢
+
+
+| Item                                                           | Reason                   |
+|----------------------------------------------------------------|--------------------------|
+| [ewelink-api](https://github.com/skydiver/ewelink-api)         | 社区项目，有借鉴其思路              |
+| [wechat-api-next](https://github.com/lblblong/wechat-api-next) | 参考实现了项目结构，特别是新学到了混合模式的使用 |

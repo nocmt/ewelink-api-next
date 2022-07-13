@@ -39,4 +39,6 @@ $ npm i ewelink-api-next@last
 
 ## Thanks
 
-Use of mixed mode and project structure reference：https://github.com/lblblong/wechat-api-next
+| Item                                                           | Reason                                            |
+|----------------------------------------------------------------|---------------------------------------------------|
+| [wechat-api-next](https://github.com/lblblong/wechat-api-next) | Use of mixed mode and project structure reference |

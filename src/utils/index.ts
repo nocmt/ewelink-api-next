@@ -23,14 +23,14 @@ export const fnParams2Url = (obj: any) => {
     let fnAdd = function(key: string, value: string) {
         return key + '=' + value
     }
-    for (var k in obj) {
+    for (let k in obj) {
         aUrl.push(fnAdd(k, obj[k]))
     }
     return encodeURIComponent(aUrl.join('&'))
 }
 
 // Hmac-Sha256 Sign
-export const sign = (msg: object, appsecret: string, isFormat: boolean = false): string => {
+export const sign = (msg: object, appSecret: string, isFormat: boolean = false): string => {
     let buffer;
     if (isFormat){
         let txt: Array<string> = [];
@@ -44,5 +44,5 @@ export const sign = (msg: object, appsecret: string, isFormat: boolean = false):
     }else{
         buffer = Buffer.from(JSON.stringify(msg), "utf-8");
     }
-    return createHmac("sha256", appsecret).update(buffer).digest("base64");
+    return createHmac("sha256", appSecret).update(buffer).digest("base64");
 };

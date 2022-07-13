@@ -9,7 +9,12 @@
     "esModuleInterop": false,
     "outDir": "dist",
     "rootDir": "./",
-    "declaration": true
+    "declaration": true, // 是否生成声明文件
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types/",
+    ]
   },
-  "include": ["./src/*"]
+  "include": ["./src/*","./test/*"],
+
 }
