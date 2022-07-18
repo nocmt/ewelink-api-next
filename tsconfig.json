@@ -6,13 +6,13 @@
     "noEmitOnError": true,
     "lib": ["es2017"],
     "strict": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "outDir": "dist",
     "rootDir": "./",
     "declaration": true, // 是否生成声明文件
     "typeRoots": [
       "./node_modules/@types",
-      "./src/types/",
+      "./src/types/"
     ]
   },
   "include": ["./src/*","./test/*"],

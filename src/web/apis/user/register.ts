@@ -7,18 +7,20 @@ export type accountInfo = {
   account: string;
   password: string;
   areaCode: string;
+  verificationCode: string;
 };
 
-export interface Login extends BaseWebAPI {}
+export interface Register extends BaseWebAPI {}
 
-export class Login {
-  async login(options: accountInfo) {
+export class Register {
+  async register(options: accountInfo) {
     const body = {
-      countryCode: options?.areaCode,
-      password: options?.password
+      verificationCode: options.verificationCode,
+      countryCode: options.areaCode,
+      password: options.password
     };
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
-    const res = await this.root.request.post("/v2/user/login", body, {
+    const res = await this.root.request.post("/v2/user/register", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
         "X-CK-Nonce": nonce(),
