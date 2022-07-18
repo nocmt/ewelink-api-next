@@ -3,5 +3,5 @@
 ./test/testConfig.ts
 ./dist/test/testConfig.js
 ./dist/test/testConfig.d.ts
-./src/cache/*
-./dist/cache/*
+./src/cache/temp/*
+./dist/cache/temp/*
