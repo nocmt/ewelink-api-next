@@ -2,22 +2,23 @@ import { BaseWebAPI } from "../../WebAPI.js";
 import { nonce, saveToken, sign } from "../../../utils/index.js";
 
 export type accountInfo = {
-  account: string;
-  password: string;
+  phoneNumber: string;
   areaCode: string;
+  code: string;
   lang?: "en" | "cn";
 };
 
-export interface Login extends BaseWebAPI {}
+export interface SMSLogin extends BaseWebAPI {}
 
-export class Login {
-  async login(options: accountInfo) {
+export class SMSLogin {
+  async smsLogin(options: accountInfo) {
     const body = {
-      countryCode: options?.areaCode || "+1",
-      password: options?.password
+      countryCode: options.areaCode,
+      phoneNumber: options.phoneNumber,
+      lang: options?.lang || "en",
+      verificationCode: options.code
     };
-    body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
-    const res = await this.root.request.post("/v2/user/login", body, {
+    const res = await this.root.request.post("/v2/user/sms-login", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
         "X-CK-Nonce": nonce(),
@@ -25,8 +26,8 @@ export class Login {
       }
     });
     if (res.status === 200 && res.error === 0) {
-      saveToken(res, options.account);
-      this.root.account = options.account;
+      saveToken(res, options.phoneNumber);
+      this.root.account = options.phoneNumber;
       this.root.token = res.data?.at;
     }
     return res;

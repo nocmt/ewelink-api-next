@@ -3,21 +3,19 @@ import { nonce, saveToken, sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   account: string;
-  password: string;
-  areaCode: string;
-  lang?: "en" | "cn";
+  newPassword: string;
+  code: string;
 };
 
-export interface Login extends BaseWebAPI {}
+export interface ResetPwd extends BaseWebAPI {}
 
-export class Login {
-  async login(options: accountInfo) {
+export class ResetPwd {
+  async resetPwd(options: accountInfo) {
     const body = {
-      countryCode: options?.areaCode || "+1",
-      password: options?.password
+      password: options.newPassword
     };
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
-    const res = await this.root.request.post("/v2/user/login", body, {
+    const res = await this.root.request.post("/v2/user/reset-pwd", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
         "X-CK-Nonce": nonce(),

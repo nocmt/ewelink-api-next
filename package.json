@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "log4js": "^6.6.0",
     "node-localstorage": "^2.2.1"
   }
 }

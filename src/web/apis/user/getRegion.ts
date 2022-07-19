@@ -15,7 +15,7 @@ export class GetRegion {
     areaCode: string;
   }) {
     const _options = {
-      countryCode: options?.areaCode.replace("+", "")
+      countryCode: options.areaCode.replace("+", "")
     };
     return await this.root.request.get("https://apia.coolkit.cn/v2/utils/get-region", {
       params: _options,

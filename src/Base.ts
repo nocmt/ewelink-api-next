@@ -1,4 +1,4 @@
-import axios, { Method } from "axios";
+import axios from "axios";
 import log4js from "log4js";
 import { getToken } from "./utils/index.js";
 import { storage } from "./cache/index.js";
@@ -83,7 +83,7 @@ export class eWeLinkBase {
     this.request.interceptors.response.use(
       function (response) {
         // 对响应数据做点什么
-        const res = Object.assign(response.data, { status: response.status });
+        const res = Object.assign({ status: response.status }, response.data);
         if (options.requestRecord) {
           logger.info("Response received：", JSON.stringify(res));
         }
@@ -102,7 +102,6 @@ export class eWeLinkBase {
     this.region = region;
     this.account = account;
     this.token = getToken(region, account);
-    console.info(this.token);
     let createTime;
     try {
       createTime = storage.get(region)[account]?.createTime;

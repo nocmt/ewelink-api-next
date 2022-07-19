@@ -1,13 +1,11 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce, sign } from "../../../utils/index.js";
-import { storage } from "../../../cache/index.js";
-import dayjs from "dayjs";
+import { nonce, saveToken, sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   account: string;
   password: string;
   areaCode: string;
-  verificationCode: string;
+  code: string;
 };
 
 export interface Register extends BaseWebAPI {}
@@ -15,8 +13,8 @@ export interface Register extends BaseWebAPI {}
 export class Register {
   async register(options: accountInfo) {
     const body = {
-      verificationCode: options.verificationCode,
-      countryCode: options.areaCode,
+      verificationCode: options.code,
+      countryCode: options.areaCode || "+1",
       password: options.password
     };
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
@@ -27,15 +25,10 @@ export class Register {
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });
-    // 存储token
     if (res.status === 200 && res.error === 0) {
-      storage.set(res.data.region, {
-        [options.account]: {
-          at: res.data.at,
-          rt: res.data.rt,
-          createTime: dayjs().format()
-        }
-      });
+      saveToken(res, options.account);
+      this.root.account = options.account;
+      this.root.token = res.data?.at;
     }
     return res;
   }
