@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce, sign } from "../../../utils/index.js";
+import { sign } from "../../../utils/index.js";
 
 export type regionInfo = {
   // 查询区号归属区域
@@ -21,7 +21,6 @@ export class GetRegion {
       params: _options,
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Sign ${sign(_options, this.root.appSecret || "", true)}`
       }
     });

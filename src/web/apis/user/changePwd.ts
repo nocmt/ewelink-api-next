@@ -1,5 +1,4 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce } from "../../../utils/index.js";
 
 export type accountInfo = {
   oldPassword: string;
@@ -17,7 +16,6 @@ export class ChangePwd {
     return await this.root.request.post("/v2/user/change-pwd", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Bearer ${this.root.token}`
       }
     });

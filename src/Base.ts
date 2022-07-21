@@ -1,6 +1,6 @@
 import axios from "axios";
 import log4js from "log4js";
-import { getToken } from "./utils/index.js";
+import { getToken, nonce } from "./utils/index.js";
 import { storage } from "./cache/index.js";
 
 log4js.configure({
@@ -43,8 +43,7 @@ export class eWeLinkBase {
   account: string = "";
   request = axios.create({
     baseURL: this.endpoint,
-    timeout: 30000,
-    headers: {}
+    timeout: 30000
   });
 
   // constructor 是一种用于创建和初始化class创建的对象的特殊方法，类似于Python的__init__函数
@@ -62,6 +61,9 @@ export class eWeLinkBase {
     // 添加请求拦截器
     this.request.interceptors.request.use(
       function (config) {
+        if (config.headers) {
+          config.headers["X-CK-Nonce"] = nonce();
+        }
         if (options.requestRecord) {
           logger.info("Send request：", {
             url: config.url,

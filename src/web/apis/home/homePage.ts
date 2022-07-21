@@ -1,20 +1,31 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce } from "../../../utils/index.js";
 
-export type accountInfo = {
+export type homePageInfo = {
   lang?: "en" | "cn";
-  clientInfo?: string;
+  clientInfo?: {
+    model?: string;
+    os?: "Android" | "iOS";
+    imei?: string;
+    romVersion?: string;
+    appVersion?: string;
+  };
   getUser?: Object;
   getFamily?: Object;
-  getThing?: Object;
+  getThing?: {
+    num?: number | 30;
+    beginIndex?: number | -9999999;
+  };
   getScene?: Object;
-  getMessage?: Object;
+  getMessage?: {
+    from?: number;
+    num?: number | 30;
+  };
 };
 
 export interface HomePage extends BaseWebAPI {}
 
 export class HomePage {
-  async homePage(options: accountInfo) {
+  async homePage(options: homePageInfo) {
     const body = {
       lang: options?.lang,
       clientInfo: options?.clientInfo,
@@ -26,8 +37,6 @@ export class HomePage {
     };
     return await this.root.request.post("/v2/homepage", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Bearer ${this.root.token}`
       }
     });

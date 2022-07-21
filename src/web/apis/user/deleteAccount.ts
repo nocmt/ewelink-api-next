@@ -1,5 +1,4 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce } from "../../../utils/index.js";
 
 export type baseInfo = {
   code: string;
@@ -15,7 +14,6 @@ export class DeleteAccount {
     return await this.root.request.post("/v2/user/close-account", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Bearer ${this.root.token}`
       }
     });

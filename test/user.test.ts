@@ -8,6 +8,8 @@ describe("用户管理测试", function () {
   it("user.getRegion", async function () {
     const response = await client.user.getRegion({ areaCode: "86" });
     assert.strictEqual(response.data.region, "cn", "区域查询是正确的");
+    const response2 = await client.user.getRegion({ areaCode: "1" });
+    assert.strictEqual(response2.data.region, "us", "区域查询是正确的");
   });
 
   it("user.login", async function () {

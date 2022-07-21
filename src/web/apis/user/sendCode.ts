@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce, sign } from "../../../utils/index.js";
+import { sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   type: number | string;
@@ -19,7 +19,6 @@ export class SendCode {
     return await this.root.request.post("/v2/user/verification-code", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });

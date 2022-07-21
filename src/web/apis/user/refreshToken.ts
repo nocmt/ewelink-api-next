@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce, saveToken } from "../../../utils/index.js";
+import { saveToken } from "../../../utils/index.js";
 
 export type accountInfo = {
   account: string;
@@ -16,7 +16,6 @@ export class RefreshToken {
     const res = await this.root.request.post("/v2/user/refresh", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Sign ${body}`
       }
     });

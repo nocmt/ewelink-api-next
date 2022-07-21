@@ -8,7 +8,7 @@ import { SendCode } from "./sendCode.js";
 import { ResetPwd } from "./resetPwd.js";
 import { ChangePwd } from "./changePwd.js";
 import { GetUserInfo } from "./getUserInfo.js";
-import { UpdateUserInfo } from "./updateUserInfo.js";
+import { SetUserInfo } from "./setUserInfo.js";
 import { RefreshToken } from "./refreshToken.js";
 import { Logout } from "./logout.js";
 import { DeleteAccount } from "./deleteAccount.js";
@@ -26,7 +26,7 @@ export interface User
     ResetPwd,
     ChangePwd,
     GetUserInfo,
-    UpdateUserInfo,
+    SetUserInfo,
     RefreshToken,
     Logout,
     DeleteAccount {}
@@ -40,7 +40,7 @@ applyMixins(User, [
   ResetPwd,
   ChangePwd,
   GetUserInfo,
-  UpdateUserInfo,
+  SetUserInfo,
   RefreshToken,
   Logout,
   DeleteAccount

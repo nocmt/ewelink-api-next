@@ -1,5 +1,4 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce } from "../../../utils/index.js";
 import { storage } from "../../../cache/index.js";
 
 export interface Logout extends BaseWebAPI {}
@@ -19,7 +18,6 @@ export class Logout {
     const res = await this.root.request.delete("/v2/user/logout", {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Bearer ${at || this.root.token}`
       }
     });

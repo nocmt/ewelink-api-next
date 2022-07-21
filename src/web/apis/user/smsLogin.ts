@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce, saveToken, sign } from "../../../utils/index.js";
+import { saveToken, sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   phoneNumber: string;
@@ -21,7 +21,6 @@ export class SMSLogin {
     const res = await this.root.request.post("/v2/user/sms-login", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });

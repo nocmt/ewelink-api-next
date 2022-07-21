@@ -1,0 +1,32 @@
+import { BaseWebAPI } from "../../WebAPI.js";
+
+export type deviceInfo = {
+  user: {
+    countryCode: string;
+    phoneNumber: string;
+    email: string;
+  };
+  deviceidList: string[];
+  permit: number | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 15;
+  comment: string | "";
+  shareType: number | 1;
+};
+
+export interface Share extends BaseWebAPI {}
+
+export class Share {
+  async share(options: deviceInfo) {
+    const body = {
+      deviceidList: options.deviceidList,
+      permit: options.permit,
+      comment: options.comment,
+      shareType: options.shareType,
+      user: options.user
+    };
+    return await this.root.request.post("/v2/device/share", body, {
+      headers: {
+        Authorization: `Bearer ${this.root.token}`
+      }
+    });
+  }
+}

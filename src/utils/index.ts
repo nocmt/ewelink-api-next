@@ -1,4 +1,4 @@
-import { createHmac } from "crypto";
+import { createHmac, createHash } from "crypto";
 import { storage } from "../cache/index.js";
 import dayjs from "dayjs";
 
@@ -49,13 +49,19 @@ export const sign = (msg: object, appSecret: string, isFormat: boolean = false):
   return createHmac("sha256", appSecret).update(buffer).digest("base64");
 };
 
-// 存储token
+// Hmac-Sha256 Sign
+export const hashSha256 = (str: string): string => {
+  return createHash("sha256").update(str).digest("hex");
+};
+
+// saveToken
 export const saveToken = (res: any, account: string) => {
   storage.set(res.data.region, {
     [account]: {
       at: res.data.at,
       rt: res.data.rt,
-      createTime: dayjs().format()
+      createTime: dayjs().format(),
+      expireTime: dayjs().add(30, "day").format()
     }
   });
 };

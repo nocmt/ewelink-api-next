@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { nonce, saveToken, sign } from "../../../utils/index.js";
+import { saveToken, sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   account: string;
@@ -18,7 +18,6 @@ export class ResetPwd {
     const res = await this.root.request.post("/v2/user/reset-pwd", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
-        "X-CK-Nonce": nonce(),
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });
