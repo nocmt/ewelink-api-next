@@ -46,7 +46,7 @@ describe("用户管理测试", function () {
   });
 
   it("user.updateUserInfo", async function () {
-    let response = await client.user.updateUserInfo({ nickname: "test", acceptEmailAd: false, accountConsult: null });
+    let response = await client.user.setUserInfo({ nickname: "test", acceptEmailAd: false, accountConsult: null });
     assert.strictEqual(response.error, 0, "更新用户信息成功");
   });
 

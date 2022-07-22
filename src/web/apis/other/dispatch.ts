@@ -8,20 +8,11 @@ export interface Dispatch extends BaseWebAPI {}
 
 export class Dispatch {
   async dispatch(options: baseInfo) {
-    const dispatchUrls = {
-      cn: "https://cn-dispa.coolkit.cn/dispatch/app",
-      us: "https://us-dispa.coolkit.cc/dispatch/app",
-      eu: "https://eu-dispa.coolkit.cc/dispatch/app",
-      as: "https://as-dispa.coolkit.cc/dispatch/app",
-      wx: "https://wx-disp.coolkit.cn:8080/dispatch/app"
-    };
-    let url;
-    // @ts-ignore
-    if (dispatchUrls[options.region]) {
-      // @ts-ignore
-      url = dispatchUrls[options.region] as keyof typeof dispatchUrls;
-    } else {
-      url = `https://${options.region}-dispa.coolkit.cc/dispatch/app`;
+    let url = `https://${options.region}-dispa.coolkit.${
+      ["cn", "test", "wx"].includes(options.region) ? "cn" : "cc"
+    }/dispatch/app`;
+    if (options.region === "wx") {
+      url = "https://wx-disp.coolkit.cn:8080/dispatch/app";
     }
     return await this.root.request.get(url, {});
   }
