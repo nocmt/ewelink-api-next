@@ -3,7 +3,7 @@ import { BaseWebAPI } from "../../WebAPI.js";
 export type baseInfo = {
   name: string;
   sort: number | 1 | 2;
-  roomNameList: string[];
+  roomNameList?: string[];
 };
 
 export interface AddFamily extends BaseWebAPI {}
@@ -13,7 +13,7 @@ export class AddFamily {
     const body = {
       name: options.name,
       sort: options.sort,
-      roomNameList: options.roomNameList
+      roomNameList: options?.roomNameList
     };
     return await this.root.request.post("/v2/family", body, {
       headers: {
