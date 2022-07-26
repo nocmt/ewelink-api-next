@@ -1,10 +1,10 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type baseInfo = {
-  familyid?: string;
+  familyId?: string;
   thingList: Array<{
-    itemTyp: string;
-    id: string;
+    itemTyp?: string;
+    id?: string;
   }>;
 };
 
@@ -13,7 +13,7 @@ export interface SortThing extends BaseWebAPI {}
 export class SortThing {
   async sortThing(options: baseInfo) {
     const body = {
-      familyid: options?.familyid,
+      familyid: options?.familyId,
       thingList: options.thingList
     };
     return await this.root.request.post("/v2/family/thing/sort", body, {
