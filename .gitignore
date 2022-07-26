@@ -1,7 +1,7 @@
 /node_modules
 .idea
-test/testConfig.ts
-dist/test/testConfig.js
-dist/test/testConfig.d.ts
-cache/*
-logs/*
+/test/testConfig.ts
+/dist/test/testConfig.js
+/dist/test/testConfig.d.ts
+/cache
+/logs
