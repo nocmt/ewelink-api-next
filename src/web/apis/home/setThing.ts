@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type baseInfo = {
-  roomid: string;
+  roomId: string;
   oldThingList: string[];
   newThingList: string[];
 };
@@ -11,7 +11,7 @@ export interface SetThing extends BaseWebAPI {}
 export class SetThing {
   async setThing(options: baseInfo) {
     const body = {
-      roomid: options.roomid,
+      roomid: options.roomId,
       oldThingList: options.oldThingList,
       newThingList: options.newThingList
     };
