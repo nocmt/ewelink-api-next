@@ -13,7 +13,7 @@ log4js.configure({
       pattern: "yyyy-MM-dd",
       keepFileExt: true,
       alwaysIncludePattern: true,
-      flags: "w" // a 是追加日志，w是删除之前的
+      flags: "a" // a 是追加日志，w是删除之前的
     }
   },
   categories: {
@@ -45,6 +45,7 @@ export class eWeLinkBase {
     baseURL: this.endpoint,
     timeout: 30000
   });
+  storage = storage;
 
   // constructor 是一种用于创建和初始化class创建的对象的特殊方法，类似于Python的__init__函数
   constructor(options?: eWeLinkBaseOptions) {
