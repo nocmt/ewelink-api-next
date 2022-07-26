@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type familyInfo = {
-  familyid: string;
+  familyId: string;
   name: string;
   sort: number | 1 | 2;
 };
@@ -11,7 +11,7 @@ export interface AddRoom extends BaseWebAPI {}
 export class AddRoom {
   async addRoom(options: familyInfo) {
     const body = {
-      familyid: options.familyid,
+      familyid: options.familyId,
       name: options.name,
       sort: options.sort
     };
