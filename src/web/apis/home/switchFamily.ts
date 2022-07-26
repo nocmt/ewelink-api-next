@@ -4,10 +4,10 @@ export type baseInfo = {
   familyid: string;
 };
 
-export interface SetThing extends BaseWebAPI {}
+export interface SwitchFamily extends BaseWebAPI {}
 
-export class SetThing {
-  async setThing(options: baseInfo) {
+export class SwitchFamily {
+  async switchFamily(options: baseInfo) {
     const body = {
       id: options.familyid
     };
