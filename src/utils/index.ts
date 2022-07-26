@@ -56,14 +56,21 @@ export const hashSha256 = (str: string): string => {
 
 // saveToken
 export const saveToken = (res: any, account: string) => {
-  storage.set(res.data.region, {
+  let valueObj = storage.get(res.data.region);
+  let value = {
     [account]: {
       at: res.data.at,
       rt: res.data.rt,
       createTime: dayjs().format(),
       expireTime: dayjs().add(30, "day").format()
     }
-  });
+  };
+  if (valueObj[Object.keys(value)[0]]) {
+    valueObj[Object.keys(value)[0]] = value[Object.keys(value)[0]];
+  } else {
+    valueObj = value;
+  }
+  storage.set(res.data.region, valueObj);
 };
 
 // 读取token
