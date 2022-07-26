@@ -13,10 +13,13 @@ export interface Login extends BaseWebAPI {}
 export class Login {
   async login(options: accountInfo) {
     const body = {
-      countryCode: options?.areaCode || "+1",
-      password: options?.password
+      countryCode: options.areaCode,
+      password: options.password
     };
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
+    if (options?.lang) {
+      body["lang" as keyof typeof body] = options.lang;
+    }
     const res = await this.root.request.post("/v2/user/login", body, {
       headers: {
         "X-CK-Appid": this.root.appid || "",
