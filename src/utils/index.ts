@@ -65,7 +65,7 @@ export const saveToken = (res: any, account: string) => {
       expireTime: dayjs().add(30, "day").format()
     }
   };
-  if (valueObj[Object.keys(value)[0]]) {
+  if (valueObj && valueObj[Object.keys(value)[0]]) {
     valueObj[Object.keys(value)[0]] = value[Object.keys(value)[0]];
   } else {
     valueObj = value;
@@ -75,7 +75,7 @@ export const saveToken = (res: any, account: string) => {
 
 // 读取token
 export const getToken = (region: string, account: string) => {
-  const valueObj = storage.get(region);
+  const valueObj = storage.get(region) || {};
   if (valueObj[account]) {
     return valueObj[account].at;
   }
