@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import log4js from "log4js";
 import { getToken, nonce } from "./utils/index.js";
 import { storage } from "./cache/index.js";
@@ -41,7 +41,7 @@ export class eWeLinkBase {
   requestRecord?: boolean = false;
   token: string = "";
   account: string = "";
-  request = axios.create({
+  request = axios.default.create({
     baseURL: this.endpoint,
     timeout: 30000
   });
@@ -61,7 +61,7 @@ export class eWeLinkBase {
 
     // 添加请求拦截器
     this.request.interceptors.request.use(
-      function (config) {
+      function (config: AxiosRequestConfig) {
         if (config.headers) {
           config.headers["X-CK-Nonce"] = nonce();
         }
@@ -77,14 +77,14 @@ export class eWeLinkBase {
         }
         return config;
       },
-      function (error) {
+      function (error: any) {
         // 对请求错误做些什么
         return Promise.reject(error);
       }
     );
     // 添加响应拦截器
     this.request.interceptors.response.use(
-      function (response) {
+      function (response: { status: number; data: any }) {
         // 对响应数据做点什么
         const res = Object.assign({ status: response.status }, response.data);
         if (options.requestRecord) {
@@ -92,7 +92,7 @@ export class eWeLinkBase {
         }
         return res;
       },
-      function (error) {
+      function (error: any) {
         // 对响应错误做点什么
         if (options.requestRecord) {
           logger.error("Incorrect response received：", error);
@@ -107,7 +107,10 @@ export class eWeLinkBase {
     this.token = getToken(region, account);
     let createTime;
     try {
-      createTime = storage.get(region)[account]?.createTime;
+      createTime = storage.get(region) || {};
+      if (createTime && createTime[account]) {
+        createTime = createTime[account]?.createTime;
+      }
     } catch (error) {
       createTime = null;
     }
