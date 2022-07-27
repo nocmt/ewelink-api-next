@@ -104,4 +104,9 @@ describe("家庭管理测试", function () {
     assert.strictEqual(response.error, 0, "删除家庭成功");
     client.storage.remove("tem_familyId");
   });
+
+  it("message.getMessage", async function () {
+    const response = await client.message.getMessage({});
+    assert.strictEqual(response.error, 0, "获取消息成功");
+  });
 });
