@@ -2,7 +2,7 @@ import "mocha";
 import { assert } from "chai";
 import { client } from "./testConfig.js";
 
-describe("设备管理测试", function () {
+describe("Device management test", function () {
   this.timeout(30000);
 
   it("device.addDevice", async function () {

@@ -2,19 +2,19 @@ import "mocha";
 import { assert } from "chai";
 import { client } from "./testConfig.js";
 
-describe("用户管理测试", function () {
+describe("User management test", function () {
   this.timeout(30000);
 
   it("user.getRegion", async function () {
     const response = await client.user.getRegion({ areaCode: "86" });
-    assert.strictEqual(response.data.region, "cn", "区域查询是正确的");
+    assert.strictEqual(response.data.region, "cn", "The region query is correct");
     const response2 = await client.user.getRegion({ areaCode: "1" });
-    assert.strictEqual(response2.data.region, "us", "区域查询是正确的");
+    assert.strictEqual(response2.data.region, "us", "The region query is correct");
   });
 
   it("user.login", async function () {
     let response = await client.user.login({ account: "upymjh35902@chacuo.net", password: "12345678", areaCode: "+1" });
-    assert.strictEqual(response.error, 0, "登录是成功的");
+    assert.strictEqual(response.error, 0, "Login is successful");
   });
 
   it("user.register", async function () {
@@ -24,7 +24,7 @@ describe("用户管理测试", function () {
       areaCode: "+1",
       code: "4495"
     });
-    assert.strictEqual(response.error, 0, "验证码错误");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.sendCode", async function () {
@@ -32,22 +32,22 @@ describe("用户管理测试", function () {
       account: "upymjh35902@chacuo.net",
       type: "1"
     });
-    assert.strictEqual(response.error, 0, "发送验证码是成功的");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.smsLogin", async function () {
     let response = await client.user.smsLogin({ code: "1234", areaCode: "+86", phoneNumber: "+8612345678945" });
-    assert.strictEqual(response.error, 0, "登录成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.getUserInfo", async function () {
     let response = await client.user.getUserInfo();
-    assert.strictEqual(response.error, 0, "获取用户信息成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.updateUserInfo", async function () {
     let response = await client.user.setUserInfo({ nickname: "test", acceptEmailAd: false, accountConsult: null });
-    assert.strictEqual(response.error, 0, "更新用户信息成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.resetPwd", async function () {
@@ -56,7 +56,7 @@ describe("用户管理测试", function () {
       newPassword: "12345678",
       account: "upymjh35902@chacuo.net"
     });
-    assert.strictEqual(response.error, 0, "重置密码成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.changePwd", async function () {
@@ -64,7 +64,7 @@ describe("用户管理测试", function () {
       oldPassword: "12345678",
       newPassword: "12345678"
     });
-    assert.strictEqual(response.error, 0, "修改密码成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.changePwd", async function () {
@@ -72,11 +72,11 @@ describe("用户管理测试", function () {
       oldPassword: "12345678",
       newPassword: "12345678"
     });
-    assert.strictEqual(response.error, 0, "修改密码成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.logout", async function () {
     let response = await client.user.logout({ account: "upymjh35902@chacuo.net" });
-    assert.strictEqual(response.error, 0, "退出登录成功");
+    assert.strictEqual(response.error, 0, "success");
   });
 });
