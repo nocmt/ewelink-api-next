@@ -3,6 +3,5 @@
   "ts-node": {
     "transpileOnly": true,
     "files": true
-  },
-
+  }
 }

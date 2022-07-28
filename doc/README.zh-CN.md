@@ -20,13 +20,35 @@
 ```bash
 $ npm i ewelink-api-next@last
 ```
+
+### 示例
+
+```typescript
+import { WebAPI } from 'ewelink-api-next';
+
+const client = new WebAPI( {
+  appid,
+  appSecret,
+  region,
+  requestRecord: true
+});
+
+try {
+  const response = await client.user.login({ account: "+8612345678912", password: "12345678", areaCode: "+1" });
+  const userInfo = response.error === 0 ? response.data.user : {};
+  console.log('userInfo：', userInfo);
+} catch (err) {
+  console.log('Failed to get user information:', err.message);
+}
+```
+
 ## TODO
 
-- [ ] 首页管理
-- [ ] 用户管理
-- [ ] 设备管理
-- [ ] 家庭房间
-- [ ] 消息中心
+- [x] 首页管理
+- [x] 用户管理
+- [x] 设备管理
+- [x] 家庭房间
+- [x] 消息中心
 - [ ] 长连接控制
 - [ ] 局域网控制
 

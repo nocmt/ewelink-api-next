@@ -15,5 +15,8 @@
       "./src/types/"
     ]
   },
-  "include": ["./src/*","./test/*"], // 指定要编译的文件，默认是所有文件
+  "include": [
+    "src",
+    "test"
+  ],
 }

@@ -21,14 +21,37 @@ Using npm, install `ewelink-api-next`(node >= 14.0)
 $ npm i ewelink-api-next@last
 ```
 
+
+#### 示例
+
+```typescript
+import { WebAPI } from 'ewelink-api-next';
+
+const client = new WebAPI( {
+  appid,
+  appSecret,
+  region,
+  requestRecord: true
+});
+
+try {
+  const response = await client.user.login({ account: "xxx@xxx.com", password: "12345678", areaCode: "+1" });
+  const userInfo = response.error === 0 ? response.data.user : {};
+  console.log('userInfo：', userInfo);
+} catch (err) {
+  console.log('Failed to get user information:', err.message);
+}
+```
+
 ## Todo
 
-- [ ] Homepage management
-- [ ] User management
-- [ ] Device management
-- [ ] Home management
-- [ ] Message center
-- [ ] Device control
+- [x] Homepage management
+- [x] User management
+- [x] Device management
+- [x] Home management
+- [x] Message center
+- [ ] WebSocket control
+- [ ] LAN control
 
 ## Contributors
 
