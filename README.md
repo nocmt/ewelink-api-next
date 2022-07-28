@@ -18,7 +18,7 @@ English | [简体中文](doc/README.zh-CN.md)
 Using npm, install `ewelink-api-next`(node >= 16.16)
 
 ```bash
-$ npm i ewelink-api-next
+$ npm i ewelink-api-next # or pnpm i ewelink-api-next
 ```
 
 #### Example

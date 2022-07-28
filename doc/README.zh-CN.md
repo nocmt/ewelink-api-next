@@ -1,4 +1,4 @@
-# [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
+# [eWeLink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.5.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
@@ -15,10 +15,10 @@
 
 ## 使用说明
 
-使用 npm, 下载 `ewelink-api-next`(node >= 16.0)
+使用 npm, 下载 `ewelink-api-next`(node >= 16.16)
 
 ```bash
-$ npm i ewelink-api-next@last
+$ npm i ewelink-api-next # or pnpm i ewelink-api-next
 ```
 
 ### 示例
@@ -27,7 +27,7 @@ $ npm i ewelink-api-next@last
 import { WebAPI } from 'ewelink-api-next';
 
 const client = new WebAPI( {
-  ,
+  appId,
   appSecret,
   region,
   requestRecord: true
@@ -60,7 +60,6 @@ try {
 [CHANGELOG.md](CHANGELOG.md)
 
 ## 致谢
-
 
 | Item                                                           | Reason                   |
 |----------------------------------------------------------------|--------------------------|
