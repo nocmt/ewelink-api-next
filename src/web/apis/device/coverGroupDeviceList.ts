@@ -9,8 +9,8 @@ export interface CoverGroupDeviceList extends BaseWebAPI {}
 
 export class CoverGroupDeviceList {
   async coverGroupDeviceList(options: groupInfo) {
-    if (options.coverDeviceidList.length < 1 || options.coverDeviceidList.length > 30) {
-      throw new Error("addDeviceidList length must be between 1 and 30");
+    if (options.coverDeviceidList.length < 1) {
+      throw new Error("addDeviceidList length must be greater than 0");
     }
     const body = {
       id: options.id,

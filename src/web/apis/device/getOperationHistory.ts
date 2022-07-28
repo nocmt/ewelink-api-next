@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type thingInfo = {
-  deviceid?: string;
+  deviceId: string;
   from?: string;
   num?: number | 30;
 };
@@ -14,7 +14,7 @@ export class GetOperationHistory {
       throw new Error("num must be between 0 and 30");
     }
     const params = {
-      deviceid: options?.deviceid,
+      deviceid: options?.deviceId,
       from: options?.from,
       num: options?.num
     };

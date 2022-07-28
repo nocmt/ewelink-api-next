@@ -15,7 +15,7 @@ export class GetOTAInfo {
     const body = {
       deviceInfoList: options.deviceInfoList
     };
-    return await this.root.request.post("/v2/device/ota", body, {
+    return await this.root.request.post("/v2/device/ota/query", body, {
       headers: {
         Authorization: `Bearer ${this.root.token}`
       }

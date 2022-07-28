@@ -1,11 +1,11 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type thingInfo = {
-  thingList: {
+  thingList: Array<{
     type: number | 1 | 2;
     id: string;
     params: object;
-  };
+  }>;
   timeout: number;
 };
 

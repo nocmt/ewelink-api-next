@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type deviceInfo = {
-  deviceid: string;
+  deviceId: string;
   apiKey: string;
 };
 
@@ -10,7 +10,7 @@ export interface DelShare extends BaseWebAPI {}
 export class DelShare {
   async delShare(options: deviceInfo) {
     const params = {
-      deviceid: options.deviceid,
+      deviceid: options.deviceId,
       apiKey: options.apiKey
     };
     return await this.root.request.delete("/v2/device/share", {
