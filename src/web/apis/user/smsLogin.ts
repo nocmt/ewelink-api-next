@@ -20,7 +20,7 @@ export class SMSLogin {
     };
     const res = await this.root.request.post("/v2/user/sms-login", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });

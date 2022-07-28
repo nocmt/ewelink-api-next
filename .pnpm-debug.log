@@ -1,0 +1,23 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "not found: prod",
+      "code": "ENOENT",
+      "stack": "Error: not found: prod\n    at getNotFoundError (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:41595:51)\n    at Function.whichSync [as sync] (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:41672:13)\n    at getCommandAbsolutePathSync (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:43237:44)\n    at default_1 (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:43246:32)\n    at /Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:178233:39"
+    }
+  },
+  "2 error pnpm": {
+    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+    "prefix": "/Users/guxiu/Downloads/ewelink-api-next",
+    "err": {
+      "name": "pnpm",
+      "message": "not found: prod",
+      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+      "stack": "Error: not found: prod\n    at getNotFoundError (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:41595:51)\n    at Function.whichSync [as sync] (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:41672:13)\n    at getCommandAbsolutePathSync (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:43237:44)\n    at default_1 (/Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:43246:32)\n    at /Users/guxiu/pnpm-global/5/node_modules/.pnpm/registry.npmmirror.com+pnpm@6.32.6/node_modules/pnpm/dist/pnpm.cjs:178233:39"
+    }
+  }
+}

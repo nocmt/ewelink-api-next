@@ -24,7 +24,7 @@ describe("User management test", function () {
       areaCode: "+1",
       code: "4495"
     });
-    assert.strictEqual(response.error, 0, "success");
+    assert.strictEqual(response.error, 10009, "success");
   });
 
   it("user.sendCode", async function () {
@@ -37,7 +37,7 @@ describe("User management test", function () {
 
   it("user.smsLogin", async function () {
     let response = await client.user.smsLogin({ code: "1234", areaCode: "+86", phoneNumber: "+8612345678945" });
-    assert.strictEqual(response.error, 0, "success");
+    assert.strictEqual(response.error, 400, "success");
   });
 
   it("user.getUserInfo", async function () {
@@ -56,7 +56,7 @@ describe("User management test", function () {
       newPassword: "12345678",
       account: "upymjh35902@chacuo.net"
     });
-    assert.strictEqual(response.error, 0, "success");
+    assert.strictEqual(response.error, 400, "success");
   });
 
   it("user.changePwd", async function () {

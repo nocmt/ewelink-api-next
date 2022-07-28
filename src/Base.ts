@@ -31,12 +31,12 @@ declare module "axios" {
   }
 }
 
-export type eWeLinkBaseOptions = { appid: string; appSecret: string; region: string; requestRecord?: boolean };
+export type eWeLinkBaseOptions = { appId: string; appSecret: string; region: string; requestRecord?: boolean };
 
 export class eWeLinkBase {
-  // appid与appSecret，可通过 https://dev.ewelink.cc 注册获取
-  // appid and appSecret can be accessed through https://dev.ewelink.cc Register for
-  appid?: string;
+  // appId与appSecret，可通过 https://dev.ewelink.cc 注册获取
+  // appId and appSecret can be accessed through https://dev.ewelink.cc Register for
+  appId?: string;
   appSecret?: string;
   region?: string;
   endpoint: string = "https://eu-apia.coolkit.cc";
@@ -53,7 +53,7 @@ export class eWeLinkBase {
   // constructor is a special method that is used to create and initialize class objects, similar to the Python __init__ function
   constructor(options?: eWeLinkBaseOptions) {
     if (!options) return;
-    if (options.appid) this.appid = options.appid;
+    if (options.appId) this.appId = options.appId;
     if (options.appSecret) this.appSecret = options.appSecret;
     if (options.requestRecord) this.requestRecord = options.requestRecord;
     if (options.region) {
@@ -129,8 +129,8 @@ export class eWeLinkBase {
     this.endpoint = `https://${region}-apia.coolkit.${region === "cn" ? "cn" : "cc"}`;
   };
 
-  setAuthConfigs = (appid: string, appSecret: string) => {
-    this.appid = appid;
+  setAuthConfigs = (appId: string, appSecret: string) => {
+    this.appId = appId;
     this.appSecret = appSecret;
   };
 }

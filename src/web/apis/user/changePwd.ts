@@ -15,7 +15,7 @@ export class ChangePwd {
     };
     return await this.root.request.post("/v2/user/change-pwd", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Bearer ${this.root.token}`
       }
     });

@@ -20,7 +20,7 @@ export class Register {
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
     const res = await this.root.request.post("/v2/user/register", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });

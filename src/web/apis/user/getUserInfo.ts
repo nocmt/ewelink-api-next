@@ -6,7 +6,7 @@ export class GetUserInfo {
   async getUserInfo() {
     return await this.root.request.get("/v2/user/profile", {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Bearer ${this.root.token}`
       }
     });

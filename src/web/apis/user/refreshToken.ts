@@ -15,7 +15,7 @@ export class RefreshToken {
     };
     const res = await this.root.request.post("/v2/user/refresh", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Sign ${body}`
       }
     });

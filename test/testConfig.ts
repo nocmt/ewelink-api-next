@@ -1,13 +1,11 @@
 import { WebAPI } from "../src/index.js";
 
-export const testConfig = {
-  appid: "lzHjzT8NipCQpRSQbhNzZZoDuTAkcI1G",
+const client = new WebAPI({
+  appId: "lzHjzT8NipCQpRSQbhNzZZoDuTAkcI1G",
   appSecret: "q75T54ondJlB8yioUdzBdAGBDzeEeDvK",
   region: "us",
   requestRecord: true
-};
-
-const client = new WebAPI(testConfig);
+});
 
 client.syncLocalToken("us", "upymjh35902@chacuo.net");
 // if (createTime == null) {

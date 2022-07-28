@@ -17,7 +17,7 @@ export class ResetPwd {
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
     const res = await this.root.request.post("/v2/user/reset-pwd", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });

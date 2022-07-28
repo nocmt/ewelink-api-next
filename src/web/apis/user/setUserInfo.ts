@@ -23,7 +23,7 @@ export class SetUserInfo {
     };
     return await this.root.request.post("/v2/user/profile", body, {
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Bearer ${this.root.token}`
       }
     });

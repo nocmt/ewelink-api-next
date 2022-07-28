@@ -17,7 +17,7 @@ export class GetRegion {
     return await this.root.request.get("https://apia.coolkit.cn/v2/utils/get-region", {
       params: _options,
       headers: {
-        "X-CK-Appid": this.root.appid || "",
+        "X-CK-Appid": this.root.appId || "",
         Authorization: `Sign ${sign(_options, this.root.appSecret || "", true)}`
       }
     });
