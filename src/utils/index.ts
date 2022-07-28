@@ -3,15 +3,19 @@ import { storage } from "../cache/index.js";
 import dayjs from "dayjs";
 
 // 混合模式，将其他类的方法添加到 derivedCtor 类的原型上。
+// Mixed mode, adding methods of other classes to the prototype of derivedCtor class.
 export const applyMixins = (derivedCtor: any, constructors: any[]) => {
   constructors.forEach((baseCtor) => {
     // 获取baseCtor的属性名称，循环输出
+    // Get the attribute name of baseCtor and output circularly
     Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
       // 定义属性
+      // Define property
       Object.defineProperty(
         derivedCtor.prototype,
         name,
         // 获取自己的属性描述符
+        // Get the description of the property of the own
         Object.getOwnPropertyDescriptor(baseCtor.prototype, name) || Object.create(null)
       );
     });
@@ -31,7 +35,14 @@ export const fnParams2Url = (obj: any) => {
   return encodeURIComponent(aUrl.join("&"));
 };
 
-// Hmac-Sha256 Sign
+/**
+ * Hmac-Sha256 Sign
+ *
+ * @param {string} msg - Message to be signed
+ * @param {string} appSecret - App secret
+ * @param {number=} isFormat - Message Type, true: such as 'a=1&b=2'；false: Original object
+ * @return {Object} sign - Signed message
+ */
 export const sign = (msg: object, appSecret: string, isFormat: boolean = false): string => {
   let buffer;
   if (isFormat) {
@@ -49,12 +60,23 @@ export const sign = (msg: object, appSecret: string, isFormat: boolean = false):
   return createHmac("sha256", appSecret).update(buffer).digest("base64");
 };
 
-// Hmac-Sha256 Sign
+/**
+ * Hash-Sha256 Sign
+ *
+ * @param {string} str - Message to be signed
+ * @return {Object} sign - Signed message
+ */
 export const hashSha256 = (str: string): string => {
   return createHash("sha256").update(str).digest("hex");
 };
 
-// saveToken
+/**
+ * Save the token to local storage
+ *
+ * @param {string} res - Axios response data
+ * @param {string} account - Account name
+ * @return {Object} None
+ */
 export const saveToken = (res: any, account: string) => {
   let valueObj = storage.get(res.data.region);
   let value = {
@@ -73,8 +95,14 @@ export const saveToken = (res: any, account: string) => {
   storage.set(res.data.region, valueObj);
 };
 
-// 读取token
-export const getToken = (region: string, account: string) => {
+/**
+ * Get the token to local storage
+ *
+ * @param {string} region - Region
+ * @param {string} account - Account name
+ * @return {Object} token - Token
+ */
+export const getToken = (region: string, account: string): string => {
   const valueObj = storage.get(region) || {};
   if (valueObj[account]) {
     return valueObj[account].at;

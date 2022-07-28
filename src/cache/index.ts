@@ -1,4 +1,4 @@
-// 本地存储配置
+// Local storage configuration
 import { LocalStorage } from "node-localstorage";
 
 const localStorage = new LocalStorage("cache");
