@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
 ![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
-[English](README.md) | 简体中文
+[English](../README.md) | 简体中文
 
 > 受到 ewelink-api 启发编写的CoolKit v2 API 库
 

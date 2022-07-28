@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
 ![Version](https://img.shields.io/badge/Version-0.0.2-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
-English | [简体中文](doc/README.zh-CN.md)
+English | [简体中文](./doc/README.zh-CN.md)
 
 > Coolkit V2 API library inspired by ewelink-api
 
@@ -24,9 +24,9 @@ $ npm i ewelink-api-next # or pnpm i ewelink-api-next
 #### Example
 
 ```typescript
-import eWeLink from 'ewelink-api-next';
+import { WebAPI } from 'ewelink-api-next';
 
-const client = new eWeLink.WebAPI({
+const client = new WebAPI({
   appId,
   appSecret,
   region,
@@ -58,7 +58,7 @@ try {
 
 ## Change Log
 
-[CHANGELOG.md](doc/CHANGELOG.md)
+[CHANGELOG.md](./doc/CHANGELOG.md)
 
 ## Thanks
 
