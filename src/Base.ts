@@ -72,7 +72,7 @@ export class eWeLinkBase {
             baseURL: config.baseURL,
             headers: config.headers,
             params: config?.params,
-            data: config?.data
+            data: JSON.stringify(config?.data)
           });
         }
         return config;
