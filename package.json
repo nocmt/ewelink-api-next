@@ -1,7 +1,7 @@
 {
   "name": "ewelink-api-next",
-  "version": "1.0.0",
-  "description": "CoolKit v2 API official library",
+  "version": "0.0.2",
+  "description": "CoolKit v2 API Official Library",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc && rm -rf dist/test && cp -r dist/src/* dist && rm -rf dist/src",
@@ -14,8 +14,8 @@
     "ewelink"
   ],
   "type": "module",
-  "author": "coolkit-carl",
-  "license": "ISC",
+  "author": "nocmt",
+  "license": "BSD",
   "devDependencies": {
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
@@ -41,6 +41,7 @@
   },
   "files": [
     "dist",
+    "doc",
     "package.json"
   ]
 }

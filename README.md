@@ -1,6 +1,6 @@
-# [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
+# [eWeLink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
 
-![Node.js](https://img.shields.io/badge/Node.js-17.8.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
+![Node.js](https://img.shields.io/badge/Node.js-18.5.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
 ![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
@@ -8,27 +8,26 @@ English | [简体中文](doc/README.zh-CN.md)
 
 > Coolkit V2 API library inspired by ewelink-api
 
-## Characteristics
+## Characteristic
 
 - Follow official document updates
 - Concise and clear calling method
 
 ## Usage Instructions
 
-Using npm, install `ewelink-api-next`(node >= 14.0)
+Using npm, install `ewelink-api-next`(node >= 16.16)
 
 ```bash
-$ npm i ewelink-api-next@last
+$ npm i ewelink-api-next
 ```
 
-
-#### 示例
+#### Example
 
 ```typescript
-import { WebAPI } from 'ewelink-api-next';
+import eWeLink from 'ewelink-api-next';
 
-const client = new WebAPI( {
-  appid,
+const client = new eWeLink.WebAPI({
+  appId,
   appSecret,
   region,
   requestRecord: true
@@ -58,10 +57,13 @@ try {
 [contributors](https://github.com/yanhaijing/jslib-base/graphs/contributors)
 
 ## Change Log
+
 [CHANGELOG.md](doc/CHANGELOG.md)
 
 ## Thanks
 
-| Item                                                           | Reason                                            |
-|----------------------------------------------------------------|---------------------------------------------------|
+| Item                                                           | Reason          |
+|----------------------------------------------------------------|----------------------------------------------|
+| [ewelink-api](https://github.com/skydiver/ewelink-api)         | Community projects, there are ideas to learn from|
 | [wechat-api-next](https://github.com/lblblong/wechat-api-next) | Use of mixed mode and project structure reference |
+

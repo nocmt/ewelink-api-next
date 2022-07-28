@@ -1,6 +1,6 @@
 # [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
 
-![Node.js](https://img.shields.io/badge/Node.js-17.8.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
+![Node.js](https://img.shields.io/badge/Node.js-18.5.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
 ![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
@@ -8,7 +8,7 @@
 
 > 受到 ewelink-api 启发编写的CoolKit v2 API 库
 
-## 特定
+## 特点
 
 - 跟随官方文档更新
 - 简洁清晰的调用方法
@@ -27,7 +27,7 @@ $ npm i ewelink-api-next@last
 import { WebAPI } from 'ewelink-api-next';
 
 const client = new WebAPI( {
-  appid,
+  ,
   appSecret,
   region,
   requestRecord: true
