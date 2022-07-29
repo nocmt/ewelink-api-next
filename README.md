@@ -1,8 +1,8 @@
 # [eWeLink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
 
-![Node.js](https://img.shields.io/badge/Node.js-18.5.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
+![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-0.0.2-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-0.0.3-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 English | [简体中文](./doc/README.zh-CN.md)
 
@@ -49,6 +49,7 @@ try {
 - [x] Device management
 - [x] Home management
 - [x] Message center
+- [x] OAuth2.0
 - [ ] WebSocket control
 - [ ] LAN control
 
