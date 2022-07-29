@@ -1,4 +1,4 @@
-# [eWeLink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
+# [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
@@ -6,7 +6,7 @@
 
 English | [简体中文](./doc/README.zh-CN.md)
 
-> Coolkit V2 API library inspired by ewelink-api
+Coolkit V2 API library inspired by [ewelink-api](https://github.com/skydiver/ewelink-api)
 
 ## Characteristic
 

@@ -1,4 +1,4 @@
-# [eWeLink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
+# [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
@@ -6,7 +6,7 @@
 
 [English](../README.md) | 简体中文
 
-> 受到 ewelink-api 启发编写的CoolKit v2 API 库
+受到 [ewelink-api](https://github.com/skydiver/ewelink-api) 启发编写的CoolKit v2 API 库
 
 ## 特点
 
@@ -15,7 +15,7 @@
 
 ## 使用说明
 
-使用 npm, 下载 `ewelink-api-next`(node >= 16.16)
+推荐使用 npm, 下载 `ewelink-api-next`(node >= 16.16)
 
 ```bash
 $ npm i ewelink-api-next # or pnpm i ewelink-api-next
