@@ -1,0 +1,11 @@
+node_modules
+.idea
+cache
+logs
+.vscode
+test/testConfig.ts
+dist/test/testConfig.js
+dist/test/testConfig.d.ts
+test/demo.ts
+dist/test/demo.js
+dist/test/demo.d.ts
