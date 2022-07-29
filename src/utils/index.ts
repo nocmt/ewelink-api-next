@@ -24,17 +24,6 @@ export const applyMixins = (derivedCtor: any, constructors: any[]) => {
 // Random {size}-digit alphanumeric
 export const nonce = (size: Number = 8): string => Math.random().toString(36).slice(-size);
 
-export const fnParams2Url = (obj: any) => {
-  let aUrl = [];
-  let fnAdd = function (key: string, value: string) {
-    return key + "=" + value;
-  };
-  for (let k in obj) {
-    aUrl.push(fnAdd(k, obj[k]));
-  }
-  return encodeURIComponent(aUrl.join("&"));
-};
-
 /**
  * Hmac-Sha256 Sign
  *
@@ -43,19 +32,17 @@ export const fnParams2Url = (obj: any) => {
  * @param {number=} isFormat - Message Type, true: such as 'a=1&b=2'；false: Original object
  * @return {Object} sign - Signed message
  */
-export const sign = (msg: object, appSecret: string, isFormat: boolean = false): string => {
+export const sign = (msg: { [key: string]: any } | string, appSecret: string, isFormat: boolean = false): string => {
+  // URLSearchParams will encode characters, resulting in inconsistent signature content
   let buffer;
-  if (isFormat) {
-    let txt: Array<string> = [];
-    Object.keys(msg).forEach((key: string) => {
-      // Type-Expression：
-      // https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression
-      // https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions
-      txt.push(`${key}=${msg[key as keyof typeof msg]}`);
-    });
-    buffer = txt.join("&");
+  if (isFormat && typeof msg === "object") {
+    buffer = Object.keys(msg)
+      .map((key) => `${key}=${msg[key]}`)
+      .join("&");
+  } else if (typeof msg === "object") {
+    buffer = JSON.stringify(msg);
   } else {
-    buffer = Buffer.from(JSON.stringify(msg), "utf-8");
+    buffer = msg;
   }
   return createHmac("sha256", appSecret).update(buffer).digest("base64");
 };
