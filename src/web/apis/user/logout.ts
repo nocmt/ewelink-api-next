@@ -26,6 +26,9 @@ export class Logout {
         const valueObj = storage.get(this.root.region);
         if (valueObj && valueObj[options.account || ""]) {
           delete valueObj[options.account];
+          if (valueObj.length === 0) {
+            storage.remove(this.root.region);
+          }
           storage.set(this.root.region, valueObj);
         }
       }

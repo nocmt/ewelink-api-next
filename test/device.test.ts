@@ -5,6 +5,16 @@ import { client } from "./testConfig.js";
 describe("Device management test", function () {
   this.timeout(30000);
 
+  before(async function () {
+    let response = await client.user.login({ account: "upymjh35902@chacuo.net", password: "12345678", areaCode: "+1" });
+    assert.strictEqual(response.error, 0, "Login is successful");
+  });
+
+  after(async function () {
+    let response = await client.user.logout({ account: "upymjh35902@chacuo.net" });
+    assert.strictEqual(response.error, 0, "success");
+  });
+
   it("device.addDevice", async function () {
     const response = await client.device.addDevice({
       name: "Device85c78c",
@@ -20,7 +30,7 @@ describe("Device management test", function () {
       name: "123",
       deviceidList: ["100085c78c", "100085c78d"]
     });
-    assert.strictEqual(response.error, 400, "success");
+    assert.strictEqual(response.error, 405, "success");
   });
 
   it("device.addGSMDevice", async function () {
@@ -82,10 +92,10 @@ describe("Device management test", function () {
   it("device.setShare", async function () {
     const response = await client.device.setShare({
       apiKey: "62dfe4cf03546100096ba08c62dfe4cf03546100096ba08c",
-      deviceid: "100085c78c",
+      deviceId: "100085c78c",
       permit: 15
     });
-    assert.strictEqual(response.error, 405, "success");
+    assert.strictEqual(response.error, 400, "success");
   });
 
   it("device.delShare", async function () {
