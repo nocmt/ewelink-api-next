@@ -67,14 +67,6 @@ describe("User management test", function () {
     assert.strictEqual(response.error, 0, "success");
   });
 
-  it("user.changePwd", async function () {
-    let response = await client.user.changePwd({
-      oldPassword: "12345678",
-      newPassword: "12345678"
-    });
-    assert.strictEqual(response.error, 0, "success");
-  });
-
   it("user.logout", async function () {
     let response = await client.user.logout({ account: "upymjh35902@chacuo.net" });
     assert.strictEqual(response.error, 0, "success");
