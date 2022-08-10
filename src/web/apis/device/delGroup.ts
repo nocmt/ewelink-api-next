@@ -14,7 +14,7 @@ export class DelGroup {
     return await this.root.request.delete("/v2/device/group", {
       params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

@@ -17,7 +17,7 @@ export class GetThingStatus {
     return await this.root.request.get("/v2/device/thing/status", {
       params: params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

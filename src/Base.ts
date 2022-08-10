@@ -10,6 +10,10 @@ declare module "axios" {
   interface AxiosResponse<T = any> {
     error: number;
     msg: string;
+    IP: string;
+    port: number;
+    domain: string;
+    reason: string;
   }
 }
 
@@ -30,8 +34,10 @@ export class eWeLinkBase {
   region?: string;
   endpoint: string = "https://eu-apia.coolkit.cc";
   requestRecord?: boolean = false;
-  token: string = "";
+  at: string = "";
+  rt: string = "";
   account: string = "";
+  userApiKey: string = "";
   request = axios.default.create({
     baseURL: this.endpoint,
     timeout: 30000
@@ -126,10 +132,12 @@ export class eWeLinkBase {
   syncLocalToken = (region: string, account: string) => {
     this.region = region;
     this.account = account;
-    this.token = getToken(region, account);
+    this.at = getToken(region, account);
     let createTime;
     try {
       createTime = storage.get(region) || {};
+      this.userApiKey = createTime.user.apikey;
+      this.rt = createTime.rt;
       if (createTime && createTime[account]) {
         createTime = createTime[account]?.createTime;
       }

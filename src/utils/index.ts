@@ -70,6 +70,7 @@ export const saveToken = (res: any, account: string) => {
     [account]: {
       at: res.data.at,
       rt: res.data.rt,
+      user: res.data.user,
       createTime: dayjs().format(),
       expireTime: dayjs().add(30, "day").format()
     }

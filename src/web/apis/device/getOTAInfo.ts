@@ -17,7 +17,7 @@ export class GetOTAInfo {
     };
     return await this.root.request.post("/v2/device/ota/query", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

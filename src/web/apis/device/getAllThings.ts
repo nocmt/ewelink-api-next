@@ -20,7 +20,7 @@ export class GetAllThings {
     return await this.root.request.get("/v2/device/thing", {
       params: params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

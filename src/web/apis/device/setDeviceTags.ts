@@ -17,7 +17,7 @@ export class SetDeviceTags {
     };
     return await this.root.request.post("/v2/device/tags", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

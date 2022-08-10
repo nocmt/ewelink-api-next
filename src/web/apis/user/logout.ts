@@ -18,7 +18,7 @@ export class Logout {
     const res = await this.root.request.delete("/v2/user/logout", {
       headers: {
         "X-CK-Appid": this.root.appId || "",
-        Authorization: `Bearer ${at || this.root.token}`
+        Authorization: `Bearer ${at || this.root.at}`
       }
     });
     if (res.status === 200 && res.error === 0) {

@@ -15,7 +15,7 @@ export class SetFamily {
     };
     return await this.root.request.put("/v2/family", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

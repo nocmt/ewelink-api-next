@@ -18,7 +18,7 @@ export class GetMessage {
     return await this.root.request.get("/v2/message/read", {
       params: params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

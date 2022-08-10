@@ -7,7 +7,7 @@ export class GetUserInfo {
     return await this.root.request.get("/v2/user/profile", {
       headers: {
         "X-CK-Appid": this.root.appId || "",
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

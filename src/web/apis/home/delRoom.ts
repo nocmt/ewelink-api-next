@@ -14,7 +14,7 @@ export class DelRoom {
     return await this.root.request.delete("/v2/family/room", {
       params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

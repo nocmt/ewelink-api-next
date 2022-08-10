@@ -18,7 +18,7 @@ export class CoverGroupDeviceList {
     };
     return await this.root.request.post("/v2/device/group/update", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

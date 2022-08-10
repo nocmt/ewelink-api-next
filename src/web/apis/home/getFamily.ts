@@ -14,7 +14,7 @@ export class GetFamily {
     return await this.root.request.get("/v2/family", {
       params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

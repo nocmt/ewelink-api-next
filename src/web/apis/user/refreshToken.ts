@@ -21,7 +21,9 @@ export class RefreshToken {
     });
     if (res.status === 200 && res.error === 0) {
       saveToken(res, options.account);
-      this.root.token = res.data?.at;
+      this.root.at = res.data?.at;
+      this.root.rt = res.data?.rt;
+      this.root.userApiKey = res.data?.user?.apikey;
     }
     return res;
   }

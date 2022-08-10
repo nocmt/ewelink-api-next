@@ -14,7 +14,7 @@ export class DeleteAccount {
     return await this.root.request.post("/v2/user/close-account", body, {
       headers: {
         "X-CK-Appid": this.root.appId || "",
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

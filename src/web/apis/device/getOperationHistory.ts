@@ -21,7 +21,7 @@ export class GetOperationHistory {
     return await this.root.request.get("/v2/device/history", {
       params: params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

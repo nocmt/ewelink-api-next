@@ -15,7 +15,7 @@ export class SetRoom {
     };
     return await this.root.request.put("/v2/family/room", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

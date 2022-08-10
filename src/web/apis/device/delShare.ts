@@ -16,7 +16,7 @@ export class DelShare {
     return await this.root.request.delete("/v2/device/share", {
       params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

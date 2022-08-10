@@ -18,7 +18,7 @@ export class SortThing {
     };
     return await this.root.request.post("/v2/family/thing/sort", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

@@ -13,7 +13,7 @@ export class DelDevice {
         deviceid: options.id
       },
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

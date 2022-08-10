@@ -21,7 +21,7 @@ export class AddGSMDevice {
     };
     return await this.root.request.post("/v2/device/add-gsm", body, {
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

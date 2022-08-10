@@ -13,7 +13,7 @@ export class GetGroup {
     return await this.root.request.get("/v2/device/group", {
       params: params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }

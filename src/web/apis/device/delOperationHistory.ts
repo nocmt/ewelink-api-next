@@ -14,7 +14,7 @@ export class DelOperationHistory {
     return await this.root.request.delete("/v2/device/history", {
       params: params,
       headers: {
-        Authorization: `Bearer ${this.root.token}`
+        Authorization: `Bearer ${this.root.at}`
       }
     });
   }
