@@ -5,4 +5,4 @@ dist
 cache
 logs
 test/testConfig.ts
-test/demo.ts
+test/*Demo.ts

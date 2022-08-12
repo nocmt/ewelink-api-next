@@ -6,6 +6,7 @@ logs
 test/testConfig.ts
 dist/test/testConfig.js
 dist/test/testConfig.d.ts
-test/demo.ts
+test/*Demo.ts
 dist/test/demo.js
 dist/test/demo.d.ts
+dist/test/*Demo.ts
