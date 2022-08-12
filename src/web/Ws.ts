@@ -1,5 +1,5 @@
 import { eWeLinkBase } from "../Base.js";
-import { LongConnection } from "./wss/index.js";
+import { Connect } from "./wss/index.js";
 
 export class BaseWsAPI {
   // 创建一个私有只读的 root 属性，用于存储实例化的对象
@@ -10,7 +10,7 @@ export class BaseWsAPI {
 export class Ws extends eWeLinkBase {
   // WebSocket服务
   // WebSocket service
-  LongConnection = new LongConnection(this);
+  Connect = new Connect(this);
 }
 
 export interface Ws {}
