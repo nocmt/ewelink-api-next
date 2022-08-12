@@ -12,7 +12,8 @@ const wsClient = new eWeLink.Ws({
   appId: "lzHjzT8NipCQpRSQbhNzZZoDuTAkcI1G",
   appSecret: "q75T54ondJlB8yioUdzBdAGBDzeEeDvK",
   region: "us",
-  requestRecord: true
+  requestRecord: true,
+  logObj: console
 });
 
 client.syncLocalToken("us", "upymjh35902@chacuo.net");

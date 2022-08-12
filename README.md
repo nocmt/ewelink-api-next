@@ -50,7 +50,7 @@ try {
 - [x] Home management
 - [x] Message center
 - [x] OAuth2.0
-- [ ] WebSocket control
+- [x] WebSocket control
 - [ ] LAN control
 
 ## Contributors

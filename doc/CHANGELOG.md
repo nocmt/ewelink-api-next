@@ -4,6 +4,7 @@ August 31, 2022 v0.0.4
 
 - Feat: Add the definition of log print object during instantiation
 - Refactor: Replace token with global parameter at and add rt parameter
+- Feat: Add WebSocket Control function
 
 
 July 29, 2022 v0.0.3
