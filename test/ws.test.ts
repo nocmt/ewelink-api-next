@@ -1,6 +1,6 @@
 import "mocha";
 import { assert } from "chai";
-import { client } from "./testConfig.js";
+import { client, wsClient } from "./testConfig.js";
 
 describe("Device management test", function () {
   this.timeout(30000);
@@ -10,17 +10,59 @@ describe("Device management test", function () {
     assert.strictEqual(response.error, 0, "Login is successful");
   });
 
-  after(async function () {
-    let response = await client.user.logout({ account: "upymjh35902@chacuo.net" });
-    assert.strictEqual(response.error, 0, "success");
-  });
-
-  it("device.addDevice", async function () {
-    const response = await client.device.addDevice({
-      name: "Device85c78c",
-      deviceId: "100085c78c",
-      deviceKey: "1234"
+  it("ws.control", async function () {
+    const ws = await wsClient.Connect.create({
+      appId: client?.appId || "",
+      at: client.at,
+      region: "us",
+      userApiKey: client.userApiKey
     });
-    assert.strictEqual(response.error, 30015, "success");
+    assert(ws, "ws is not null");
+
+    setTimeout(() => {
+      wsClient.Connect.updateState("10009f1c42", {
+        switches: [
+          { switch: "on", outlet: 0 },
+          { switch: "on", outlet: 1 },
+          { switch: "on", outlet: 2 },
+          { switch: "on", outlet: 3 }
+        ]
+      });
+    }, 5000);
+
+    setTimeout(() => {
+      wsClient.Connect.updateState("10009f1c42", {
+        switches: [
+          { switch: "off", outlet: 0 },
+          { switch: "off", outlet: 1 },
+          { switch: "off", outlet: 2 },
+          { switch: "off", outlet: 3 }
+        ]
+      });
+    }, 8000);
+
+    setTimeout(() => {
+      wsClient.Connect.updateState("10009f1c42", {
+        switches: [
+          { switch: "on", outlet: 0 },
+          { switch: "on", outlet: 1 },
+          { switch: "off", outlet: 2 },
+          { switch: "off", outlet: 3 }
+        ]
+      });
+    }, 10000);
+
+    setTimeout(() => {
+      wsClient.Connect.updateState("10009f1c42", {
+        switches: [
+          { switch: "off", outlet: 0 },
+          { switch: "off", outlet: 1 },
+          { switch: "off", outlet: 2 },
+          { switch: "off", outlet: 3 }
+        ]
+      });
+      ws.close();
+    }, 12000);
+    assert(ws, "ws is not null");
   });
 });
