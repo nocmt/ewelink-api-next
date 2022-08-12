@@ -97,7 +97,6 @@ export class eWeLinkBase {
             params: config?.params,
             data: JSON.stringify(config?.data)
           });
-          _logger.debug("123");
         }
         return config;
       },
@@ -135,7 +134,7 @@ export class eWeLinkBase {
     this.at = getToken(region, account);
     let createTime;
     try {
-      createTime = storage.get(region) || {};
+      createTime = (storage.get(region) || {})[account];
       this.userApiKey = createTime.user.apikey;
       this.rt = createTime.rt;
       if (createTime && createTime[account]) {
