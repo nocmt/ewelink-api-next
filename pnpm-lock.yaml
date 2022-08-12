@@ -12,6 +12,7 @@ specifiers:
   cross-env: ^7.0.3
   dayjs: ^1.11.4
   log4js: ^6.6.0
+  mdns: ^2.7.2
   mocha: ^10.0.0
   node-localstorage: ^2.2.1
   nyc: ^15.1.0
@@ -28,6 +29,7 @@ dependencies:
   axios: registry.npmmirror.com/axios/0.27.2
   dayjs: registry.npmmirror.com/dayjs/1.11.4
   log4js: registry.npmmirror.com/log4js/6.6.1
+  mdns: 2.7.2
   node-localstorage: registry.npmmirror.com/node-localstorage/2.2.1
   ws: 8.8.1
 
@@ -73,6 +75,10 @@ packages:
       '@types/node': 18.6.2
     dev: false
 
+  /bindings/1.2.1:
+    resolution: {integrity: sha512-u4cBQNepWxYA55FunZSM7wMi55yQaN0otnhhilNoWHq0MfOfJeQx0v0mRRpolGOExPjZcl6FtB0BB8Xkb88F0g==}
+    dev: false
+
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -86,6 +92,18 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /mdns/2.7.2:
+    resolution: {integrity: sha512-NBOQT22DKvuNWVY7nKNbs6w9eGRyPwnc4ZjKOsCG2G/4wNt1+IyiHvc+5yhcAUZLG46cOY321YW7Ufz3lMtrhw==}
+    requiresBuild: true
+    dependencies:
+      bindings: 1.2.1
+      nan: 2.16.0
+    dev: false
+
+  /nan/2.16.0:
+    resolution: {integrity: sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==}
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}

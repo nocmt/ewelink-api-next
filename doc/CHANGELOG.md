@@ -11,7 +11,7 @@ July 29, 2022 v0.0.3
 
 - Fix: Continue to fix some errors in the documentation
 - Feat: Add statement of MIT agreement
-- Feat: Add relevant interface methods of oauth2.0
+- Feat: Add relevant interface methods of OAuth2.0
 
 July 29, 2022 v0.0.2
 
