@@ -1,9 +1,8 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { Axios, AxiosInstance, AxiosRequestConfig } from "axios";
 import log4js from "log4js";
 import { getToken, nonce } from "./utils/index.js";
 import { storage } from "./cache/index.js";
 
-// const logger = log4js.getLogger();
 let _logger: any;
 
 declare module "axios" {
@@ -15,6 +14,7 @@ declare module "axios" {
     domain: string;
     reason: string;
   }
+  export function create(config?: AxiosRequestConfig): AxiosInstance;
 }
 
 export type eWeLinkBaseOptions = {
@@ -38,7 +38,7 @@ export class eWeLinkBase {
   rt: string = "";
   account: string = "";
   userApiKey: string = "";
-  request = axios.default.create({
+  request: Axios = axios.create({
     baseURL: this.endpoint,
     timeout: 30000
   });

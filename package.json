@@ -7,7 +7,8 @@
     "build": "rimraf dist && tsc && rm -rf dist/test && cp -r dist/src/* dist && rm -rf dist/src",
     "build:all": "rimraf dist && tsc",
     "test": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/*.test.ts",
-    "cover": "nyc --reporter=html npm run test"
+    "cover": "nyc --reporter=html npm run test",
+    "build:rollup": "rimraf dist && rollup -c"
   },
   "keywords": [
     "coolkit",
@@ -17,6 +18,8 @@
   "author": "nocmt",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-typescript": "^8.3.4",
     "@types/chai": "^4.3.1",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.6.2",
@@ -28,10 +31,17 @@
     "nyc": "^15.1.0",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.77.3",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.32.1",
     "sinon": "^14.0.0",
     "ts-node": "^10.8.2",
     "tsconfig-paths": "^4.0.0",
-    "typescript": "^4.8.0-dev.20220727"
+    "tslib": "^2.4.0",
+    "typescript": "4.8.0-dev.20220728"
   },
   "dependencies": {
     "@types/ws": "^8.5.3",
