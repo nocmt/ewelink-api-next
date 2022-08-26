@@ -4,17 +4,19 @@ specifiers:
   '@rollup/plugin-commonjs': ^22.0.2
   '@rollup/plugin-typescript': ^8.3.4
   '@types/chai': ^4.3.1
+  '@types/crypto-js': ^4.1.1
   '@types/mocha': ^9.1.1
   '@types/node': ^18.6.2
   '@types/node-localstorage': ^1.3.0
   '@types/sinon': ^10.0.12
   '@types/ws': ^8.5.3
   axios: ^0.27.2
+  bonjour-service: ^1.0.13
   chai: ^4.3.6
   cross-env: ^7.0.3
+  crypto-js: ^4.1.1
   dayjs: ^1.11.4
   log4js: ^6.6.0
-  mdns: ^2.7.2
   mocha: ^10.0.0
   node-localstorage: ^2.2.1
   nyc: ^15.1.0
@@ -34,11 +36,13 @@ specifiers:
   ws: ^8.8.1
 
 dependencies:
+  '@types/crypto-js': 4.1.1
   '@types/ws': 8.5.3
   axios: registry.npmmirror.com/axios/0.27.2
+  bonjour-service: 1.0.13
+  crypto-js: 4.1.1
   dayjs: registry.npmmirror.com/dayjs/1.11.4
   log4js: registry.npmmirror.com/log4js/6.6.1
-  mdns: 2.7.2
   node-localstorage: registry.npmmirror.com/node-localstorage/2.2.1
   ws: 8.8.1
 
@@ -136,6 +140,10 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@leichtgewicht/ip-codec/2.0.4:
+    resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
+    dev: false
+
   /@rollup/plugin-commonjs/22.0.2_rollup@2.77.3:
     resolution: {integrity: sha512-//NdP6iIwPbMTcazYsiBMbJW7gfmpHom33u1beiIoHDEM0Q9clvtQB1T0efvMqHeKsGohiHo97BCPCkBXdscwg==}
     engines: {node: '>= 12.0.0'}
@@ -190,6 +198,10 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /@types/crypto-js/4.1.1:
+    resolution: {integrity: sha512-BG7fQKZ689HIoc5h+6D2Dgq1fABRa0RbBWKBd9SP/MVRVXROflpm5fhwyATX5duFmbStzyzyycPB8qUYKDH3NA==}
+    dev: false
+
   /@types/estree/0.0.39:
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
     dev: true
@@ -222,12 +234,21 @@ packages:
       color-convert: 1.9.3
     dev: true
 
+  /array-flatten/2.1.2:
+    resolution: {integrity: sha512-hNfzcOV8W4NdualtqBFPyVO+54DSJuZGY9qT4pRroB6S9e3iiido2ISIC5h9R2sPJ8H3FHCIiEnsv1lPXO3KtQ==}
+    dev: false
+
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
 
-  /bindings/1.2.1:
-    resolution: {integrity: sha512-u4cBQNepWxYA55FunZSM7wMi55yQaN0otnhhilNoWHq0MfOfJeQx0v0mRRpolGOExPjZcl6FtB0BB8Xkb88F0g==}
+  /bonjour-service/1.0.13:
+    resolution: {integrity: sha512-LWKRU/7EqDUC9CTAQtuZl5HzBALoCYwtLhffW3et7vZMwv3bWLpJf8bRYlMD5OCcDpTfnPgNCV4yo9ZIaJGMiA==}
+    dependencies:
+      array-flatten: 2.1.2
+      dns-equal: 1.0.0
+      fast-deep-equal: 3.1.3
+      multicast-dns: 7.2.5
     dev: false
 
   /brace-expansion/1.1.11:
@@ -277,6 +298,21 @@ packages:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
+  /crypto-js/4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
+
+  /dns-equal/1.0.0:
+    resolution: {integrity: sha512-z+paD6YUQsk+AbGCEM4PrOXSss5gd66QfcVBFTKR/HpFL9jCqikS94HYwKww6fQyO7IxrIIyUu+g0Ka9tUS2Cg==}
+    dev: false
+
+  /dns-packet/5.4.0:
+    resolution: {integrity: sha512-EgqGeaBB8hLiHLZtp/IbaDQTL8pZ0+IvwzSHA6d7VyMDM+B9hgddEMa9xjK5oYnw0ci0JQ6g2XCD7/f6cafU6g==}
+    engines: {node: '>=6'}
+    dependencies:
+      '@leichtgewicht/ip-codec': 2.0.4
+    dev: false
+
   /escape-string-regexp/1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
     engines: {node: '>=0.8.0'}
@@ -293,6 +329,10 @@ packages:
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
+
+  /fast-deep-equal/3.1.3:
+    resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+    dev: false
 
   /find-cache-dir/3.3.2:
     resolution: {integrity: sha512-wXZV5emFEjrridIgED11OoUKLxiYjAcqot/NJdAkOhlJ+vGzwhOAfcG5OX1jP+S0PcjEn8bdMJv+g2jwQ3Onig==}
@@ -436,14 +476,6 @@ packages:
       semver: 6.3.0
     dev: true
 
-  /mdns/2.7.2:
-    resolution: {integrity: sha512-NBOQT22DKvuNWVY7nKNbs6w9eGRyPwnc4ZjKOsCG2G/4wNt1+IyiHvc+5yhcAUZLG46cOY321YW7Ufz3lMtrhw==}
-    requiresBuild: true
-    dependencies:
-      bindings: 1.2.1
-      nan: 2.16.0
-    dev: false
-
   /merge-stream/2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
     dev: true
@@ -454,8 +486,12 @@ packages:
       brace-expansion: 1.1.11
     dev: true
 
-  /nan/2.16.0:
-    resolution: {integrity: sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==}
+  /multicast-dns/7.2.5:
+    resolution: {integrity: sha512-2eznPJP8z2BFLX50tf0LuODrpINqP1RVIm/CObbTcBRITQgmC/TjcREF1NeTBzIcR5XO/ukWo+YHOjBbFwIupg==}
+    hasBin: true
+    dependencies:
+      dns-packet: 5.4.0
+      thunky: 1.1.0
     dev: false
 
   /once/1.4.0:
@@ -666,6 +702,10 @@ packages:
       commander: 2.20.3
       source-map-support: 0.5.21
     dev: true
+
+  /thunky/1.1.0:
+    resolution: {integrity: sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==}
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}

@@ -44,11 +44,13 @@
     "typescript": "4.8.0-dev.20220728"
   },
   "dependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/ws": "^8.5.3",
     "axios": "^0.27.2",
+    "bonjour-service": "^1.0.13",
+    "crypto-js": "^4.1.1",
     "dayjs": "^1.11.4",
     "log4js": "^6.6.0",
-    "mdns": "^2.7.2",
     "node-localstorage": "^2.2.1",
     "ws": "^8.8.1"
   },
