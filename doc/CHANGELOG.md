@@ -6,6 +6,7 @@ August 31, 2022 v0.0.4
 - Refactor: Replace token with global parameter at and add rt parameter
 - Feat: Add WebSocket Control function
 - Feat: Add Lan Control function
+- Refactor: Major changes, change the parameters of the instantiated object and delete the requestRecord and logLevel parameters
 
 July 29, 2022 v0.0.3
 

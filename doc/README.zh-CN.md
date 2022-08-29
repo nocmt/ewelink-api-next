@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-0.0.3-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-0.0.4-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 [English](../README.md) | 简体中文
 
@@ -18,28 +18,90 @@
 推荐使用 npm, 下载 `ewelink-api-next`(node >= 16.16)
 
 ```bash
-$ npm i ewelink-api-next # or pnpm i ewelink-api-next
+npm i ewelink-api-next
+# or pnpm i ewelink-api-next
 ```
 
 ### 示例
 
 ```typescript
-import { WebAPI } from 'ewelink-api-next';
+// eWeLink v2 API
 
-const client = new WebAPI( {
-  appId,
-  appSecret,
-  region,
-  requestRecord: true
+import eWeLink from 'ewelink-api-next';
+
+const client = new eWeLink.WebAPI({
+  appId: "xxx",
+  appSecret: "xxx",
+  region: "us",
+  logObj: eWeLink.createLogger("us") // or console
 });
 
+client.syncLocalToken(region="us", account="xxx@xxx.net");
 try {
-  const response = await client.user.login({ account: "+8612345678912", password: "12345678", areaCode: "+1" });
+  const response = await client.user.login({ account: "xxx@xxx.com", password: "12345678", areaCode: "+1" });
   const userInfo = response.error === 0 ? response.data.user : {};
   console.log('userInfo：', userInfo);
 } catch (err) {
   console.log('Failed to get user information:', err.message);
 }
+```
+
+```typescript
+// eWeLink WebSocket API
+
+import eWeLink from 'ewelink-api-next';
+
+const wsClient = new eWeLink.Ws({
+  appId: "xxx",
+  appSecret: "xxx",
+  region: "us"
+});
+wsClient.syncLocalToken(region="us", account="xxx@xxx.net");
+
+let ws = await wsClient.Connect.create({
+  appId: wsClient?.appId || "",
+  at: wsClient.at,
+  region: "us",
+  userApiKey: wsClient.userApiKey
+});
+
+setTimeout(() => {
+  wsClient.Connect.updateState("xxxx", {
+    switch: "on"});
+}, 5000);
+```
+
+```typescript
+// eWeLink Lan Control
+import eWeLink from 'ewelink-api-next';
+
+const lanClient = new eWeLink.Lan({
+  selfApikey: "xxx",
+  logObj: eWeLink.createLogger("lan")
+});
+
+lanClient.discovery(); // Start Discovery Service
+try {
+  const res = await lanClient.zeroconf.switches({
+    data: {
+      switch: "on"
+    },
+    deviceId: "xxx",
+    secretKey: "xxx"
+  });
+  console.info("Request result:：", res);
+  const res2 = await lanClient.zeroconf.switches({
+    data: {
+      switch: "off"
+    },
+    deviceId: "xxx",
+    secretKey: "xxx"
+  });
+  console.info("Request result:：", res2);
+} catch (error: any) {
+  console.info(error.message);
+}
+
 ```
 
 ## TODO
@@ -50,8 +112,8 @@ try {
 - [x] 家庭房间
 - [x] 消息中心
 - [x] OAuth2.0
-- [ ] 长连接控制
-- [ ] 局域网控制
+- [x] 长连接控制
+- [x] 局域网控制
 
 ## 贡献者
 
