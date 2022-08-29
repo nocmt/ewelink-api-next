@@ -4,7 +4,7 @@ import path from "path";
 export const createLogger = (
   name: string,
   logLevel?: string | "info" | "debug" | "warn" | "error" | "fatal",
-  fileName?: string
+  filename?: string
 ) => {
   log4js.configure({
     appenders: {
@@ -13,7 +13,7 @@ export const createLogger = (
       // HTTP request log HTTP request log requires app Use to quote, so that each request information can be automatically recorded
       httpLog: {
         type: "dateFile",
-        filename: fileName || path.join("logs", "default.log"),
+        filename: filename || path.join("logs", "default.log"),
         pattern: "yyyy-MM-dd",
         keepFileExt: true,
         alwaysIncludePattern: true,
