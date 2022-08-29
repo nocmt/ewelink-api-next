@@ -53,10 +53,10 @@ export class Connect {
     // Create a new heartbeat timer
     let intervalTime = Math.ceil(hbInterval * (0.8 + 0.2 * Math.random()));
     hbIntervalTimer = setInterval(() => {
-      this.root.logger?.info("Send ping: ping");
+      this.root.logObj?.info("Send ping: ping");
       ws.send("ping");
     }, intervalTime * 1000);
-    this.root.logger?.info(`A timer for sending heartbeat packets has been created. Time interval: ${intervalTime}s`);
+    this.root.logObj?.info(`A timer for sending heartbeat packets has been created. Time interval: ${intervalTime}s`);
   };
 
   // Create a websocket connection
@@ -71,7 +71,7 @@ export class Connect {
     // Set onopen event
     ws.onopen = () => {
       // Send userOnline message
-      this.root.logger?.info("WebSocket connection has been established");
+      this.root.logObj?.info("WebSocket connection has been established");
       const data = {
         action: "userOnline",
         at: options.at || this.root.at || "",
@@ -81,33 +81,33 @@ export class Connect {
         userAgent: "app",
         sequence: new Date().getTime().toString()
       };
-      this.root.logger?.info(`Send userOnline message: ${JSON.stringify(data)}`);
+      this.root.logObj?.info(`Send userOnline message: ${JSON.stringify(data)}`);
       ws?.send(JSON.stringify(data));
     };
     // Set onclose event
     ws.onclose = () => {
       if (hbIntervalTimer) {
         clearInterval(hbIntervalTimer);
-        this.root.logger?.info("WebSocket hbIntervalTimer cleared");
+        this.root.logObj?.info("WebSocket hbIntervalTimer cleared");
       }
-      this.root.logger?.info("WebSocket connection has been closed");
+      this.root.logObj?.info("WebSocket connection has been closed");
       ws && ws.close();
     };
 
     // Set onerror event
     ws.onerror = (error) => {
-      this.root.logger?.info("WebSocket connection dropped, please reconnect, error: " + error.message);
+      this.root.logObj?.info("WebSocket connection dropped, please reconnect, error: " + error.message);
       if (hbIntervalTimer) {
         clearInterval(hbIntervalTimer);
-        this.root.logger?.info("WebSocket hbIntervalTimer cleared");
+        this.root.logObj?.info("WebSocket hbIntervalTimer cleared");
       }
     };
 
     // Set onmessage event
     ws.onmessage = (message) => {
-      this.root.logger?.info("WebSocket response received: " + message.data);
+      this.root.logObj?.info("WebSocket response received: " + message.data);
       if (message.data.toString()[0] == "{" && JSON.parse(message.data.toString())?.config) {
-        this.root.logger?.info("WebSocket handshake succeeded, creating heartbeat timer");
+        this.root.logObj?.info("WebSocket handshake succeeded, creating heartbeat timer");
         this.createHbTimer(JSON.parse(message.data.toString())?.config);
       }
     };
@@ -155,11 +155,11 @@ export class Connect {
     userApiKey?: string
   ) => {
     if (ws.readyState !== 1) {
-      this.root.logger?.info("WebSocket is not connected");
+      this.root.logObj?.info("WebSocket is not connected");
       return;
     }
     const data: string = this.getUpdateState(deviceId, params, action, userAgent, userApiKey);
-    this.root.logger?.info("Send update message:：" + data);
+    this.root.logObj?.info("Send update message:：" + data);
     ws?.send(data);
   };
 }

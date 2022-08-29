@@ -1,18 +1,16 @@
-// import { WebAPI, Ws } from "../src/index.js";
 import eWeLink from "../src/index.js";
 
 const client = new eWeLink.WebAPI({
   appId: "lzHjzT8NipCQpRSQbhNzZZoDuTAkcI1G",
   appSecret: "q75T54ondJlB8yioUdzBdAGBDzeEeDvK",
   region: "us",
-  requestRecord: true
+  logObj: eWeLink.createLogger("us")
 });
 
 const wsClient = new eWeLink.Ws({
   appId: "lzHjzT8NipCQpRSQbhNzZZoDuTAkcI1G",
   appSecret: "q75T54ondJlB8yioUdzBdAGBDzeEeDvK",
-  region: "us",
-  requestRecord: true
+  region: "us"
 });
 
 client.syncLocalToken("us", "upymjh35902@chacuo.net");

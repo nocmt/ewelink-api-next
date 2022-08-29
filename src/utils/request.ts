@@ -1,6 +1,19 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { nonce } from "./index.js";
 
+declare module "axios" {
+  interface AxiosResponse<T = any> {
+    error: number;
+    msg: string;
+    IP: string;
+    port: number;
+    domain: string;
+    reason: string;
+  }
+
+  export function create(config?: AxiosRequestConfig): AxiosInstance;
+}
+
 export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosInstance => {
   // 创建axios的实例对象，添加全局配置
   // Create an instance object of Axios and add a global configuration
@@ -51,7 +64,7 @@ export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosIn
       // Do something with response data
       const response = Object.assign({ status: res.status }, res.data);
       if (logObj) {
-        logObj.info("Response received：", JSON.stringify(res));
+        logObj.info("Response received：", JSON.stringify(response));
       }
       return response;
     },
