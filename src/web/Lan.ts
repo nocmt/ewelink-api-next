@@ -17,21 +17,23 @@ export type ControlOptions = {
 };
 
 export type LanOptions = {
-  logObj?: any;
   selfApikey: string;
+  logObj?: any;
+  request?: string;
 };
 
-let serverList: Service[] = []; // Service list 服务列表
-let serverDict: { [key: string]: Service } = {}; // Mapping table of device ID and service 设备ID与服务的映射表
+let lanServerList: Service[] = []; // Service list 服务列表
+let lanServerDict: { [key: string]: Service } = {}; // Mapping table of device ID and service 设备ID与服务的映射表
 
 export class Lan {
   logObj?: any;
   selfApikey: string = "";
-  request: AxiosInstance | any = creatRequest(undefined, this.logObj);
+  request: AxiosInstance | any;
 
   constructor(options?: LanOptions) {
     if (!options) return;
     _logger = this.logObj = options.logObj;
+    this.request = options.request || creatRequest(undefined, this.logObj);
     this.selfApikey = options.selfApikey;
   }
 
@@ -43,26 +45,26 @@ export class Lan {
       if (_logger) {
         _logger.info("Found an eWeLink mdns server:", service);
       }
-      serverList.push(service);
-      storage.set("serverList", serverList);
-      serverDict[service.txt.id] = service;
-      storage.set("lanServerDict", serverDict);
+      lanServerList.push(service);
+      storage.set("lanServerList", lanServerList);
+      lanServerDict[service.txt.id] = service;
+      storage.set("lanServerDict", lanServerDict);
     });
     return bonjourClient;
   }
 
-  getServerList() {
+  getLocalServerList() {
     if (_logger) {
-      _logger.info("serverList:", serverList);
+      _logger.info("lanServerList:", lanServerList);
     }
-    return serverList;
+    return lanServerList;
   }
 
-  getServerDict() {
+  getLocalServerDict() {
     if (_logger) {
-      _logger.info("serverDict:", serverDict);
+      _logger.info("lanServerDict:", lanServerDict);
     }
-    return serverDict;
+    return lanServerDict;
   }
 
   // data encrypt
@@ -116,17 +118,17 @@ export class Lan {
   ) {
     if (!iv && encrypt === undefined && !ipPort) {
       // 取实时记录
-      if (serverDict[deviceId]) {
-        encrypt = !!serverDict[deviceId].txt.encrypt;
-        iv = serverDict[deviceId].txt.iv;
-        ipPort = this.getDeviceIpPort(serverDict[deviceId]);
+      if (lanServerDict[deviceId]) {
+        encrypt = !!lanServerDict[deviceId].txt.encrypt;
+        iv = lanServerDict[deviceId].txt.iv;
+        ipPort = this.getDeviceIpPort(lanServerDict[deviceId]);
       } else {
         // 取本地记录
-        const _serverDict = storage.get("lanServerDict") || {};
-        if (_serverDict[deviceId]) {
-          encrypt = !!_serverDict[deviceId].txt.encrypt;
-          iv = _serverDict[deviceId].txt.iv;
-          ipPort = this.getDeviceIpPort(_serverDict[deviceId]);
+        const _lanServerDict = storage.get("lanServerDict") || {};
+        if (_lanServerDict[deviceId]) {
+          encrypt = !!_lanServerDict[deviceId].txt.encrypt;
+          iv = _lanServerDict[deviceId].txt.iv;
+          ipPort = this.getDeviceIpPort(_lanServerDict[deviceId]);
         }
       }
     }

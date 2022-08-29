@@ -2,8 +2,8 @@ import eWeLink from "../src/index.js";
 import { expect } from "chai";
 
 const lanClient = new eWeLink.Lan({
-  logObj: console,
-  selfApikey: "123"
+  selfApikey: "123",
+  logObj: console
 });
 
 describe("Device management test", function () {
