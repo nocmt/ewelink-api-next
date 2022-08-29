@@ -1,16 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ESNext", // 指定ECMAScript目标版本
-    "module": "ESNext", // 指定生成哪个模块系统代码
-    "moduleResolution": "Node16", // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
-    "noEmitOnError": true, // 发生错误时不输出任何文件
-    "lib": ["DOM", "ESNext"], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",
-    "strict": true, // 开启所有严格的类型检查
-    "esModuleInterop": true, // 允许export=导出，由import from 导入
-    "outDir": "dist", // 打包后的输出目录
-    "rootDir": "./", // 指定根目录，默认是当前目录
-    "declaration": true, // 是否生成声明文件
-    "typeRoots": [ // 声明文件目录，默认时node_modules/@types
+    "target": "ESNext",
+    // 指定ECMAScript目标版本
+    "module": "ESNext",
+    // 指定生成哪个模块系统代码
+    "moduleResolution": "Node16",
+    // 模块解析策略，ts默认用node的解析策略，即相对的方式导入
+    "noEmitOnError": true,
+    // 发生错误时不输出任何文件
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
+    // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入"ES2019.Array",
+    "strict": true,
+    // 开启所有严格的类型检查
+    "esModuleInterop": true,
+    // 允许export=导出，由import from 导入
+    "outDir": "dist",
+    // 打包后的输出目录
+    "rootDir": "./",
+    // 指定根目录，默认是当前目录
+    "declaration": true,
+    // 是否生成声明文件
+    "typeRoots": [
+      // 声明文件目录，默认时node_modules/@types
       "./node_modules/@types",
       "./src/types/"
     ]
@@ -18,5 +32,5 @@
   "include": [
     "src",
     "test"
-  ],
+  ]
 }

@@ -1,4 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
+
 export type thingInfo = {
   type: number | 1 | 2;
   id: string;

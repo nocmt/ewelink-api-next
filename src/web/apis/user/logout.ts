@@ -6,6 +6,7 @@ export interface Logout extends BaseWebAPI {}
 export type accountInfo = {
   account: string;
 };
+
 export class Logout {
   async logout(options: accountInfo) {
     let at;

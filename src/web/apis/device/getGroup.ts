@@ -1,4 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
+
 export type baseInfo = {
   lang?: "cn" | "en";
 };

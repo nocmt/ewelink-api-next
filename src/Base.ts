@@ -14,6 +14,7 @@ declare module "axios" {
     domain: string;
     reason: string;
   }
+
   export function create(config?: AxiosRequestConfig): AxiosInstance;
 }
 
@@ -128,6 +129,7 @@ export class eWeLinkBase {
       }
     );
   }
+
   syncLocalToken = (region: string, account: string) => {
     this.region = region;
     this.account = account;
