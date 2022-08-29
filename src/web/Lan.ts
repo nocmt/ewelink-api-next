@@ -1,34 +1,37 @@
 import { Bonjour, Service } from "bonjour-service";
-import { createLogger } from "../utils/logger.js";
-import log4js from "log4js";
-import { request } from "../utils/request.js";
+import { creatRequest } from "../utils/request.js";
 import { AxiosInstance } from "axios";
-
+import { storage } from "../cache/index.js";
 import CryptoJS from "crypto-js";
 
 let _logger: any;
 
+// Type of parameter transferred when controlling equipment
+export type ControlOptions = {
+  deviceId: string;
+  data: any;
+  secretKey: string;
+  iv?: string;
+  encrypt?: boolean;
+  ipPort?: string;
+};
+
 export type LanOptions = {
   logObj?: any;
-  logLevel?: string | "info" | "debug" | "warn" | "error" | "fatal";
   selfApikey: string;
 };
 
-let serverList: Service[] = []; // 服务列表
-let serverDict: { [key: string]: Service } = {}; // 设备ID与服务的映射表
+let serverList: Service[] = []; // Service list 服务列表
+let serverDict: { [key: string]: Service } = {}; // Mapping table of device ID and service 设备ID与服务的映射表
 
 export class Lan {
-  logger?: log4js.Logger | Console | any;
-  logLevel?: string | "info" | "debug" | "warn" | "error" | "fatal";
+  logObj?: any;
   selfApikey: string = "";
-  request: AxiosInstance | any = request;
+  request: AxiosInstance | any = creatRequest(undefined, this.logObj);
 
   constructor(options?: LanOptions) {
     if (!options) return;
-
-    this.logLevel = options.logLevel || "debug";
-    this.logger = options.logObj || createLogger("lan", this.logLevel);
-    _logger = this.logger;
+    _logger = this.logObj = options.logObj;
     this.selfApikey = options.selfApikey;
   }
 
@@ -37,20 +40,28 @@ export class Lan {
   discovery(type: string = "ewelink") {
     const bonjourClient = new Bonjour();
     bonjourClient.find({ type: type }, function (service: Service) {
-      _logger.info("Found an eWeLink mdns server:", service);
+      if (_logger) {
+        _logger.info("Found an eWeLink mdns server:", service);
+      }
       serverList.push(service);
+      storage.set("serverList", serverList);
       serverDict[service.txt.id] = service;
+      storage.set("lanServerDict", serverDict);
     });
     return bonjourClient;
   }
 
   getServerList() {
-    _logger.info("serverList:", serverList);
+    if (_logger) {
+      _logger.info("serverList:", serverList);
+    }
     return serverList;
   }
 
   getServerDict() {
-    _logger.info("serverDict:", serverDict);
+    if (_logger) {
+      _logger.info("serverDict:", serverDict);
+    }
     return serverDict;
   }
 
@@ -78,165 +89,223 @@ export class Lan {
   }
 
   // Get device ID + port
-  getDeviceIpPort(deviceId: string): string {
-    if (serverDict[deviceId] && serverDict[deviceId]?.addresses) {
-      const addresses = serverDict[deviceId].addresses || [];
+  getDeviceIpPort(server: Service): string {
+    if (server && server?.addresses) {
+      const addresses = server.addresses || [];
       const ips: string[] = addresses.filter((ip: string) => {
         if (ip.length <= 32) {
-          return `${ip}:${serverDict[deviceId].port || "8081"}`;
+          return ip;
         }
       });
       if (ips.length > 0) {
-        return ips[0];
+        return `${ips[0]}:${server.port || "8081"}`;
       }
     }
     return "";
   }
+
   async generalRequest(
+    method: string | "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
+    api: string,
     deviceId: string,
-    data: object,
-    method: string | "GET" | "POST" | "PUT" | "DELETE",
-    api: string
+    data: any,
+    secretKey: string,
+    iv?: string,
+    encrypt?: boolean,
+    ipPort?: string
   ) {
-    const url = this.getDeviceIpPort(deviceId);
-    if (url) throw new Error("Device not found");
+    if (!iv && encrypt === undefined && !ipPort) {
+      // 取实时记录
+      if (serverDict[deviceId]) {
+        encrypt = !!serverDict[deviceId].txt.encrypt;
+        iv = serverDict[deviceId].txt.iv;
+        ipPort = this.getDeviceIpPort(serverDict[deviceId]);
+      } else {
+        // 取本地记录
+        const _serverDict = storage.get("lanServerDict") || {};
+        if (_serverDict[deviceId]) {
+          encrypt = !!_serverDict[deviceId].txt.encrypt;
+          iv = _serverDict[deviceId].txt.iv;
+          ipPort = this.getDeviceIpPort(_serverDict[deviceId]);
+        }
+      }
+    }
+
+    if (!ipPort) {
+      throw new Error("Device not found");
+    }
+
+    if (encrypt && iv) {
+      data = this.encrypt(data, secretKey, iv);
+    }
+
     let body = {
       deviceid: deviceId,
       sequence: new Date().getTime().toString(),
       selfApikey: this.selfApikey,
+      iv: iv,
+      encrypt: encrypt,
       data: data
     };
+    try {
+      let requestConfig: { [key: string]: string | object } = {
+        url: `http://${ipPort}${api}`,
+        method: method.toLowerCase()
+      };
+      if (["post", "put", "patch", "putForm", "patchForm", "postForm"].includes(method.toLowerCase())) {
+        requestConfig["data"] = body;
+      } else {
+        requestConfig["params"] = body;
+      }
 
-    return await request.request({
-      url: `http://${url}${api}`,
-      method: method.toLowerCase(),
-      data: body,
-      headers: {}
-    });
+      return await this.request.request(requestConfig);
+    } catch (error) {
+      if (_logger) {
+        _logger.error(error);
+      }
+      throw new Error("Request error, please check the network, or the device not online.");
+    }
   }
 
   // General interface
   zeroconf = {
     // 单通道设备开关
     // Switch single channel device
-    switch: async (
-      deviceId: string,
-      data:
-        | {
-            switch: "on" | "off";
-          }
-        | { [key: string]: any }
-    ) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/switch`);
+    switch: async (controlOptions: ControlOptions) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/switch",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
 
     // 多通道设备开关
     // Switch multiple channels
-    switches: async (
-      deviceId: string,
-      data:
-        | {
-            switches: [
-              { switch: "on" | "off"; outlet: 0 },
-              { switch: "on" | "off"; outlet: 1 },
-              { switch: "on" | "off"; outlet: 2 },
-              { switch: "on" | "off"; outlet: 3 }
-            ];
-          }
-        | { [key: string]: any }
-    ) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/switches`);
+    switches: async (controlOptions: ControlOptions) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/switches",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
 
     // 调节灯的颜色、亮度、色温
     // Adjust the color, brightness, color temperature of the light
-    dimmable: async (deviceId: string, data: object) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/dimmable`);
+    dimmable: async (controlOptions: ControlOptions) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/dimmable",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
-
-    // // 学习通道键值
-    // // Learning channel key value
-    // capture: async (
-    //   deviceId: string,
-    //   data: {
-    //     rfChl: number;
-    //   }
-    // ) => {
-    //   return await this.generalRequest(deviceId, data, "POST", `/zeroconf/capture`);
-    // },
-    //
-    // // 退出学习通道键值
-    // // Exit learning channel key value
-    // cancelCapture: async (deviceId: string) => {
-    //   return await this.generalRequest(deviceId, {}, "POST", `/zeroconf/capture/cancel`);
-    // },
-    //
-    // // 获取通道键值列表
-    // // Get channel key value list
-    // getRFList: async (
-    //   deviceId: string,
-    //   data: {
-    //     rangeStart: number;
-    //     rangeEnd: number;
-    //   }
-    // ) => {
-    //   if (data.rangeEnd > data.rangeStart && data.rangeEnd - data.rangeStart < 24) {
-    //     return await this.generalRequest(deviceId, data, "POST", `/zeroconf/rflist/get`);
-    //   } else {
-    //     throw new Error("rangeEnd must be greater than rangeStart and rangeEnd - rangeStart must be less than 24");
-    //   }
-    // },
-    //
-    // // 发送通道键值
-    // // Send channel key value
-    // transmit: async (
-    //   deviceId: string,
-    //   data: {
-    //     rfChl: number;
-    //   }
-    // ) => {
-    //   return await this.generalRequest(deviceId, data, "POST", `/zeroconf/transmit`);
-    // },
 
     // 网络指示灯开关
     // Switch network indicator light
-    sledOnline: async (deviceId: string, data: object) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/sledonline`);
+    sledOnline: async (controlOptions: ControlOptions) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/sledonline",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
 
     // 设备上电状态设置
     // Set device power on status
-    startups: async (deviceId: string, data: object) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/startups`);
+    startups: async (controlOptions: ControlOptions) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/startups",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
 
     // 设备打开后自动关闭设置
     // Set device auto close after open
-    pulses: async (deviceId: string, data: object) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/pulses`);
+    pulses: async (controlOptions: ControlOptions) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/pulses",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
 
     // 传输是否加密
     // Whether to encrypt the transmission
-    encrypt: async (
-      deviceId: string,
+    encrypt: async (controlOptions: {
+      deviceId: string;
       data: {
         encrypt: boolean;
-      }
-    ) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/encrypt`);
+      };
+      ipPort?: string;
+      secretKey: string;
+      iv?: string;
+      encrypt?: boolean;
+    }) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/encrypt",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     },
 
     // 设置加密密码
     // Set encryption password
-    password: async (
-      deviceId: string,
+    password: async (controlOptions: {
+      deviceId: string;
       data: {
         newPassword: string;
         oldPassword: string;
-      }
-    ) => {
-      return await this.generalRequest(deviceId, data, "POST", `/zeroconf/password`);
+      };
+      ipPort?: string;
+      secretKey: string;
+      iv?: string;
+      encrypt?: boolean;
+    }) => {
+      return await this.generalRequest(
+        "POST",
+        "/zeroconf/password",
+        controlOptions.deviceId,
+        controlOptions.data,
+        controlOptions.secretKey,
+        controlOptions?.iv,
+        controlOptions?.encrypt,
+        controlOptions?.ipPort
+      );
     }
   };
 }
