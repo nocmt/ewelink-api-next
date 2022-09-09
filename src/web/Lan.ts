@@ -39,7 +39,7 @@ export class Lan {
 
   // 发现局域网内易微联设备
   // Discover eWeLink devices in LAN
-  discovery(type: string = "ewelink") {
+  discovery(type: string = "ewelink", onDiscover?: (server: Service) => void) {
     const bonjourClient = new Bonjour();
     bonjourClient.find({ type: type }, function (service: Service) {
       if (_logger) {
@@ -49,6 +49,9 @@ export class Lan {
       storage.set("lanServerList", lanServerList);
       lanServerDict[service.txt.id] = service;
       storage.set("lanServerDict", lanServerDict);
+      if (onDiscover) {
+        onDiscover(service);
+      }
     });
     return bonjourClient;
   }

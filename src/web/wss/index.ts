@@ -1,7 +1,7 @@
 import { Ws } from "../Ws.js";
 import { storage } from "../../cache/index.js";
 import { nonce } from "../../utils/index.js";
-import WebSocket from "ws";
+import WebSocket, { ErrorEvent, MessageEvent } from "ws";
 
 let ws: WebSocket; // WebSocket instance
 let hbIntervalTimer: any; // Heartbeat timer instance
@@ -60,7 +60,13 @@ export class Connect {
   };
 
   // Create a websocket connection
-  create = async (options: connectInfo) => {
+  create = async (
+    options: connectInfo,
+    onOpen?: (_ws: WebSocket) => void,
+    onClose?: () => void,
+    onError?: (error: ErrorEvent) => void,
+    onMessage?: (_ws: WebSocket, message: MessageEvent) => void
+  ) => {
     // If fullUrl is provided, use it directly
     if (options?.fullUrl) {
       ws = new WebSocket(options.fullUrl);
@@ -83,6 +89,9 @@ export class Connect {
       };
       this.root.logObj?.info(`Send userOnline message: ${JSON.stringify(data)}`);
       ws?.send(JSON.stringify(data));
+      if (onOpen) {
+        onOpen(ws);
+      }
     };
     // Set onclose event
     ws.onclose = () => {
@@ -92,6 +101,9 @@ export class Connect {
       }
       this.root.logObj?.info("WebSocket connection has been closed");
       ws && ws.close();
+      if (onClose) {
+        onClose();
+      }
     };
 
     // Set onerror event
@@ -101,6 +113,9 @@ export class Connect {
         clearInterval(hbIntervalTimer);
         this.root.logObj?.info("WebSocket hbIntervalTimer cleared");
       }
+      if (onError) {
+        onError(error);
+      }
     };
 
     // Set onmessage event
@@ -109,6 +124,9 @@ export class Connect {
       if (message.data.toString()[0] == "{" && JSON.parse(message.data.toString())?.config) {
         this.root.logObj?.info("WebSocket handshake succeeded, creating heartbeat timer");
         this.createHbTimer(JSON.parse(message.data.toString())?.config);
+      }
+      if (onMessage) {
+        onMessage(ws, message);
       }
     };
     return ws;
