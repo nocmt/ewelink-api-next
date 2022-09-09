@@ -1,6 +1,10 @@
 # CHANGELOG
 
-August 31, 2022 v0.0.4
+September 9, 2022 v0.0.5
+
+- Feat: New support for LAN discovery and selective transfer callback function when websocket creates a connection
+
+August 29, 2022 v0.0.4
 
 - Feat: Add the definition of log print object during instantiation
 - Refactor: Replace token with global parameter at and add rt parameter

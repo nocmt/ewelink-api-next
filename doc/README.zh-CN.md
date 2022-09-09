@@ -80,7 +80,9 @@ const lanClient = new eWeLink.Lan({
   logObj: eWeLink.createLogger("lan")
 });
 
-lanClient.discovery(); // Start Discovery Service
+lanClient.discovery(undefined, (server)=>{
+  console.log("server:", server);
+}); // Start Discovery Service
 try {
   const res = await lanClient.zeroconf.switches({
     data: {
