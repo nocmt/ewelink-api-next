@@ -119,39 +119,41 @@ export class Lan {
     encrypt?: boolean,
     ipPort?: string
   ) {
-    if (!iv && encrypt === undefined && !ipPort) {
-      // 取实时记录
+    // encrypt undefined,false,true
+    encrypt = encrypt === undefined ? true : encrypt; // default true
+    // If the device ID is not passed in, it is obtained from the local cache
+    if (!iv || !ipPort) {
+      // Get real-time records
       if (lanServerDict[deviceId]) {
-        encrypt = !!lanServerDict[deviceId].txt.encrypt;
-        iv = lanServerDict[deviceId].txt.iv;
-        ipPort = this.getDeviceIpPort(lanServerDict[deviceId]);
+        iv = iv || lanServerDict[deviceId].txt.iv;
+        ipPort = ipPort || this.getDeviceIpPort(lanServerDict[deviceId]);
       } else {
-        // 取本地记录
+        // Get local records
         const _lanServerDict = storage.get("lanServerDict") || {};
         if (_lanServerDict[deviceId]) {
-          encrypt = !!_lanServerDict[deviceId].txt.encrypt;
-          iv = _lanServerDict[deviceId].txt.iv;
-          ipPort = this.getDeviceIpPort(_lanServerDict[deviceId]);
+          iv = iv || _lanServerDict[deviceId].txt.iv;
+          ipPort = ipPort || this.getDeviceIpPort(_lanServerDict[deviceId]);
         }
       }
     }
 
     if (!ipPort) {
-      throw new Error("Device not found");
+      throw new Error("Device ipPort is empty, Device may not be in LAN");
     }
 
     if (encrypt && iv) {
       data = this.encrypt(data, secretKey, iv);
     }
 
-    let body = {
+    const body = {
       deviceid: deviceId,
       sequence: new Date().getTime().toString(),
       selfApikey: this.selfApikey,
       iv: iv,
       encrypt: encrypt,
-      data: data
+      data: !encrypt ? JSON.stringify(data) : data
     };
+
     try {
       let requestConfig: { [key: string]: string | object } = {
         url: `http://${ipPort}${api}`,
