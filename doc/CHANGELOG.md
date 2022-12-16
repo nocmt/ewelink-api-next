@@ -1,5 +1,10 @@
 # CHANGELOG
 
+December 16, 2022 v0.0.6
+
+- Fix: Fix the error reported when the device encryption is canceled and then controlled in the LAN control
+- Fix: Fix invalid setUrl function
+
 September 9, 2022 v0.0.5
 
 - Feat: New support for LAN discovery and selective transfer callback function when websocket creates a connection
