@@ -8,6 +8,11 @@ export type groupInfo = {
 export interface CoverGroupDeviceList extends BaseWebAPI {}
 
 export class CoverGroupDeviceList {
+  /**
+   * Adding or deleting devices in a group
+   * @returns full device info in 'response.data'
+   * @param options
+   */
   async coverGroupDeviceList(options: groupInfo) {
     if (options.coverDeviceidList.length < 1) {
       throw new Error("addDeviceidList length must be greater than 0");

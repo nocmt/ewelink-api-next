@@ -24,6 +24,8 @@ npm i ewelink-api-next
 
 ### Example
 
+Set the 'type' and 'module' in package.json, otherwise an error will be reported
+
 ```typescript
 // eWeLink v2 API
 

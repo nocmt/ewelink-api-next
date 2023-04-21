@@ -3,8 +3,6 @@ import { assert } from "chai";
 import { client } from "./testConfig.js";
 
 describe("OAuth management test", function () {
-  this.timeout(30000);
-
   it("oauth.createLoginUrl", function () {
     const url = client.oauth.createLoginUrl({
       redirectUrl: "https://127.0.0.1",

@@ -1,12 +1,13 @@
 {
   "name": "ewelink-api-next",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "CoolKit v2 API Official Library",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc && rm -rf dist/test && cp -r dist/src/* dist && rm -rf dist/src",
     "build:all": "rimraf dist && tsc",
-    "test": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/*.test.ts",
+    "test": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/*.test.ts --timeout 30000",
+    "testJson": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/*.test.ts --reporter json --reporter-option output=test.json",
     "cover": "nyc --reporter=html npm run test",
     "build:rollup": "rimraf dist && rollup -c"
   },
@@ -46,13 +47,13 @@
   "dependencies": {
     "@types/crypto-js": "^4.1.1",
     "@types/ws": "^8.5.3",
-    "axios": "^0.27.2",
-    "bonjour-service": "^1.0.13",
+    "axios": "1.2.1",
+    "bonjour-service": "1.0.14",
     "crypto-js": "^4.1.1",
-    "dayjs": "^1.11.4",
-    "log4js": "^6.6.0",
+    "dayjs": "1.11.7",
+    "log4js": "6.7.1",
     "node-localstorage": "^2.2.1",
-    "ws": "^8.8.1"
+    "ws": "8.11.0"
   },
   "files": [
     "dist",

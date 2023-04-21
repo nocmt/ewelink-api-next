@@ -12,6 +12,11 @@ export type groupInfo = {
 export interface AddGroup extends BaseWebAPI {}
 
 export class AddGroup {
+  /**
+   * Creates a new Device Group.
+   * @returns full device info in 'response.data'
+   * @param options
+   */
   async addGroup(options: groupInfo) {
     if (options.deviceidList.length < 1 || options.deviceidList.length > 30) {
       throw new Error("deviceidList length must be between 1 and 30");

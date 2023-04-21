@@ -9,6 +9,11 @@ export type baseInfo = {
 export interface AddFamily extends BaseWebAPI {}
 
 export class AddFamily {
+  /**
+   * Creates a new Family.
+   * @returns full family info in 'response.data'
+   * @param options
+   */
   async addFamily(options: baseInfo) {
     const body = {
       name: options.name,

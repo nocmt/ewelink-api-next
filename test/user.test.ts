@@ -3,8 +3,6 @@ import { assert } from "chai";
 import { client } from "./testConfig.js";
 
 describe("User management test", function () {
-  this.timeout(30000);
-
   it("user.getRegion", async function () {
     const response = await client.user.getRegion({ areaCode: "86" });
     assert.strictEqual(response.data.region, "cn", "The region query is correct");

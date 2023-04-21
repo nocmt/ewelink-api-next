@@ -20,6 +20,11 @@ export type deviceInfo = {
 export interface AddDevice extends BaseWebAPI {}
 
 export class AddDevice {
+  /**
+   * Creates a new Wi-Fi Device.
+   * @returns full device info in 'response.data'
+   * @param options
+   */
   async addDevice(options: deviceInfo) {
     const body = {
       name: options?.name || `MyDevice${options.deviceId.slice(-5)}`,

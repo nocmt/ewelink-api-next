@@ -7,8 +7,6 @@ const lanClient = new eWeLink.Lan({
 });
 
 describe("Device management test", function () {
-  this.timeout(30000);
-
   it("lan.encrypt+decrypt", async function () {
     const data = {
       switch: "on",

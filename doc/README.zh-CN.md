@@ -24,6 +24,8 @@ npm i ewelink-api-next
 
 ### 示例
 
+设置 package.json 中的 "type": "module"，否则会报错
+
 ```typescript
 // eWeLink v2 API
 
