@@ -66,7 +66,7 @@ describe("User management test", function () {
   });
 
   it("user.logout", async function () {
-    let response = await client.user.logout({ account: "upymjh35902@chacuo.net" });
+    let response = await client.user.logout({});
     assert.strictEqual(response.error, 0, "success");
   });
 });

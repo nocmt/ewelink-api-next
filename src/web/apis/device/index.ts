@@ -16,10 +16,10 @@ import { GetOTAInfo } from "./getOTAInfo.js";
 import { GetThings } from "./getThings.js";
 import { GetThingStatus } from "./getThingStatus.js";
 import { SetAllThingStatus } from "./setAllThingStatus.js";
-import { SetDeviceInfo } from "./setDeviceInfo.js";
+// import { SetDeviceInfo } from "./setDeviceInfo.js";
 import { SetDeviceTags } from "./setDeviceTags.js";
 import { SetGroup } from "./setGroup.js";
-import { SetGroupDeviceList } from "./setGroupDeviceList.js";
+// import { SetGroupDeviceList } from "./setGroupDeviceList.js";
 import { SetGroupStatus } from "./setGroupStatus.js";
 import { SetShare } from "./setShare.js";
 import { SetThingStatus } from "./setThingStatus.js";
@@ -46,10 +46,8 @@ export interface Device
     GetThings,
     GetThingStatus,
     SetAllThingStatus,
-    SetDeviceInfo,
     SetDeviceTags,
     SetGroup,
-    SetGroupDeviceList,
     SetGroupStatus,
     SetShare,
     SetThingStatus,
@@ -72,10 +70,8 @@ applyMixins(Device, [
   GetThings,
   GetThingStatus,
   SetAllThingStatus,
-  SetDeviceInfo,
   SetDeviceTags,
   SetGroup,
-  SetGroupDeviceList,
   SetGroupStatus,
   SetShare,
   SetThingStatus,

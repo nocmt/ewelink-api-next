@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { saveToken, sign } from "../../../utils/index.js";
+import { sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   phoneNumber: string;
@@ -25,7 +25,7 @@ export class SMSLogin {
       }
     });
     if (res.status === 200 && res.error === 0) {
-      saveToken(res, options.phoneNumber);
+      // saveToken(res, options.phoneNumber);
       this.root.account = options.phoneNumber;
       this.root.at = res.data?.at;
       this.root.rt = res.data?.rt;

@@ -1,5 +1,4 @@
 import { Ws } from "../Ws.js";
-import { storage } from "../../cache/index.js";
 import { nonce } from "../../utils/index.js";
 import WebSocket, { ErrorEvent, MessageEvent } from "ws";
 
@@ -39,9 +38,8 @@ export class Connect {
     } else {
       res = await this.root.request.get("https://dispa.coolkit.cc/dispatch/app");
     }
-    let { IP, port, domain, reason } = res;
+    let { port, domain, reason } = res;
     if (reason !== "ok") throw new Error("Long connection address acquisition failed");
-    storage.set("ws", { IP, port, domain });
     return `wss://${domain}:${port}/api/ws`;
   };
 

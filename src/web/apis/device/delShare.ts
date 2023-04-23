@@ -11,7 +11,7 @@ export class DelShare {
   async delShare(options: deviceInfo) {
     const params = {
       deviceid: options.deviceId,
-      apiKey: options.apiKey
+      apikey: options.apiKey
     };
     return await this.root.request.delete("/v2/device/share", {
       params,

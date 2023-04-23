@@ -11,8 +11,8 @@ export interface SetShare extends BaseWebAPI {}
 export class SetShare {
   async setShare(options: deviceInfo) {
     const body = {
-      deviceId: options.deviceId,
-      apiKey: options.apiKey,
+      deviceid: options.deviceId,
+      apikey: options.apiKey,
       permit: options.permit
     };
     return await this.root.request.post("/v2/device/share/permit", body, {

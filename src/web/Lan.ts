@@ -1,7 +1,6 @@
 import { Bonjour, Service } from "bonjour-service";
 import { creatRequest } from "../utils/request.js";
 import { AxiosInstance } from "axios";
-import { storage } from "../cache/index.js";
 import CryptoJS from "crypto-js";
 
 let _logger: any;
@@ -39,19 +38,17 @@ export class Lan {
 
   // 发现局域网内易微联设备
   // Discover eWeLink devices in LAN
-  discovery(type: string = "ewelink", onDiscover?: (server: Service) => void) {
+  discovery(type: string = "ewelink", onDiscover: (server: Service) => void) {
     const bonjourClient = new Bonjour();
     bonjourClient.find({ type: type }, function (service: Service) {
       if (_logger) {
-        _logger.info("Found an eWeLink mdns server:", service);
+        _logger.info("Found an eWeLink mDns server: ", service);
       }
-      lanServerList.push(service);
-      storage.set("lanServerList", lanServerList);
-      lanServerDict[service.txt.id] = service;
-      storage.set("lanServerDict", lanServerDict);
-      if (onDiscover) {
-        onDiscover(service);
-      }
+      // lanServerList.push(service);
+      // storage.set("lanServerList", lanServerList);
+      // lanServerDict[service.txt.id] = service;
+      // storage.set("lanServerDict", lanServerDict);
+      onDiscover(service);
     });
     return bonjourClient;
   }
@@ -129,11 +126,11 @@ export class Lan {
         ipPort = ipPort || this.getDeviceIpPort(lanServerDict[deviceId]);
       } else {
         // Get local records
-        const _lanServerDict = storage.get("lanServerDict") || {};
-        if (_lanServerDict[deviceId]) {
-          iv = iv || _lanServerDict[deviceId].txt.iv;
-          ipPort = ipPort || this.getDeviceIpPort(_lanServerDict[deviceId]);
-        }
+        // const _lanServerDict = storage.get("lanServerDict") || {};
+        // if (_lanServerDict[deviceId]) {
+        //   iv = iv || _lanServerDict[deviceId].txt.iv;
+        //   ipPort = ipPort || this.getDeviceIpPort(_lanServerDict[deviceId]);
+        // }
       }
     }
 

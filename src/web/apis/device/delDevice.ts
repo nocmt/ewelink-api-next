@@ -8,7 +8,7 @@ export interface DelDevice extends BaseWebAPI {}
 
 export class DelDevice {
   async delDevice(options: deviceInfo) {
-    return await this.root.request.delete("/v2/device/update-info", {
+    return await this.root.request.delete("/v2/device", {
       params: {
         deviceid: options.id
       },

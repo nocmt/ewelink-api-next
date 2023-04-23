@@ -1,4 +1,4 @@
-import { getToken } from "./utils/index.js";
+// import { getToken } from "./utils/index.js";
 import { storage } from "./cache/index.js";
 import { AxiosInstance } from "axios";
 import { creatRequest } from "./utils/request.js";
@@ -53,27 +53,28 @@ export class eWeLinkBase {
     }
   }
 
-  syncLocalToken = (region: string, account: string) => {
-    this.region = region;
-    this.account = account;
-    this.at = getToken(region, account);
-    let createTime;
-    try {
-      createTime = (storage.get(region) || {})[account];
-      this.userApiKey = createTime.user.apikey;
-      this.rt = createTime.rt;
-      if (createTime && createTime[account]) {
-        createTime = createTime[account]?.createTime;
-      }
-    } catch (error) {
-      createTime = null;
-    }
-    return createTime;
-  };
+  // syncLocalToken = (region: string, account: string) => {
+  //   this.region = region;
+  //   this.account = account;
+  //   this.at = getToken(region, account);
+  //   let createTime;
+  //   try {
+  //     createTime = (storage.get(region) || {})[account];
+  //     this.userApiKey = createTime.user.apikey;
+  //     this.rt = createTime.rt;
+  //     if (createTime && createTime[account]) {
+  //       createTime = createTime[account]?.createTime;
+  //     }
+  //   } catch (error) {
+  //     createTime = null;
+  //   }
+  //   return createTime;
+  // };
 
   setUrl = (region: string) => {
     this.endpoint = `https://${region}-apia.coolkit.${["cn", "test"].includes(region) ? "cn" : "cc"}`;
     this.request.default.baseURL = this.endpoint;
+    this.request.baseURL = this.endpoint;
   };
 
   setAuthConfigs = (appId: string, appSecret: string) => {

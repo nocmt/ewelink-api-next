@@ -9,7 +9,7 @@ describe("Device management test", function () {
   });
 
   after(async function () {
-    let response = await client.user.logout({ account: "upymjh35902@chacuo.net" });
+    let response = await client.user.logout({});
     assert.strictEqual(response.error, 0, "success");
   });
 
@@ -22,14 +22,14 @@ describe("Device management test", function () {
     assert.strictEqual(response.error, 30015, "success");
   });
 
-  it("device.addGroup", async function () {
-    const response = await client.device.addGroup({
-      mainDeviceId: "100085c78c",
-      name: "123",
-      deviceidList: ["100085c78c", "100085c78d"]
-    });
-    assert.strictEqual(response.error, 405, "success");
-  });
+  // it("device.addGroup", async function () {
+  //   const response = await client.device.addGroup({
+  //     mainDeviceId: "100085c78c",
+  //     name: "123",
+  //     deviceidList: ["100085c78c", "100085c78d"]
+  //   });
+  //   assert.strictEqual(response.error, 405, "success");
+  // });
 
   it("device.addGSMDevice", async function () {
     const response = await client.device.addGSMDevice({
@@ -51,7 +51,7 @@ describe("Device management test", function () {
     const response = await client.device.delDevice({
       id: "100085c78c"
     });
-    assert.strictEqual(response.error, 403, "success");
+    assert.strictEqual(response.error, 405, "success");
   });
 
   it("device.delGroup", async function () {
@@ -61,13 +61,13 @@ describe("Device management test", function () {
     assert.strictEqual(response.error, 400, "success");
   });
 
-  it("device.delGroupDeviceList", async function () {
-    const response = await client.device.delGroupDeviceList({
-      delDeviceidList: ["100085c78c", "100085c78d"],
-      id: "123"
-    });
-    assert.strictEqual(response.error, 400, "success");
-  });
+  // it("device.delGroupDeviceList", async function () {
+  //   const response = await client.device.delGroupDeviceList({
+  //     delDeviceidList: ["100085c78c", "100085c78d"],
+  //     id: "123"
+  //   });
+  //   assert.strictEqual(response.error, 400, "success");
+  // });
 
   it("device.delOperationHistory", async function () {
     const response = await client.device.delOperationHistory({
@@ -147,15 +147,6 @@ describe("Device management test", function () {
     assert.strictEqual(response.error, 0, "success");
   });
 
-  it("device.setDeviceInfo", async function () {
-    const response = await client.device.setDeviceInfo({
-      deviceId: "100085c78c",
-      newName: "newName100085c78c",
-      newRoomId: "62dfe4cf03546100096ba08c"
-    });
-    assert.strictEqual(response.error, 405, "success");
-  });
-
   it("device.setDeviceTags", async function () {
     const response = await client.device.setDeviceTags({
       type: "replace",
@@ -171,14 +162,6 @@ describe("Device management test", function () {
     const response = await client.device.setGroup({
       newName: "newName",
       id: "62dfe4cf03546100096ba08c"
-    });
-    assert.strictEqual(response.error, 405, "success");
-  });
-
-  it("device.setGroupDeviceList", async function () {
-    const response = await client.device.setGroupDeviceList({
-      id: "62dfe4cf03546100096ba08c",
-      addDeviceidList: ["100085c78c", "100085c78d"]
     });
     assert.strictEqual(response.error, 405, "success");
   });

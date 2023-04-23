@@ -1,5 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
-import { saveToken, sign } from "../../../utils/index.js";
+import { sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   account: string;
@@ -27,7 +27,6 @@ export class Login {
       }
     });
     if (res.status === 200 && res.error === 0) {
-      saveToken(res, options.account);
       this.root.account = options.account;
       this.root.at = res.data?.at;
       this.root.rt = res.data?.rt;
