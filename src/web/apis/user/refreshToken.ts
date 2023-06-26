@@ -1,7 +1,6 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type accountInfo = {
-  account: string;
   rt: string;
 };
 

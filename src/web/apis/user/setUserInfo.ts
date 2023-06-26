@@ -10,18 +10,22 @@ export type userInfo = {
   // 是否接受过会员咨询反馈，固定值 true，填写其它值则返回参数错误，如果字段为空或 NULL，表示不更新
   // Have you received member consultation feedback? The fixed value is true. If you fill in other values, the parameter error will be returned. If the field is empty or null, it means that it will not be updated
   accountConsult?: true | null;
+  timezone?: {
+    id: string;
+    offset: number;
+  };
+  language?: string;
+  lang?: string | "en" | "cn";
+  emailSubscription?: {
+    email: string;
+  };
 };
 
 export interface SetUserInfo extends BaseWebAPI {}
 
 export class SetUserInfo {
   async setUserInfo(options: userInfo) {
-    const body = {
-      nickname: options?.nickname,
-      acceptEmailAd: options?.acceptEmailAd,
-      accountConsult: options?.accountConsult
-    };
-    return await this.root.request.post("/v2/user/profile", body, {
+    return await this.root.request.post("/v2/user/profile", options, {
       headers: {
         "X-CK-Appid": this.root.appId || "",
         Authorization: `Bearer ${this.root.at}`

@@ -1,5 +1,4 @@
 import { createHmac, createHash } from "crypto";
-import dayjs from "dayjs";
 
 // 混合模式，将其他类的方法添加到 derivedCtor 类的原型上。
 // Mixed mode, adding methods of other classes to the prototype of derivedCtor class.
