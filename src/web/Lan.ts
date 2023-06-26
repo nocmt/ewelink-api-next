@@ -6,13 +6,28 @@ import CryptoJS from "crypto-js";
 let _logger: any;
 
 // Type of parameter transferred when controlling equipment
-export type ControlOptions = {
+export type controlOptions = {
+  ip: string;
+  port: string;
   deviceId: string;
   data: any;
-  secretKey: string;
+  encrypt: boolean;
+  secretKey?: string;
   iv?: string;
-  encrypt?: boolean;
-  ipPort?: string;
+  selfApikey?: string;
+};
+
+export type serverOptions = {
+  method: string | "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  ip: string;
+  port: string;
+  path: string;
+  deviceId: string;
+  data: any;
+  encrypt: boolean;
+  secretKey?: string;
+  iv?: string;
+  selfApikey?: string;
 };
 
 export type LanOptions = {
@@ -21,8 +36,8 @@ export type LanOptions = {
   request?: string;
 };
 
-let lanServerList: Service[] = []; // Service list 服务列表
-let lanServerDict: { [key: string]: Service } = {}; // Mapping table of device ID and service 设备ID与服务的映射表
+// let lanServerList: Service[] = []; // Service list 服务列表
+// let lanServerDict: { [key: string]: Service } = {}; // Mapping table of device ID and service 设备ID与服务的映射表
 
 export class Lan {
   logObj?: any;
@@ -36,9 +51,13 @@ export class Lan {
     this.selfApikey = options.selfApikey;
   }
 
-  // 发现局域网内易微联设备
-  // Discover eWeLink devices in LAN
-  discovery(type: string = "ewelink", onDiscover: (server: Service) => void) {
+  /**
+   * Discover eWeLink devices in LAN
+   * @param onDiscover callback function
+   * @param type default: ewelink
+   * @returns bonjourClient Bonjour Object
+   */
+  discovery(onDiscover: (server: Service) => void, type: string = "ewelink", ) {
     const bonjourClient = new Bonjour();
     bonjourClient.find({ type: type }, function (service: Service) {
       if (_logger) {
@@ -53,21 +72,27 @@ export class Lan {
     return bonjourClient;
   }
 
-  getLocalServerList() {
-    if (_logger) {
-      _logger.info("lanServerList:", lanServerList);
-    }
-    return lanServerList;
-  }
+  // getLocalServerList() {
+  //   if (_logger) {
+  //     _logger.info("lanServerList:", lanServerList);
+  //   }
+  //   return lanServerList;
+  // }
 
-  getLocalServerDict() {
-    if (_logger) {
-      _logger.info("lanServerDict:", lanServerDict);
-    }
-    return lanServerDict;
-  }
+  // getLocalServerDict() {
+  //   if (_logger) {
+  //     _logger.info("lanServerDict:", lanServerDict);
+  //   }
+  //   return lanServerDict;
+  // }
 
-  // data encrypt
+  /**
+   * data encrypt
+   * @param {string} data -  data
+   * @param {string} secretKey - secretKey
+   * @param {string} iv - iv
+   * @returns {string} encrypted data - encrypted data
+   */
   encrypt(data: any, secretKey: string, iv: string): string {
     if (!data) return "";
     const cipher = CryptoJS.AES.encrypt(JSON.stringify(data), CryptoJS.enc.Hex.parse(secretKey), {
@@ -78,7 +103,13 @@ export class Lan {
     return cipher.ciphertext.toString(CryptoJS.enc.Base64);
   }
 
-  // data decrypt
+  /**
+   * data decrypt
+   * @param {string} data -  encrypted data
+   * @param {string} secretKey - secretKey
+   * @param {string} iv - iv
+   * @returns {Object} decrypted data - decrypted data
+   */
   decrypt(data: string, secretKey: string, iv: string): object {
     if (!data) return {};
     return JSON.parse(
@@ -91,72 +122,53 @@ export class Lan {
   }
 
   // Get device ID + port
-  getDeviceIpPort(server: Service): string {
+  getDeviceIpPort(server: Service): {
+    ip?: string;
+    port?: number;
+  } {
     if (server && server?.addresses) {
       const addresses = server.addresses || [];
       const ips: string[] = addresses.filter((ip: string) => {
         if (ip.length <= 32) {
-          return ip;
+          return {
+            ip: ip,
+            port: server.port || 8081
+          };
         }
       });
       if (ips.length > 0) {
-        return `${ips[0]}:${server.port || "8081"}`;
+        return {
+          ip: ips[0],
+          port: server.port || 8081
+        };
       }
     }
-    return "";
+    return {};
   }
 
-  async generalRequest(
-    method: string | "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
-    api: string,
-    deviceId: string,
-    data: any,
-    secretKey: string,
-    iv?: string,
-    encrypt?: boolean,
-    ipPort?: string
-  ) {
-    // encrypt undefined,false,true
-    encrypt = encrypt === undefined ? true : encrypt; // default true
-    // If the device ID is not passed in, it is obtained from the local cache
-    if (!iv || !ipPort) {
-      // Get real-time records
-      if (lanServerDict[deviceId]) {
-        iv = iv || lanServerDict[deviceId].txt.iv;
-        ipPort = ipPort || this.getDeviceIpPort(lanServerDict[deviceId]);
-      } else {
-        // Get local records
-        // const _lanServerDict = storage.get("lanServerDict") || {};
-        // if (_lanServerDict[deviceId]) {
-        //   iv = iv || _lanServerDict[deviceId].txt.iv;
-        //   ipPort = ipPort || this.getDeviceIpPort(_lanServerDict[deviceId]);
-        // }
+  async generalRequest(serverOptions: serverOptions) {
+    if (serverOptions.encrypt) {
+      if (!serverOptions?.iv && !serverOptions?.secretKey) {
+        return new Error("iv is required when encrypt is true");
       }
-    }
-
-    if (!ipPort) {
-      throw new Error("Device ipPort is empty, Device may not be in LAN");
-    }
-
-    if (encrypt && iv) {
-      data = this.encrypt(data, secretKey, iv);
+      serverOptions.data = this.encrypt(serverOptions.data, serverOptions.secretKey || "", serverOptions.iv || "");
     }
 
     const body = {
-      deviceid: deviceId,
+      deviceid: serverOptions.deviceId,
       sequence: new Date().getTime().toString(),
-      selfApikey: this.selfApikey,
-      iv: iv,
-      encrypt: encrypt,
-      data: !encrypt ? JSON.stringify(data) : data
+      selfApikey: serverOptions.selfApikey || this.selfApikey,
+      iv: serverOptions.iv,
+      encrypt: serverOptions.encrypt,
+      data: !serverOptions.encrypt ? JSON.stringify(serverOptions.data) : serverOptions.data
     };
 
     try {
       let requestConfig: { [key: string]: string | object } = {
-        url: `http://${ipPort}${api}`,
-        method: method.toLowerCase()
+        url: `http://${serverOptions.ip}:${serverOptions.port}${serverOptions.path}`,
+        method: serverOptions.method.toLowerCase()
       };
-      if (["post", "put", "patch", "putForm", "patchForm", "postForm"].includes(method.toLowerCase())) {
+      if (["post", "put", "patch", "putForm", "patchForm", "postForm"].includes(serverOptions.method.toLowerCase())) {
         requestConfig["data"] = body;
       } else {
         requestConfig["params"] = body;
@@ -175,141 +187,201 @@ export class Lan {
   zeroconf = {
     // 单通道设备开关
     // Switch single channel device
-    switch: async (controlOptions: ControlOptions) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/switch",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+    switch: async (controlOptions: {
+      ip: string;
+      port: string;
+      deviceId: string;
+      data: { switch: "on" | "off" };
+      encrypt: boolean;
+      secretKey?: string;
+      iv?: string;
+      selfApikey?: string;
+    }) => {
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/switch",
+        method: "post"
+      });
     },
 
     // 多通道设备开关
     // Switch multiple channels
-    switches: async (controlOptions: ControlOptions) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/switches",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+    switches: async (controlOptions: {
+      ip: string;
+      port: string;
+      deviceId: string;
+      data: {
+        switches: [
+          { switch: "on" | "off"; outlet: 0 },
+          { switch: "on" | "off"; outlet: 1 },
+          { switch: "on" | "off"; outlet: 2 },
+          { switch: "on" | "off"; outlet: 3 }
+        ];
+      };
+      encrypt: boolean;
+      secretKey?: string;
+      iv?: string;
+      selfApikey?: string;
+    }) => {
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/switches",
+        method: "post"
+      });
     },
 
     // 调节灯的颜色、亮度、色温
     // Adjust the color, brightness, color temperature of the light
-    dimmable: async (controlOptions: ControlOptions) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/dimmable",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+    dimmable: async (controlOptions: {
+      ip: string;
+      port: string;
+      deviceId: string;
+      data: {
+        ltype: "white" | "color" | "party" | string;
+        white?: { br: number; ct: number };
+        party?: { br: number; r: number; g: number; b: number; tf: number; sp: number };
+        color?: { br: number; r: number; g: number; b: number };
+      };
+      encrypt: boolean;
+      secretKey?: string;
+      iv?: string;
+      selfApikey?: string;
+    }) => {
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/dimmable",
+        method: "post"
+      });
     },
 
     // 网络指示灯开关
     // Switch network indicator light
-    sledOnline: async (controlOptions: ControlOptions) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/sledonline",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+    sledOnline: async (controlOptions: {
+      ip: string;
+      port: string;
+      deviceId: string;
+      data: {
+        sledOnline: boolean;
+      };
+      encrypt: boolean;
+      secretKey?: string;
+      iv?: string;
+      selfApikey?: string;
+    }) => {
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/sledonline",
+        method: "post"
+      });
     },
 
     // 设备上电状态设置
     // Set device power on status
-    startups: async (controlOptions: ControlOptions) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/startups",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+    startups: async (controlOptions: {
+      ip: string;
+      port: string;
+      deviceId: string;
+      data: {
+        configure: [
+          { startup: "on" | "off" | "stay"; outlet: 0 },
+          { startup: "on" | "off" | "stay"; outlet: 1 },
+          { startup: "on" | "off" | "stay"; outlet: 2 },
+          { startup: "on" | "off" | "stay"; outlet: 3 }
+        ];
+      };
+      encrypt: boolean;
+      secretKey?: string;
+      iv?: string;
+      selfApikey?: string;
+    }) => {
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/startups",
+        method: "post"
+      });
     },
 
     // 设备打开后自动关闭设置
     // Set device auto close after open
-    pulses: async (controlOptions: ControlOptions) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/pulses",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+    pulses: async (controlOptions: {
+      ip: string;
+      port: string;
+      deviceId: string;
+      data: {
+        pulses: [
+          {
+            pulse: "on" | "off";
+            width: number;
+            outlet: 0;
+          },
+          {
+            pulse: "on" | "off";
+            width: number;
+            outlet: 1;
+          },
+          {
+            pulse: "on" | "off";
+            width: number;
+            outlet: 2;
+          },
+          {
+            pulse: "on" | "off";
+            width: number;
+            outlet: 3;
+          }
+        ];
+      };
+      encrypt: boolean;
+      secretKey?: string;
+      iv?: string;
+      selfApikey?: string;
+    }) => {
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/pulses",
+        method: "post"
+      });
     },
 
     // 传输是否加密
     // Whether to encrypt the transmission
     encrypt: async (controlOptions: {
+      ip: string;
+      port: string;
       deviceId: string;
-      data: {
-        encrypt: boolean;
-      };
-      ipPort?: string;
-      secretKey: string;
+      data: { encrypt: boolean };
+      encrypt: boolean;
+      secretKey?: string;
       iv?: string;
-      encrypt?: boolean;
+      selfApikey?: string;
     }) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/encrypt",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/encrypt",
+        method: "post"
+      });
     },
 
     // 设置加密密码
     // Set encryption password
     password: async (controlOptions: {
+      ip: string;
+      port: string;
       deviceId: string;
       data: {
         newPassword: string;
         oldPassword: string;
       };
-      ipPort?: string;
-      secretKey: string;
+      encrypt: boolean;
+      secretKey?: string;
       iv?: string;
-      encrypt?: boolean;
+      selfApikey?: string;
     }) => {
-      return await this.generalRequest(
-        "POST",
-        "/zeroconf/password",
-        controlOptions.deviceId,
-        controlOptions.data,
-        controlOptions.secretKey,
-        controlOptions?.iv,
-        controlOptions?.encrypt,
-        controlOptions?.ipPort
-      );
+      return await this.generalRequest({
+        ...controlOptions,
+        path: "/zeroconf/encrypt",
+        method: "post"
+      });
     }
   };
 }
