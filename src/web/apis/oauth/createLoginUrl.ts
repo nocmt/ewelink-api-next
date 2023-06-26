@@ -27,6 +27,6 @@ export class CreateLoginUrl {
       Object.keys(params)
         .map((key) => `${key}=${params[key]}`)
         .join("&")
-    );
+    ).replace("&auion", "&authorization");
   }
 }
