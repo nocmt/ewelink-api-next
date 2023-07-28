@@ -11,6 +11,19 @@ export type accountInfo = {
 export interface Login extends BaseWebAPI {}
 
 export class Login {
+  /**
+   * Login
+   * @description You should log in before you access device data or other resources
+   *
+   * @param options - The account information.
+   * @param options.account - The account.
+   * @param options.password - The password.
+   * @param options.areaCode - The area code.
+   * @param options.lang - option, The language, cn or en. Default is cn.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async login(options: accountInfo) {
     const body = {
       countryCode: options.areaCode,

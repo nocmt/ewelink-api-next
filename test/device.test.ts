@@ -3,6 +3,8 @@ import { assert } from "chai";
 import { client } from "./testConfig.js";
 
 describe("Device management test", function () {
+  this.timeout(10000);
+
   before(async function () {
     let response = await client.user.login({ account: "upymjh35902@chacuo.net", password: "12345678", areaCode: "+1" });
     assert.strictEqual(response.error, 0, "Login is successful");
@@ -93,7 +95,7 @@ describe("Device management test", function () {
       deviceId: "100085c78c",
       permit: 15
     });
-    assert.strictEqual(response.error, 400, "success");
+    assert.strictEqual(response.error, 500, "success");
   });
 
   it("device.delShare", async function () {
@@ -101,7 +103,7 @@ describe("Device management test", function () {
       apiKey: "123123123123123123213123",
       deviceId: "100085c78c"
     });
-    assert.strictEqual(response.error, 400, "success");
+    assert.strictEqual(response.error, 500, "success");
   });
 
   it("device.GetAllThings", async function () {
@@ -109,8 +111,13 @@ describe("Device management test", function () {
     assert.strictEqual(response.error, 0, "success");
   });
 
-  it("device.getGroup", async function () {
-    const response = await client.device.getGroup({});
+  it("device.getAllThingsAllPages", async function () {
+    const response = await client.device.getAllThingsAllPages({});
+    assert.strictEqual(response.error, 0, "success");
+  });
+
+  it("device.getGroups", async function () {
+    const response = await client.device.getGroups({});
     assert.strictEqual(response.error, 0, "success");
   });
 

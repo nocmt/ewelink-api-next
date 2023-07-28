@@ -9,6 +9,17 @@ export type deviceInfo = {
 export interface SetDeviceTags extends BaseWebAPI {}
 
 export class SetDeviceTags {
+  /**
+   * Set the tags of the device
+   *
+   * @param options - The device information.
+   * @param options.type - The type of the operation. 'replace' or 'merge'.
+   * @param options.deviceId - The device id.
+   * @param options.tags - The tags of the device.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async setDeviceTags(options: deviceInfo) {
     const body = {
       type: options.type,

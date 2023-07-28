@@ -9,6 +9,17 @@ export type accountInfo = {
 export interface SendCode extends BaseWebAPI {}
 
 export class SendCode {
+  /**
+   * Send Verification Code
+   * @description Send verification code to email or phone number.
+   *
+   * @param options - The account information.
+   * @param options.type - The type of Verification code
+   * @param options.account - The account.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async sendCode(options: accountInfo) {
     const body = {
       type: options.type

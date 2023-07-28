@@ -1,15 +1,17 @@
 # CHANGELOG
 
-December 16, 2022 v0.0.6
+June 27th, 2023 v0.0.6
 
 - Fix: Fix the error reported when the device encryption is canceled and then controlled in the LAN control
 - Fix: Fix invalid setUrl function
+- Refactor: Lan module discovery function type parameter position adjustment, can be left blank by default
+- Feat: Add optional parameters：refreshToken、setUserInfo
 
-September 9, 2022 v0.0.5
+September 9th, 2022 v0.0.5
 
 - Feat: New support for LAN discovery and selective transfer callback function when websocket creates a connection
 
-August 29, 2022 v0.0.4
+August 29th, 2022 v0.0.4
 
 - Feat: Add the definition of log print object during instantiation
 - Refactor: Replace token with global parameter at and add rt parameter
@@ -17,16 +19,16 @@ August 29, 2022 v0.0.4
 - Feat: Add Lan Control function
 - Refactor: Major changes, change the parameters of the instantiated object and delete the requestRecord and logLevel parameters
 
-July 29, 2022 v0.0.3
+July 29th, 2022 v0.0.3
 
 - Fix: Continue to fix some errors in the documentation
 - Feat: Add statement of MIT agreement
 - Feat: Add relevant interface methods of OAuth2.0
 
-July 29, 2022 v0.0.2
+July 29th, 2022 v0.0.2
 
 - Fix: Fix some errors in the description document and the dependent storage location.
 
-July 29, 2022 v0.0.1
+July 29th, 2022 v0.0.1
 
 - Feat: The first version provides the methods of the basic 50 V2 interfaces for use.

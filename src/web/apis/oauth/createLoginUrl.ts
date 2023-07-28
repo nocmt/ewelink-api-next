@@ -11,6 +11,18 @@ export type loginPageInfo = {
 export interface CreateLoginUrl extends BaseWebAPI {}
 
 export class CreateLoginUrl {
+  /**
+   * Create a URL for OAuth login
+   * @description Create a URL for OAuth login
+   *
+   * @param options - loginPageInfo
+   * @param options.redirectUrl - The redirect URL after login
+   * @param options.grantType - option, The grant type, default: `authorization_code`
+   * @param options.state - The state
+   * @returns loginUrl - which is a URL for OAuth login
+   *
+   * @beta
+   */
   createLoginUrl(options: loginPageInfo): string {
     const seq = dayjs().valueOf();
     const params: { [key: string]: any } = {

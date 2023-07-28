@@ -8,7 +8,7 @@ describe("OAuth management test", function () {
       redirectUrl: "https://127.0.0.1",
       state: "001"
     });
-    assert.exists(url, "success");
+    assert.exists(url, "无URL生成");
   });
 
   it("oauth.getToken", async function () {
@@ -17,6 +17,6 @@ describe("OAuth management test", function () {
       code: "123124",
       region: "cn"
     });
-    assert.strictEqual(response.error, 406, "success");
+    assert.strictEqual(response.error, 406, "接口不通");
   });
 });

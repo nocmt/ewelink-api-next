@@ -19,6 +19,8 @@
   "author": "nocmt",
   "license": "MIT",
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
+    "@types/ws": "^8.5.3",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-typescript": "^8.3.4",
     "@types/chai": "^4.3.1",
@@ -45,8 +47,6 @@
     "typescript": "4.8.0-dev.20220728"
   },
   "dependencies": {
-    "@types/crypto-js": "^4.1.1",
-    "@types/ws": "^8.5.3",
     "axios": "1.2.1",
     "bonjour-service": "1.0.14",
     "crypto-js": "^4.1.1",
@@ -57,7 +57,8 @@
   },
   "files": [
     "dist",
-    "doc",
-    "package.json"
+    "README.zh-CN.md",
+    "package.json",
+    "CHANGELOG.md"
   ]
 }

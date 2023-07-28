@@ -10,9 +10,15 @@ export interface AddFamily extends BaseWebAPI {}
 
 export class AddFamily {
   /**
-   * Creates a new Family.
-   * @returns full family info in 'response.data'
-   * @param options
+   * Create 1 new family
+   *
+   * @param options - The base information.
+   * @param options.name - The family name.
+   * @param options.sort - The family sort. 1: positive sequence, 2: reverse sequence.
+   * @param options.roomNameList - The room name list.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
    */
   async addFamily(options: baseInfo) {
     const body = {

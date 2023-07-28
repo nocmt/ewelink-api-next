@@ -11,6 +11,19 @@ export type accountInfo = {
 export interface Register extends BaseWebAPI {}
 
 export class Register {
+  /**
+   * register
+   * @description register
+   *
+   * @param options - The account information.
+   * @param options.account - The account.
+   * @param options.password - The password.
+   * @param options.areaCode - The area code.
+   * @param options.code - Verification code.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async register(options: accountInfo) {
     const body = {
       verificationCode: options.code,

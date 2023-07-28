@@ -4,7 +4,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
 ![Version](https://img.shields.io/badge/Version-0.0.4-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
-English | [简体中文](./doc/README.zh-CN.md)
+English | [简体中文](README.zh-CN.md)
 
 Coolkit V2 API library inspired by [ewelink-api](https://github.com/skydiver/ewelink-api)
 
@@ -82,7 +82,7 @@ const lanClient = new eWeLink.Lan({
   logObj: eWeLink.createLogger("lan")
 });
 
-lanClient.discovery(undefined, (server)=>{
+lanClient.discovery((server)=>{
   console.log("server:", server);
 }); // Start Discovery Service
 try {
@@ -125,7 +125,7 @@ try {
 
 ## Change Log
 
-[CHANGELOG.md](./doc/CHANGELOG.md)
+[CHANGELOG.md](CHANGELOG.md)
 
 ## Thanks
 

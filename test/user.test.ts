@@ -11,8 +11,10 @@ describe("User management test", function () {
   });
 
   it("user.login", async function () {
+    this.timeout(10000);
     let response = await client.user.login({ account: "upymjh35902@chacuo.net", password: "12345678", areaCode: "+1" });
     assert.strictEqual(response.error, 0, "Login is successful");
+    client.storage.set("at", response.data.at);
   });
 
   it("user.register", async function () {
@@ -44,7 +46,9 @@ describe("User management test", function () {
   });
 
   it("user.updateUserInfo", async function () {
-    let response = await client.user.setUserInfo({ nickname: "test", acceptEmailAd: false, accountConsult: null });
+    this.timeout(10000);
+    client.at = client.storage.get("at");
+    let response = await client.user.setUserInfo({ nickname: "test" });
     assert.strictEqual(response.error, 0, "success");
   });
 
@@ -58,6 +62,8 @@ describe("User management test", function () {
   });
 
   it("user.changePwd", async function () {
+    this.timeout(10000);
+    client.at = client.storage.get("at");
     let response = await client.user.changePwd({
       oldPassword: "12345678",
       newPassword: "12345678"
@@ -68,5 +74,6 @@ describe("User management test", function () {
   it("user.logout", async function () {
     let response = await client.user.logout({});
     assert.strictEqual(response.error, 0, "success");
+    client.storage.remove("at");
   });
 });

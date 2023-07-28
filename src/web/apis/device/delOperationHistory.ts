@@ -7,6 +7,17 @@ export type thingInfo = {
 export interface DelOperationHistory extends BaseWebAPI {}
 
 export class DelOperationHistory {
+  /**
+   * Delete device's operation history
+   *
+   * @param options - The things information.
+   * @param options.deviceId - The device id.
+   *
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
+
   async delOperationHistory(options: thingInfo) {
     const params = {
       deviceid: options.deviceId

@@ -9,6 +9,17 @@ export type baseInfo = {
 export interface DelFamily extends BaseWebAPI {}
 
 export class DelFamily {
+  /**
+   * Delete 1 family
+   *
+   * @param options - The family information.
+   * @param options.id - The family id.
+   * @param options.deviceFamily - Family ID of mobile device.
+   * @param options.switchFamily - Family ID of switch.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async delFamily(options: baseInfo) {
     const params = {
       id: options.id,

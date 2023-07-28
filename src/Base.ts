@@ -71,11 +71,27 @@ export class eWeLinkBase {
   //   return createTime;
   // };
 
+  /**
+   * Set the URL for the request
+   *
+   * @param region - The region.
+   * @returns null
+   *
+   * @beta
+   */
   setUrl = (region: string) => {
     this.endpoint = `https://${region}-apia.coolkit.${["cn", "test"].includes(region) ? "cn" : "cc"}`;
     this.request.defaults.baseURL = this.endpoint;
   };
 
+  /**
+   * Set APPID and APP SECRET
+   * @param appId - The APPID.
+   * @param appSecret - The APP SECRET.
+   * @returns null
+   *
+   * @beta
+   */
   setAuthConfigs = (appId: string, appSecret: string) => {
     this.appId = appId;
     this.appSecret = appSecret;

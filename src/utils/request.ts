@@ -72,7 +72,7 @@ export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosIn
       // 对响应错误做点什么
       // Do something with response error
       if (logObj) {
-        logObj.error("Incorrect response received:", error);
+        logObj.error("Incorrect response received: ", error);
       }
       return Promise.reject(error);
     }

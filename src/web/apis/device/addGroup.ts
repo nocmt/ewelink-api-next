@@ -14,8 +14,17 @@ export interface AddGroup extends BaseWebAPI {}
 export class AddGroup {
   /**
    * Creates a new Device Group.
-   * @returns full device info in 'response.data'
-   * @param options
+   *
+   * @param options - The device information.
+   * @param options.name - The device group name.
+   * @param options.mainDeviceId - The device group main device id.
+   * @param options.familyid - option, The device group familyid.
+   * @param options.roomid - option, The device group roomid.
+   * @param options.sort - The device group sort. 1: positive sequence, 2: reverse sequence
+   * @param options.deviceidList - The device group deviceidList.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
    */
   async addGroup(options: groupInfo) {
     if (options.deviceidList.length < 1 || options.deviceidList.length > 30) {

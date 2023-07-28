@@ -7,6 +7,16 @@ export type accountInfo = {
 export interface RefreshToken extends BaseWebAPI {}
 
 export class RefreshToken {
+  /**
+   * Refresh Access Token
+   * @description 'access token' expires in 30 days (for security reasons) by default. When this happens, no need to log in again to GET@'access token', just use 'Refresh Token' endpoint to refresh the 'access token'.
+   *
+   * @param options - The account information.
+   * @param options.rt - Refresh token.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async refreshToken(options: accountInfo) {
     const body = {
       rt: options.rt

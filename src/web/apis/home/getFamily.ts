@@ -7,6 +7,15 @@ export type baseInfo = {
 export interface GetFamily extends BaseWebAPI {}
 
 export class GetFamily {
+  /**
+   * Obtaining Family Information
+   *
+   * @param options - The family information.
+   * @param options.lang - option, The language. en: English, cn: Chinese.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async getFamily(options: baseInfo) {
     const params = {
       lang: options?.lang

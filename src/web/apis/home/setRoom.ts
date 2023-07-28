@@ -8,6 +8,17 @@ export type baseInfo = {
 export interface SetRoom extends BaseWebAPI {}
 
 export class SetRoom {
+  /**
+   * Change Room Name
+   * @description Currently, it only allows you to change the name of a room
+   *
+   * @param options - The base information.
+   * @param options.id - The room id.
+   * @param options.newName - The new room name.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async setRoom(options: baseInfo) {
     const body = {
       id: options.id,

@@ -8,6 +8,17 @@ export type deviceInfo = {
 export interface DelShare extends BaseWebAPI {}
 
 export class DelShare {
+  /**
+   * Cancel sharing device
+   *
+   * @param options - The device information.
+   * @param options.deviceId - The device id.
+   * @param options.apiKey - The user's apiKey.
+   *
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async delShare(options: deviceInfo) {
     const params = {
       deviceid: options.deviceId,

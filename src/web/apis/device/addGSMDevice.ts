@@ -12,9 +12,17 @@ export interface AddGSMDevice extends BaseWebAPI {}
 
 export class AddGSMDevice {
   /**
-   * Creates a new 4G、GPRS Device.
-   * @returns full device info in 'response.data'
-   * @param options
+   * Add a new 4G、GPRS Device.
+   *
+   * @param options - The device information.
+   * @param options.name - The device name.
+   * @param options.id - The GSM ID.
+   * @param options.familyid - option, The device familyid.
+   * @param options.roomid - option, The device roomid.
+   * @param options.sort - The device sort. 1: positive sequence, 2: reverse sequence
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
    */
   async addGSMDevice(options: deviceInfo) {
     const body = {

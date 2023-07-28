@@ -10,8 +10,14 @@ export interface CoverGroupDeviceList extends BaseWebAPI {}
 export class CoverGroupDeviceList {
   /**
    * Adding or deleting devices in a group
-   * @returns full device info in 'response.data'
-   * @param options
+   *
+   * @param options - The group information.
+   * @param options.id - The device group id.
+   * @param options.coverDeviceidList - The device group cover deviceidList.
+   *
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
    */
   async coverGroupDeviceList(options: groupInfo) {
     if (options.coverDeviceidList.length < 1) {

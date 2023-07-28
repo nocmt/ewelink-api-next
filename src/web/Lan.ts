@@ -53,11 +53,14 @@ export class Lan {
 
   /**
    * Discover eWeLink devices in LAN
-   * @param onDiscover callback function
-   * @param type default: ewelink
-   * @returns bonjourClient Bonjour Object
+   *
+   * @param onDiscover - callback function
+   * @param type - default: ewelink
+   * @returns bonjourClient - Bonjour Object
+   *
+   * @beta
    */
-  discovery(onDiscover: (server: Service) => void, type: string = "ewelink", ) {
+  discovery(onDiscover: (server: Service) => void, type: string = "ewelink") {
     const bonjourClient = new Bonjour();
     bonjourClient.find({ type: type }, function (service: Service) {
       if (_logger) {
@@ -88,10 +91,13 @@ export class Lan {
 
   /**
    * data encrypt
-   * @param {string} data -  data
-   * @param {string} secretKey - secretKey
-   * @param {string} iv - iv
-   * @returns {string} encrypted data - encrypted data
+   *
+   * @param data -  data
+   * @param secretKey - secretKey
+   * @param iv - iv
+   * @returns encrypted data - encrypted data
+   *
+   * @beta
    */
   encrypt(data: any, secretKey: string, iv: string): string {
     if (!data) return "";
@@ -105,10 +111,12 @@ export class Lan {
 
   /**
    * data decrypt
-   * @param {string} data -  encrypted data
-   * @param {string} secretKey - secretKey
-   * @param {string} iv - iv
-   * @returns {Object} decrypted data - decrypted data
+   * @param data -  encrypted data
+   * @param secretKey - secretKey
+   * @param iv - iv
+   * @returns decrypted data - decrypted data
+   *
+   * @beta
    */
   decrypt(data: string, secretKey: string, iv: string): object {
     if (!data) return {};
@@ -121,7 +129,15 @@ export class Lan {
     );
   }
 
-  // Get device ID + port
+  /**
+   * Obtain the device's IP and port from the service
+   *
+   * @param server
+   * @return ip - ip
+   * @return port - port
+   *
+   * @beta
+   */
   getDeviceIpPort(server: Service): {
     ip?: string;
     port?: number;
@@ -146,6 +162,24 @@ export class Lan {
     return {};
   }
 
+  /**
+   * General Request
+   * @param serverOptions - serverOptions
+   * @param serverOptions.method - Request method
+   * @param serverOptions.ip - Device IP
+   * @param serverOptions.port - Device port
+   * @param serverOptions.path - Request path
+   * @param serverOptions.deviceId - Device ID
+   * @param serverOptions.data - Request data
+   * @param serverOptions.encrypt - Whether to encrypt the request data
+   * @param serverOptions.secretKey - Encryption password
+   * @param serverOptions.iv - iv
+   * @param serverOptions.selfApikey - selfApikey
+   *
+   * @returns response - Data returned by the device
+   *
+   * @beta
+   */
   async generalRequest(serverOptions: serverOptions) {
     if (serverOptions.encrypt) {
       if (!serverOptions?.iv && !serverOptions?.secretKey) {
@@ -183,10 +217,11 @@ export class Lan {
     }
   }
 
-  // General interface
   zeroconf = {
     // 单通道设备开关
-    // Switch single channel device
+    /**
+     * Switch single channel device
+     */
     switch: async (controlOptions: {
       ip: string;
       port: string;
@@ -196,7 +231,7 @@ export class Lan {
       secretKey?: string;
       iv?: string;
       selfApikey?: string;
-    }) => {
+    }):Promise<any>  => {
       return await this.generalRequest({
         ...controlOptions,
         path: "/zeroconf/switch",
@@ -205,7 +240,9 @@ export class Lan {
     },
 
     // 多通道设备开关
-    // Switch multiple channels
+    /**
+     * Switch multiple channels
+     */
     switches: async (controlOptions: {
       ip: string;
       port: string;
@@ -231,7 +268,9 @@ export class Lan {
     },
 
     // 调节灯的颜色、亮度、色温
-    // Adjust the color, brightness, color temperature of the light
+    /**
+     * Adjust the color, brightness, color temperature of the light
+     */
     dimmable: async (controlOptions: {
       ip: string;
       port: string;
@@ -255,7 +294,9 @@ export class Lan {
     },
 
     // 网络指示灯开关
-    // Switch network indicator light
+    /**
+     * Switch network indicator light
+     */
     sledOnline: async (controlOptions: {
       ip: string;
       port: string;
@@ -276,7 +317,9 @@ export class Lan {
     },
 
     // 设备上电状态设置
-    // Set device power on status
+    /**
+     * Set device power on status
+     */
     startups: async (controlOptions: {
       ip: string;
       port: string;
@@ -302,7 +345,9 @@ export class Lan {
     },
 
     // 设备打开后自动关闭设置
-    // Set device auto close after open
+    /**
+     * Set device auto close after open
+     */
     pulses: async (controlOptions: {
       ip: string;
       port: string;
@@ -344,7 +389,9 @@ export class Lan {
     },
 
     // 传输是否加密
-    // Whether to encrypt the transmission
+    /**
+     * Whether to encrypt the transmission
+     */
     encrypt: async (controlOptions: {
       ip: string;
       port: string;
@@ -363,7 +410,9 @@ export class Lan {
     },
 
     // 设置加密密码
-    // Set encryption password
+    /**
+     * Set encryption password
+     */
     password: async (controlOptions: {
       ip: string;
       port: string;

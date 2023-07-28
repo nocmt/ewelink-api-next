@@ -9,6 +9,17 @@ export type familyInfo = {
 export interface AddRoom extends BaseWebAPI {}
 
 export class AddRoom {
+  /**
+   * Create 1 new room
+   *
+   * @param options - The family information.
+   * @param options.familyId - The family id.
+   * @param options.name - The room name.
+   * @param options.sort - The room sort. 1: positive sequence, 2: reverse sequence.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async addRoom(options: familyInfo) {
     const body = {
       familyid: options.familyId,

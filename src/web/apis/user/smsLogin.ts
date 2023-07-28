@@ -11,6 +11,19 @@ export type accountInfo = {
 export interface SMSLogin extends BaseWebAPI {}
 
 export class SMSLogin {
+  /**
+   * SMS Login
+   * @description Only users registered by phone number in mainland China has access to this.
+   *
+   * @param options - The account information.
+   * @param options.phoneNumber - The phone number.
+   * @param options.areaCode - The area code.
+   * @param options.code - Verification code.
+   * @param options.lang - option, The language, cn or en. Default is cn.
+   * @returns response - Please refer to the online API documentation
+   *
+   * @beta
+   */
   async smsLogin(options: accountInfo) {
     const body = {
       countryCode: options.areaCode,

@@ -23,9 +23,17 @@ export type connectInfo = {
 
 export class Connect {
   constructor(protected readonly root: Ws) {}
-
-  // Get the assigned long connection address
-  getDispatch = async (options: baseInfo) => {
+  /**
+   * Get the assigned long connection address
+   *
+   * @param options - The connection information.
+   * @param options.region - The region.
+   * @param options.fullUrl - The fullUrl.
+   * @returns { Promise<string> } WSS address
+   *
+   * @beta
+   */
+  getDispatch = async (options: baseInfo): Promise<string> => {
     let res;
     if (options?.fullUrl) {
       res = await this.root.request.get(options.fullUrl);
@@ -44,7 +52,8 @@ export class Connect {
   };
 
   // Creat a websocket heartbeat timer
-  createHbTimer = ({ hb = 0, hbInterval = 145 } = {}) => {
+
+  private createHbTimer = ({ hb = 0, hbInterval = 145 } = {}) => {
     // Clear the previous heartbeat timer
     hbIntervalTimer && clearInterval(hbIntervalTimer);
     if (!hb) return;
@@ -57,14 +66,24 @@ export class Connect {
     this.root.logObj?.info(`A timer for sending heartbeat packets has been created. Time interval: ${intervalTime}s`);
   };
 
-  // Create a websocket connection
+  /**
+   * Create a websocket connection
+   * @param { baseInfo } options
+   * @param onOpen - The onOpen event.
+   * @param onClose - The onClose event.
+   * @param onError - The onError event.
+   * @param onMessage - The onMessage event.
+   * @returns { Promise<WebSocket> } WebSocket instance
+   *
+   * @beta
+   */
   create = async (
     options: connectInfo,
     onOpen?: (_ws: WebSocket) => void,
     onClose?: () => void,
     onError?: (error: ErrorEvent) => void,
     onMessage?: (_ws: WebSocket, message: MessageEvent) => void
-  ) => {
+  ): Promise<WebSocket> => {
     // If fullUrl is provided, use it directly
     if (options?.fullUrl) {
       ws = new WebSocket(options.fullUrl);
@@ -142,14 +161,26 @@ export class Connect {
     });
   };
 
-  // Get updateState message for your own business
+  /**
+   * Generate messages to update device status
+   *
+   * @param deviceId - The device id.
+   * @param params - The device status.
+   * @param action - The action.
+   * @param userAgent - The userAgent.
+   * @param userApiKey  - The userApiKey.
+   *
+   * @returns { string } message
+   *
+   * @beta
+   */
   getUpdateState = (
     deviceId: string,
     params: object,
     action?: string | "update" | "upgrade" | "date",
     userAgent?: string | "app",
     userApiKey?: string
-  ) => {
+  ): string => {
     const data: object = {
       action: action || "update",
       apikey: userApiKey || this.root.userApiKey,
@@ -162,17 +193,28 @@ export class Connect {
     return JSON.stringify(data);
   };
 
-  // Update device status
+  /**
+   * Update device status
+   *
+   * @param deviceId - The device id.
+   * @param params - The device status.
+   * @param action - The action.
+   * @param userAgent - The userAgent.
+   * @param userApiKey - The userApiKey.
+   * @returns { null | undefined } null | undefined
+   *
+   * @beta
+   */
   updateState = (
     deviceId: string,
     params: object,
     action?: string | "update" | "upgrade" | "date",
     userAgent?: string | "app",
     userApiKey?: string
-  ) => {
+  ): null | undefined => {
     if (ws.readyState !== 1) {
       this.root.logObj?.info("WebSocket is not connected");
-      return;
+      return null;
     }
     const data: string = this.getUpdateState(deviceId, params, action, userAgent, userApiKey);
     this.root.logObj?.info("Send update message:：" + data);
