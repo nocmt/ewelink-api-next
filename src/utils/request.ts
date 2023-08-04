@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { nonce } from "./index.js";
+import dayjs from "dayjs";
 
 declare module "axios" {
   interface AxiosResponse<T = any> {
@@ -9,6 +10,7 @@ declare module "axios" {
     port: number;
     domain: string;
     reason: string;
+    responseTime: number;
   }
 
   export function create(config?: AxiosRequestConfig): AxiosInstance;
@@ -32,6 +34,7 @@ export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosIn
         if (req.headers) {
           req.headers["Content-Type"] = "application/json";
           req.headers["X-CK-Nonce"] = nonce();
+          req.headers["Date"] = String(dayjs().valueOf());
         }
       }
       if (logObj) {
@@ -59,10 +62,14 @@ export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosIn
   // 响应拦截
   // Response interception
   instance.interceptors.response.use(
-    (res: { status: number; data: any }) => {
+    (res: { status: number; responseTime: number; data: any; config: any }) => {
       // 对响应数据做点什么
       // Do something with response data
-      const response = Object.assign({ status: res.status }, res.data);
+      const responseTime = res.config?.headers?.Date
+        ? parseInt(String(dayjs().valueOf())) - parseInt(res.config.headers?.Date)
+        : null;
+
+      const response = Object.assign({ status: res.status, responseTime }, res.data);
       if (logObj) {
         logObj.info("Response received：", JSON.stringify(response));
       }
