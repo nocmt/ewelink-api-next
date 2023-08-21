@@ -136,7 +136,7 @@ try {
 
 ## 修改日志
 
-[CHANGELOG](CHANGELOG.md)
+[修改日志](CHANGELOG.md)
 
 ## 致谢
 
