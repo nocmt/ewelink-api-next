@@ -30,13 +30,16 @@ export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosIn
   // Request interception
   instance.interceptors.request.use(
     (req: AxiosRequestConfig) => {
-      if (["post", "put"].includes(typeof req.method === "string" ? req.method : "get")) {
+      if (["post", "put"].includes(req.method || "")) {
         if (req.headers) {
           req.headers["Content-Type"] = "application/json";
-          req.headers["X-CK-Nonce"] = nonce();
-          req.headers["Date"] = String(dayjs().valueOf());
         }
       }
+      if (req.headers) {
+        req.headers["X-CK-Nonce"] = nonce();
+        req.headers["Date"] = String(dayjs().valueOf());
+      }
+
       if (logObj) {
         logObj.info("Send request: ", {
           url: req.url,

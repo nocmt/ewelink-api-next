@@ -138,7 +138,7 @@ export class Connect {
     // Set onmessage event
     ws.onmessage = (message) => {
       this.root.logObj?.info("WebSocket response received: " + message.data);
-      if (message.data.toString()[0] == "{" && JSON.parse(message.data.toString())?.config) {
+      if (message.data.toString()[0] === "{" && JSON.parse(message.data.toString())?.config) {
         this.root.logObj?.info("WebSocket handshake succeeded, creating heartbeat timer");
         this.createHbTimer(JSON.parse(message.data.toString())?.config);
       }
