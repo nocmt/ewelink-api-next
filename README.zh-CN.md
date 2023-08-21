@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-1.0.1-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 [English](README.md) | 简体中文
 
@@ -84,21 +84,38 @@ const lanClient = new eWeLink.Lan({
 lanClient.discovery((server) => {
   console.log("server:", server);
 }); // Start Discovery Service
+
+// 将设备信息保存到本地缓存
+
+// 控制时需要传入 deviceId, secretKey, encrypt, iv
 try {
-  const res = await lanClient.zeroconf.switches({
+  const res = await lanClient.zeroconf.switch({
+    ip: "xxx",
+    port: 80,
     data: {
       switch: "on"
     },
     deviceId: "xxx",
-    secretKey: "xxx"
+    secretKey: "xxx",
+    encrypt: true,
+    iv: "xxx"
   });
   console.info("Request result:：", res);
   const res2 = await lanClient.zeroconf.switches({
+    ip: "xxx",
+    port: 80,
     data: {
-      switch: "off"
+      switches: [
+        { switch: "on", outlet: 0 },
+        { switch: "on", outlet: 1 },
+        { switch: "on", outlet: 2 },
+        { switch: "on", outlet: 3 }
+      ]
     },
     deviceId: "xxx",
-    secretKey: "xxx"
+    secretKey: "xxx",
+    encrypt: true,
+    iv: "xxx"
   });
   console.info("Request result:：", res2);
 } catch (error: any) {
