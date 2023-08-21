@@ -48,7 +48,7 @@ describe("User management test", function () {
   it("user.updateUserInfo", async function () {
     this.timeout(10000);
     client.at = client.storage.get("at");
-    let response = await client.user.setUserInfo({ nickname: "test" });
+    let response = await client.user.updateUserInfo({ nickname: "test" });
     assert.strictEqual(response.error, 0, "success");
   });
 
@@ -72,7 +72,7 @@ describe("User management test", function () {
   });
 
   it("user.logout", async function () {
-    let response = await client.user.logout({});
+    let response = await client.user.logout();
     assert.strictEqual(response.error, 0, "success");
     client.storage.remove("at");
   });

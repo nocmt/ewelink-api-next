@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-0.0.4-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 English | [简体中文](README.zh-CN.md)
 
@@ -29,7 +29,7 @@ Set the 'type' and 'module' in package.json, otherwise an error will be reported
 ```typescript
 // eWeLink v2 API
 
-import eWeLink from 'ewelink-api-next';
+import eWeLink from "ewelink-api-next";
 
 const client = new eWeLink.WebAPI({
   appId: "xxx",
@@ -38,27 +38,25 @@ const client = new eWeLink.WebAPI({
   logObj: eWeLink.createLogger("us") // or console
 });
 
-client.syncLocalToken(region="us", account="xxx@xxx.net");
 try {
   const response = await client.user.login({ account: "xxx@xxx.com", password: "12345678", areaCode: "+1" });
   const userInfo = response.error === 0 ? response.data.user : {};
-  console.log('userInfo：', userInfo);
+  console.log("userInfo：", userInfo);
 } catch (err) {
-  console.log('Failed to get user information:', err.message);
+  console.log("Failed to get user information:", err.message);
 }
 ```
 
 ```typescript
 // eWeLink WebSocket API
 
-import eWeLink from 'ewelink-api-next';
+import eWeLink from "ewelink-api-next";
 
 const wsClient = new eWeLink.Ws({
   appId: "xxx",
   appSecret: "xxx",
   region: "us"
 });
-wsClient.syncLocalToken(region="us", account="xxx@xxx.net");
 
 let ws = await wsClient.Connect.create({
   appId: wsClient?.appId || "",
@@ -69,20 +67,21 @@ let ws = await wsClient.Connect.create({
 
 setTimeout(() => {
   wsClient.Connect.updateState("xxxx", {
-    switch: "on"});
+    switch: "on"
+  });
 }, 5000);
 ```
 
 ```typescript
 // eWeLink Lan Control
-import eWeLink from 'ewelink-api-next';
+import eWeLink from "ewelink-api-next";
 
 const lanClient = new eWeLink.Lan({
   selfApikey: "xxx",
   logObj: eWeLink.createLogger("lan")
 });
 
-lanClient.discovery((server)=>{
+lanClient.discovery((server) => {
   console.log("server:", server);
 }); // Start Discovery Service
 try {
@@ -105,8 +104,22 @@ try {
 } catch (error: any) {
   console.info(error.message);
 }
-
 ```
+
+The login method for the authorization page can be referred to：[https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo](https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo)
+
+### Method Description
+
+- [Basic specifications](./docs/en/Specification.md)
+- [Built-in method](./docs/en/Built-inMethod.md)
+- [User management](./docs/en/UserManagement.md)
+- [Device management](./docs/en/DeviceManagement.md)
+- [Home management](./docs/en/HomeManagement.md)
+- [Message center](./docs/en/MessageCenter.md)
+- [OAuth2.0](./docs/en/OAuth2.0.md)
+- [WebSocket control](./docs/en/WebSocketControl.md)
+- [LAN control](./docs/en/LAN-Control.md)
+- [Other](./docs/en/Other.md)
 
 ## Todo
 
@@ -129,8 +142,7 @@ try {
 
 ## Thanks
 
-| Item                                                           | Reason          |
-|----------------------------------------------------------------|----------------------------------------------|
-| [ewelink-api](https://github.com/skydiver/ewelink-api)         | Community projects, there are ideas to learn from|
+| Item                                                           | Reason                                            |
+| -------------------------------------------------------------- | ------------------------------------------------- |
+| [ewelink-api](https://github.com/skydiver/ewelink-api)         | Community projects, there are ideas to learn from |
 | [wechat-api-next](https://github.com/lblblong/wechat-api-next) | Use of mixed mode and project structure reference |
-

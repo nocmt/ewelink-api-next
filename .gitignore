@@ -8,3 +8,4 @@ test/testConfig.ts
 test/*Demo.ts
 .DS_Store
 **/.DS_Store
+test

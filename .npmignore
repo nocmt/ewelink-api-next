@@ -10,3 +10,4 @@ test/*Demo.ts
 dist/test/demo.js
 dist/test/demo.d.ts
 dist/test/*Demo.ts
+test

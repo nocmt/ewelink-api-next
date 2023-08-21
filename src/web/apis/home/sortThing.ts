@@ -3,7 +3,7 @@ import { BaseWebAPI } from "../../WebAPI.js";
 export type baseInfo = {
   familyId?: string;
   thingList: Array<{
-    itemTyp?: string;
+    itemType?: string;
     id?: string;
   }>;
 };

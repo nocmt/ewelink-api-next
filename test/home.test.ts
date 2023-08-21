@@ -9,7 +9,7 @@ describe("Family management test", function () {
   });
 
   after(async function () {
-    let response = await client.user.logout({});
+    let response = await client.user.logout();
     assert.strictEqual(response.error, 0, "success");
   });
 
@@ -23,9 +23,7 @@ describe("Family management test", function () {
   });
 
   it("other.dispatch", async function () {
-    const response = await client.other.dispatch({
-      region: "cn"
-    });
+    const response = await client.other.dispatch("cn");
     assert.strictEqual(response.error, 0, "success");
   });
 

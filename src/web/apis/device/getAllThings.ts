@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type thingInfo = {
-  familyid?: string;
+  familyId?: string;
   lang?: "en" | "cn";
   num?: number | 30;
   beginIndex?: number | -9999999;
@@ -14,7 +14,7 @@ export class GetAllThings {
    * Get all devices and groups under the user
    *
    * @param options - The things information.
-   * @param options.familyid - option, The family id.
+   * @param options.familyId - option, The family id.
    * @param options.lang -  option, The language. 'en' or 'cn'.
    * @param options.num -  option, The number of things per page. Default is 0 means all things.
    * @param options.beginIndex - The index of the first thing. Default is -9999999.
@@ -26,7 +26,7 @@ export class GetAllThings {
   async getAllThings(options: thingInfo) {
     const params = {
       lang: options?.lang,
-      familyid: options?.familyid,
+      familyid: options?.familyId,
       num: options?.num,
       beginIndex: options?.beginIndex
     };
@@ -42,7 +42,7 @@ export class GetAllThings {
    * Get all devices and groups under the user (All pages)
    *
    * @param options - The things information.
-   * @param options.familyid - option, The family id.
+   * @param options.familyId - option, The family id.
    * @param options.lang -  option, The language. 'en' or 'cn'.
    *
    * @returns response - Please refer to the online API documentation
@@ -58,7 +58,7 @@ export class GetAllThings {
         let res = this.root.request.get("/v2/device/thing", {
           params: {
             lang: options?.lang,
-            familyid: options?.familyid,
+            familyid: options?.familyId,
             num: 30,
             beginIndex: beginIndex
           },

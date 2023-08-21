@@ -21,9 +21,9 @@ export type userInfo = {
   };
 };
 
-export interface SetUserInfo extends BaseWebAPI {}
+export interface UpdateUserInfo extends BaseWebAPI {}
 
-export class SetUserInfo {
+export class UpdateUserInfo {
   /**
    * Update User Info
    * @description Update the information of current account such as the nickname.
@@ -41,7 +41,7 @@ export class SetUserInfo {
    *
    * @beta
    */
-  async setUserInfo(options: userInfo) {
+  async updateUserInfo(options: userInfo) {
     return await this.root.request.post("/v2/user/profile", options, {
       headers: {
         "X-CK-Appid": this.root.appId || "",

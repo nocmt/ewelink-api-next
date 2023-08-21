@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type accountInfo = {
-  rt: string;
+  rt?: string;
 };
 
 export interface RefreshToken extends BaseWebAPI {}
@@ -19,7 +19,7 @@ export class RefreshToken {
    */
   async refreshToken(options: accountInfo) {
     const body = {
-      rt: options.rt
+      rt: options.rt || this.root.rt
     };
     const res = await this.root.request.post("/v2/user/refresh", body, {
       headers: {

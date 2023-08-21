@@ -3,8 +3,8 @@ import { BaseWebAPI } from "../../WebAPI.js";
 export type groupInfo = {
   name: string;
   mainDeviceId: string;
-  familyid?: string;
-  roomid?: string;
+  familyId?: string;
+  roomId?: string;
   sort?: 1 | 2;
   deviceidList: string[];
 };
@@ -18,8 +18,8 @@ export class AddGroup {
    * @param options - The device information.
    * @param options.name - The device group name.
    * @param options.mainDeviceId - The device group main device id.
-   * @param options.familyid - option, The device group familyid.
-   * @param options.roomid - option, The device group roomid.
+   * @param options.familyId - option, The device group familyId.
+   * @param options.roomId - option, The device group roomId.
    * @param options.sort - The device group sort. 1: positive sequence, 2: reverse sequence
    * @param options.deviceidList - The device group deviceidList.
    * @returns response - Please refer to the online API documentation
@@ -34,8 +34,8 @@ export class AddGroup {
     const body = {
       name: options.name,
       mainDeviceId: options.mainDeviceId,
-      familyid: options?.familyid,
-      roomid: options?.roomid,
+      familyid: options?.familyId,
+      roomid: options?.roomId,
       sort: options?.sort,
       deviceidList: options.deviceidList
     };

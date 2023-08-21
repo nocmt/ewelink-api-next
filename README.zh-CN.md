@@ -2,11 +2,11 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-0.0.4-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 [English](README.md) | 简体中文
 
-受到 [ewelink-api](https://github.com/skydiver/ewelink-api) 启发编写的CoolKit v2 API 库
+受到 [ewelink-api](https://github.com/skydiver/ewelink-api) 启发编写的 CoolKit v2 API 库
 
 ## 特点
 
@@ -29,7 +29,7 @@ npm i ewelink-api-next
 ```typescript
 // eWeLink v2 API
 
-import eWeLink from 'ewelink-api-next';
+import eWeLink from "ewelink-api-next";
 
 const client = new eWeLink.WebAPI({
   appId: "xxx",
@@ -38,27 +38,25 @@ const client = new eWeLink.WebAPI({
   logObj: eWeLink.createLogger("us") // or console
 });
 
-client.syncLocalToken(region="us", account="xxx@xxx.net");
 try {
   const response = await client.user.login({ account: "xxx@xxx.com", password: "12345678", areaCode: "+1" });
   const userInfo = response.error === 0 ? response.data.user : {};
-  console.log('userInfo：', userInfo);
+  console.log("userInfo：", userInfo);
 } catch (err) {
-  console.log('Failed to get user information:', err.message);
+  console.log("Failed to get user information:", err.message);
 }
 ```
 
 ```typescript
 // eWeLink WebSocket API
 
-import eWeLink from 'ewelink-api-next';
+import eWeLink from "ewelink-api-next";
 
 const wsClient = new eWeLink.Ws({
   appId: "xxx",
   appSecret: "xxx",
   region: "us"
 });
-wsClient.syncLocalToken(region="us", account="xxx@xxx.net");
 
 let ws = await wsClient.Connect.create({
   appId: wsClient?.appId || "",
@@ -69,20 +67,21 @@ let ws = await wsClient.Connect.create({
 
 setTimeout(() => {
   wsClient.Connect.updateState("xxxx", {
-    switch: "on"});
+    switch: "on"
+  });
 }, 5000);
 ```
 
 ```typescript
 // eWeLink Lan Control
-import eWeLink from 'ewelink-api-next';
+import eWeLink from "ewelink-api-next";
 
 const lanClient = new eWeLink.Lan({
   selfApikey: "xxx",
   logObj: eWeLink.createLogger("lan")
 });
 
-lanClient.discovery(undefined, (server)=>{
+lanClient.discovery((server) => {
   console.log("server:", server);
 }); // Start Discovery Service
 try {
@@ -105,8 +104,22 @@ try {
 } catch (error: any) {
   console.info(error.message);
 }
-
 ```
+
+授权页登录方法可参考 [https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo](https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo)
+
+### 方法说明
+
+- [基本规范](./docs/zh/基本规范.md) 
+- [自带方法](./docs/zh/自带方法.md) 
+- [用户管理](./docs/zh/用户管理.md) 
+- [设备管理](./docs/zh/设备管理.md)
+- [家庭房间](./docs/zh/家庭房间.md)
+- [消息中心](./docs/zh/消息中心.md) 
+- [OAuth2.0](./docs/zh/OAuth2.0.md) 
+- [长连接控制](./docs/zh/长连接控制.md)
+- [局域网控制](./docs/zh/局域网控制.md) 
+- [其他](./docs/zh/其他.md) 
 
 ## TODO
 
@@ -127,7 +140,7 @@ try {
 
 ## 致谢
 
-| Item                                                           | Reason                   |
-|----------------------------------------------------------------|--------------------------|
-| [ewelink-api](https://github.com/skydiver/ewelink-api)         | 社区项目，有借鉴其思路              |
+| Item                                                           | Reason                                           |
+| -------------------------------------------------------------- | ------------------------------------------------ |
+| [ewelink-api](https://github.com/skydiver/ewelink-api)         | 社区项目，有借鉴其思路                           |
 | [wechat-api-next](https://github.com/lblblong/wechat-api-next) | 参考实现了项目结构，特别是新学到了混合模式的使用 |

@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type baseInfo = {
-  familyid: string;
+  id: string;
 };
 
 export interface SwitchFamily extends BaseWebAPI {}
@@ -12,7 +12,7 @@ export class SwitchFamily {
    * @description Switch to the default family
    *
    * @param options - The base information.
-   * @param options.familyid - Target Family ID.
+   * @param options.id - Target Family ID.
    *
    * @returns response - Please refer to the online API documentation
    *
@@ -20,7 +20,7 @@ export class SwitchFamily {
    */
   async switchFamily(options: baseInfo) {
     const body = {
-      id: options.familyid
+      id: options.id
     };
     return await this.root.request.post("/v2/family/current", body, {
       headers: {

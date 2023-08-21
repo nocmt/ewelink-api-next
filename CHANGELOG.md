@@ -1,5 +1,16 @@
 # CHANGELOG
 
+August 21, 2023 v1.0.0
+
+- Refactor: other.dispatch(region: string)、change user.setUserInfo to user.updateUserInfo
+- Refactor: user.logout() Cancel at parameter transfer
+- Feat: New document description, open source project
+
+August 4, 2023 v0.0.8
+
+- Feat: Add responseTime in response
+- Fix: Error modifying getRegion
+
 June 27th, 2023 v0.0.6
 
 - Fix: Fix the error reported when the device encryption is canceled and then controlled in the LAN control

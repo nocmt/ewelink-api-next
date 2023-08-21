@@ -231,7 +231,7 @@ export class Lan {
       secretKey?: string;
       iv?: string;
       selfApikey?: string;
-    }):Promise<any>  => {
+    }): Promise<any> => {
       return await this.generalRequest({
         ...controlOptions,
         path: "/zeroconf/switch",

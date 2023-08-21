@@ -3,8 +3,8 @@ import { BaseWebAPI } from "../../WebAPI.js";
 export type deviceInfo = {
   name: string;
   id: string;
-  familyid?: string;
-  roomid?: string;
+  familyId?: string;
+  roomId?: string;
   sort?: 1 | 2;
 };
 
@@ -17,8 +17,8 @@ export class AddGSMDevice {
    * @param options - The device information.
    * @param options.name - The device name.
    * @param options.id - The GSM ID.
-   * @param options.familyid - option, The device familyid.
-   * @param options.roomid - option, The device roomid.
+   * @param options.familyId - option, The device familyId.
+   * @param options.roomId - option, The device roomId.
    * @param options.sort - The device sort. 1: positive sequence, 2: reverse sequence
    * @returns response - Please refer to the online API documentation
    *
@@ -28,8 +28,8 @@ export class AddGSMDevice {
     const body = {
       name: options.name,
       id: options.id,
-      familyid: options?.familyid,
-      roomid: options?.roomid,
+      familyid: options?.familyId,
+      roomid: options?.roomId,
       sort: options?.sort
     };
     return await this.root.request.post("/v2/device/add-gsm", body, {

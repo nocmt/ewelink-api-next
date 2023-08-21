@@ -11,7 +11,7 @@ describe("Device management test", function () {
   });
 
   after(async function () {
-    let response = await client.user.logout({});
+    let response = await client.user.logout();
     assert.strictEqual(response.error, 0, "success");
   });
 
@@ -132,7 +132,7 @@ describe("Device management test", function () {
     const response = await client.device.getOTAInfo({
       deviceInfoList: [
         {
-          deviceid: "100085c78c",
+          deviceId: "100085c78c",
           model: "PSF-B01-GL",
           version: "1.0.0"
         }
