@@ -1,7 +1,6 @@
 node_modules
 .idea
 .vscode
-dist
 cache
 logs
 test/testConfig.ts
