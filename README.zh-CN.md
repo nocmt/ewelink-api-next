@@ -121,7 +121,7 @@ try {
 - [局域网控制](./docs/zh/局域网控制.md) 
 - [其他](./docs/zh/其他.md) 
 
-## TODO
+## 功能
 
 - [x] 首页管理
 - [x] 用户管理
@@ -136,11 +136,11 @@ try {
 
 ## 修改日志
 
-[CHANGELOG.md](CHANGELOG.md)
+[CHANGELOG](CHANGELOG.md)
 
 ## 致谢
 
-| Item                                                           | Reason                                           |
-| -------------------------------------------------------------- | ------------------------------------------------ |
-| [ewelink-api](https://github.com/skydiver/ewelink-api)         | 社区项目，有借鉴其思路                           |
+| Item                                                           | Reason                   |
+|----------------------------------------------------------------|--------------------------|
+| [ewelink-api](https://github.com/skydiver/ewelink-api)         | 社区项目，有借鉴其思路              |
 | [wechat-api-next](https://github.com/lblblong/wechat-api-next) | 参考实现了项目结构，特别是新学到了混合模式的使用 |

@@ -134,15 +134,13 @@ The login method for the authorization page can be referred to：[https://github
 
 ## Contributors
 
-[contributors](https://github.com/yanhaijing/jslib-base/graphs/contributors)
-
 ## Change Log
 
-[CHANGELOG.md](CHANGELOG.md)
+[CHANGELOG](CHANGELOG.md)
 
 ## Thanks
 
 | Item                                                           | Reason                                            |
-| -------------------------------------------------------------- | ------------------------------------------------- |
+|----------------------------------------------------------------|---------------------------------------------------|
 | [ewelink-api](https://github.com/skydiver/ewelink-api)         | Community projects, there are ideas to learn from |
 | [wechat-api-next](https://github.com/lblblong/wechat-api-next) | Use of mixed mode and project structure reference |
