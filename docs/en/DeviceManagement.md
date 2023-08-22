@@ -194,7 +194,7 @@ Params：
 | :---------- | :------- | :------- | :-------------------------------------------- |
 | type        | Int      | N        | Whether to get device or group. 1=device 2=group  |
 | id          | String   | N        |  When type=1, this means deviceId. For 2, group id |
-| params      | String   | Y        | Status parameters to be obtained   |
+| params      | String   | N        | Status parameters to be update   |
 
 Response data parameter：{}
 
@@ -209,7 +209,7 @@ Params：
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :------------| :------- | :-------------------------------------------- |
 | thingList      | Array<Object>   | N    | The things information |
-| timeout        | String          | N    | The timeout. 0-8000ms, default is 0ms |
+| timeout        | String          | Y    | The timeout. 0-8000ms, default is 0ms |
 
 thingList  description:
 
@@ -264,12 +264,6 @@ settings  description:
 Response data parameter：
 
 | Name        | Type | Allows Empty | Description            |
-| :------------- | :------------ | :------- | :------------------------|
-| respList      | Array<Object>  | N        | List of response results for each thing  |
-
-respList  description:
-
-| Name        | Type | Allows Empty | Description            |
 | :---------- | :----- | :------- | :-------------------------------|
 | itemType    | Int      | N    | The item type |
 | itemData    | Object   | N    | See the[device.getThings]interface of deviceList item description |
@@ -309,7 +303,7 @@ thingList  description:
 | itemData    | Object   | N    | See the[device.getThings]interface of deviceList  item description |
 | index       | Int      | N    | The sequence number of the device  |
 
-## device.setDeviceInfo({deviceId,name,roomId})
+## device.setDeviceInfo({deviceId,newName,newRoomId})
 
 Function：Update device/room name information
 
@@ -320,12 +314,12 @@ Params：
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :-----------| :------- | :-------------------------------------------- |
 | deviceId    | String      |  N       |  The device id |
-| name	      | String	    |  Y	   |  The device name  |                                
-| roomId	  | String	    |  Y	   |  The room id  |
+| newName	  | String	    |  Y	   |  The device new name  |                                
+| newRoomId	  | String	    |  Y	   |  The  new room id  |
 
 Response data parameter：{}
 
-## device.delDevice({deviceId})
+## device.delDevice({id})
 
 Function：Delete device
 
@@ -337,7 +331,7 @@ Params：
 
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :-----------| :------- | :---------- |
-| deviceId    | String      |  N       |  The device id |
+| id    | String      |  N       |  The device id |
 
 Response data parameter：{}
 
@@ -412,7 +406,7 @@ family description:
 | index	      | Int	        |  N	   |  Group sort number  |                                
 | roomId	  | String	    |  Y	   |  The room id |
 
-## device.addGroup({name,maindeviceId,familyId,roomId,sort,deviceIdList})
+## device.addGroup({name,mainDeviceId,familyId,roomId,sort,deviceidList})
 
 Function：Add device group
 
@@ -425,11 +419,11 @@ Params：
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :------------| :------- | :-------------------------------------------- |
 | name	          | String	        |  N	   |  The device group name  |                                
-| maindeviceId	  | String	        |  N	   |  The device group main device id. |
+| mainDeviceId	  | String	        |  N	   |  The device group main device id. |
 | familyId	      | String	        |  Y	   |  option, The device group familyId |
 | roomId	      | String          |  Y	   |  option, The device group roomId  |
 | sort	          | Int             |  Y	   |  The device group sort. 1: positive sequence, 2: reverse sequence  |
-| deviceIdList	  | Array<String>   |  Y	   |  The device group deviceidList  |
+| deviceidList	  | Array<String>   |  Y	   |  The device group deviceidList  |
 
 Response data parameter：
 
@@ -486,7 +480,7 @@ Params：
 
 Response data parameter：{}
 
-## device.coverGroupDeviceList({id，deviceIdList})
+## device.coverGroupDeviceList({id，coverDeviceidList})
 
 Function：Update the device list in the device group
 
@@ -499,15 +493,16 @@ Params：
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :------------| :------- | :------------- |
 | id              | String        |  N       |  The group id|                           
-| deviceIdList	  | Array<String> |  N	     |  The device id list |
+| coverDeviceidList	  | Array<String> |  N	     |  The device group cover device id list |
 
 Response data parameter：
 
-| Name        | Type | Allows Empty | Description            ||
-| :---------- | :-------------- | :------- | :-------------------------------|
-| updatedThingList   | Array    | N    | Update thing data |
+| Name        | Type | Allows Empty | Description            |
+| :---------- | :------------| :------- | :------------- |
+| id              | String        |  N       |  The group id|                           
+| updatedThingList	  | Array |  N	     |   Update thing data |
 
-## device.share({deviceIdList,user,permit,comment,shareType})
+## device.share({deviceidList,user,permit,comment,shareType})
 
 Function：Device share
 
@@ -517,7 +512,7 @@ Params：
 
 | Name        | Type | Allows Empty | Description            |
 | :------------ | :------------| :------- | :------------- |                         
-| deviceIdList	| Array         |  N	    |  The device id list |
+| deviceidList	| Array         |  N	    |  The device id list |
 | user          | Object        |  N        |  The user information   |                           
 | permit	    | Int           |  N	    |  The sharing permissions |
 | comment       | String        |  Y        |  option, The sharing comment |                           
@@ -527,8 +522,8 @@ user description：
 
 | Name        | Type | Allows Empty | Description            |
 | :------------ | :------------| :------- | :------------- |                         
-| countryCode	| String         |  Y	    | The user's countryCode |
-| phoneNumber   | String         |  Y       | option, The user's phoneNumber  |                           
+| countryCode	| String         |  N	    | The user's country code |
+| phoneNumber   | String         |  Y       | option, The user's phone number  |                           
 | email	        | String         |  Y	    | option, The user's email |
 
 Response data parameter：
@@ -586,7 +581,7 @@ Parameter type：Object
 
 Params：
 
-| Name        | Type | Allows Empty | Description            | |
+| Name        | Type | Allows Empty | Description            |
 | :------------ | :------------| :------- | :------------- |                         
 | deviceId	    | String        |  N	   | The device id  |
 | from          | Long          |  Y       | The start time of the query, in the format of timestamp |
