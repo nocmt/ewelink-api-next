@@ -1,9 +1,8 @@
 # CHANGELOG
 
+August 22, 2023 v1.0.1
 
-August 21, 2023 v1.0.1
-
-- Fix: Fix bug in device.getAllThingsAllPages() method
+- Fix: Fix bug in device.getAllThingsAllPages() and user.refreshToken() method
 
 August 21, 2023 v1.0.0
 

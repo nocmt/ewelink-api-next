@@ -5,7 +5,7 @@ export declare type thingInfo = {
         id: string;
         params: object;
     }>;
-    timeout: number;
+    timeout?: number;
 };
 export interface SetAllThingStatus extends BaseWebAPI {
 }
@@ -18,7 +18,7 @@ export declare class SetAllThingStatus {
      * @param options.thingList.type - The things type. 1: user's own device, 2: devices shared by others.
      * @param options.thingList.id - The things id.
      * @param options.thingList.params - The things params.
-     * @param options.timeout - The timeout. 0-8000ms, default is 0ms.
+     * @param options.timeout - The timeout. 0-8000ms.default 0ms.
      * @returns response - Please refer to the online API documentation
      *
      * @beta

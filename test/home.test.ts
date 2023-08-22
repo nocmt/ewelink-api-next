@@ -69,6 +69,7 @@ describe("Family management test", function () {
   });
 
   it("home.setThing", async function () {
+    this.timeout(30000);
     const response = await client.home.setThing({
       roomId: client.storage.get("tem_roomId"),
       newThingList: [],

@@ -15,6 +15,7 @@ describe("User management test", function () {
     let response = await client.user.login({ account: "upymjh35902@chacuo.net", password: "12345678", areaCode: "+1" });
     assert.strictEqual(response.error, 0, "Login is successful");
     client.storage.set("at", response.data.at);
+    client.storage.set("rt", response.data.rt);
   });
 
   it("user.register", async function () {
@@ -41,6 +42,8 @@ describe("User management test", function () {
   });
 
   it("user.getUserInfo", async function () {
+    this.timeout(20000);
+    client.at = client.storage.get("at");
     let response = await client.user.getUserInfo();
     assert.strictEqual(response.error, 0, "success");
   });
@@ -67,6 +70,15 @@ describe("User management test", function () {
     let response = await client.user.changePwd({
       oldPassword: "12345678",
       newPassword: "12345678"
+    });
+    assert.strictEqual(response.error, 0, "success");
+  });
+
+  it("user.refreshToken", async function () {
+    this.timeout(10000);
+    client.rt = client.storage.get("rt");
+    let response = await client.user.refreshToken({
+      rt: client.storage.get("rt")
     });
     assert.strictEqual(response.error, 0, "success");
   });

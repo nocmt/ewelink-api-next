@@ -1,4 +1,5 @@
 import { BaseWebAPI } from "../../WebAPI.js";
+import { sign } from "../../../utils/index.js";
 
 export type accountInfo = {
   rt?: string;
@@ -24,7 +25,7 @@ export class RefreshToken {
     const res = await this.root.request.post("/v2/user/refresh", body, {
       headers: {
         "X-CK-Appid": this.root.appId || "",
-        Authorization: `Sign ${body}`
+        Authorization: `Sign ${sign(body, this.root.appSecret || "")}`
       }
     });
     if (res.status === 200 && res.error === 0) {
