@@ -8,8 +8,8 @@ Params:
 
 | Name        | Type | Allows Empty | Description            |
 | :--------- | :------------------------ | :------- | :-------------------------- |
-| region     | String                    | N        | The service region          |
-| fullUrl    | String                    | N        | The full url |
+| region     | String                    | Y        | The service region          |
+| fullUrl    | String                    | Y        | The full url |
 
 ## createHbTimer({hb = 0, hbInterval = 145})
 
@@ -33,11 +33,11 @@ connectInfo item description ：
 
 | Name        | Type | Allows Empty | Description            |
 | :--------- | :------------------------ | :------- | :-------------------------- |
-| region     | String                    | N        | The service region          |
-| fullUrl    | String                    | N        | The full url |
+| region     | String                    | Y        | The service region          |
+| fullUrl    | String                    | Y        | The full url |
 | at         | String                    | N        | The at         |
 | userApiKey | String                    | N        | The user api key |
-| appId      | String                    | Y        | The app id          |
+| appId      | String                    | N        | The app id          |
 | userAgent  | String                    | Y        | The user agent |
 
 ## getUserOnline({connectInfo})
@@ -71,22 +71,10 @@ Params:
 | Name        | Type | Allows Empty | Description            |
 | :--------- | :------------------------ | :------- | :-------------------------- |
 | deviceId     | String                  | N        | The device id   |
-| params       | Object                  | Y        | The device status  |
-| action       | String                  | Y        | The action|
-| userAgent    | String                  | Y        | The user agent |
-| userApiKey   | String                  | Y        | The user api key |
-
-Return：
-
-| Name        | Type | Allows Empty | Description            |
-| :--------- | :------------------------ | :------- | :-------------------------- |
-| deviceId     | String                  | N        | The device id   |
 | params       | Object                  | N        | The device status  |
 | action       | String                  | Y        | The action|
 | userAgent    | String                  | Y        | The user agent |
 | userApiKey   | String                  | Y        | The user api key |
-| nonce        | String                  | Y        | The nonce |
-| sequence     | String                  | Y        | The sequence |
 
 ## updateState({deviceId,params,action,userAgent,userApiKey})
 

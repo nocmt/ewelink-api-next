@@ -59,7 +59,7 @@ Response data parameters：
 | id	      | String	       | N	      |  The family id |         
 | name	      | String	       | N	      |  The family name |                            
 | index	      | Int	           | N	      |   Sequence number of the family  |     
-| roomList	  | Array<Object>  | Y	      |  The room list，see the【home.getFamily】interface description | 
+| roomList	  | Array<Object>  | Y	      |  The room list，see the[home.getFamily]interface description | 
 
 ## home.addRoom({familyId,name,index})
 
