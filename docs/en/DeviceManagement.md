@@ -93,7 +93,7 @@ family  description：
 
 ## device.getAllThings({lang,familyId,num,beginIndex})
 
-Function：Get the list of Things
+Function：Get the list of Things(Only one page specified)
 
 Description：Things include
 
@@ -105,10 +105,10 @@ Parameter type：Object
 Params：
 
 | Name         | Type    | Allows Empty | Description            |
-| :----------- | :------ | :----------- | :-------------------------------------------- |
-| lang         | String  | N            | option, The language. 'en' or 'cn'  |
-| familyId     | String  | N            | option, The family id. Default is currentfamilyId |
-| num          | Int     | N            | option, The number of things per page. Default is 0 means all things |
+| :----------- | :------ |:-------------| :-------------------------------------------- |
+| lang         | String  | Y            | option, The language. 'en' or 'cn'  |
+| familyId     | String  | Y            | option, The family id. Default is currentfamilyId |
+| num          | Int     | Y            | option, The number of things per page. Default is 0 means all things |
 | beginIndex   | Int     | Y            | The index of the first thing. Default is -9999999 |
 
 Response data parameter：
@@ -126,9 +126,15 @@ thingList  description：
 | itemData         | Array   | N        | The id of the corresponding thing. When itemType is 1 or 2, thing id means device id. For 3 or 4, this field means group id  |
 | index            | Int     | N        | Sequence number |
 
+## device.getAllThingsAllPages({ lang, familyId, num, beginIndex })
+
+Function: Get Thing List (All Pages)
+
+Pass parameters and return consistent with the [device.getAllThings] interface
+
 ## device.getThings({thingList})
 
-Function：Getthe specified thing list
+Function：Get the specified thing list
 
 Parameter type：Object
 

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+
+August 21, 2023 v1.0.1
+
+- Fix: Fix bug in device.getAllThingsAllPages() method
+
 August 21, 2023 v1.0.0
 
 - Refactor: other.dispatch(region: string)、change user.setUserInfo to user.updateUserInfo
