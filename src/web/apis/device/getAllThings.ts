@@ -55,7 +55,7 @@ export class GetAllThings {
       let beginIndex: number = -99999;
       let thingList: any[] = [];
       while (isContinue) {
-        let res = this.root.request.get("/v2/device/thing", {
+        let res = await this.root.request.get("/v2/device/thing", {
           params: {
             lang: options?.lang,
             familyid: options?.familyId,
