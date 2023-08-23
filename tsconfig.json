@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2020",
     // 指定ECMAScript目标版本
     "module": "ESNext",
     // 指定生成哪个模块系统代码
