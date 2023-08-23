@@ -369,7 +369,7 @@ Parameter type：Object
 
 Params：
 
-| Name        | Type | Allows Empty | Description            ||
+| Name        | Type | Allows Empty | Description            |
 | :---------- | :-----------| :------- | :---------------------------------------|
 | lang        | String      |  Y       |  option, The language. 'en' or 'cn'  |
 
