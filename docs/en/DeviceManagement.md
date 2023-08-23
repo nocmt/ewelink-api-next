@@ -75,12 +75,12 @@ sharedBy   description：
 | shareTime	  | Long	  |  Y	      |  UTC standard time, in milliseconds, used to display sorting on the client  |
 
 devConfig  description(camera)：
-
-| Name            | Type      | Allows Empty | Description       |
-| :-------------- | :----- ---| :----------- | :------------------|
+| Name        | Type          | Allows Empty | Description            |
+| :---------- | :------------ | :----------- | :----------------------|
 | p2pServerName	  | Int	      |  Y	         |  Server Name  |         
-| p2pAccout	      | String	  |  Y	         |  Account  |                            
-| p2pLicense      | String	  |  Y	         |  license |                
+| p2pAccout	      | String  	      |  Y	         |  Account  |                            
+| p2pLicense      | String	      |  Y	         | license |   
+            
 
 family  description：
 
