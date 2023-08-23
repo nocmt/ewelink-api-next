@@ -24,7 +24,7 @@ npm i ewelink-api-next
 
 ### 示例
 
-设置 package.json 中的 "type": "module"，否则会报错
+ESM: 设置 package.json 中的 { "type": "module" }
 
 ```typescript
 // eWeLink v2 API
@@ -123,20 +123,42 @@ try {
 }
 ```
 
+#### CommonJS: 使用 `require` 导入（ewelink-api-next@^1.0.2）
+
+```javascript
+const eWeLink = require('ewelink-api-next').default
+
+const client = new eWeLink.WebAPI({
+    appId: 'xxx',
+    appSecret: 'xxx',
+    region: 'cn',
+    logObj: eWeLink.createLogger('eu'),
+  })
+
+;(async () => {
+  let response = await client.user.login({
+    account: 'xxx',
+    password: 'xxx',
+    areaCode: '+1',
+  })
+  console.info(JSON.stringify(response))
+})()
+```
+
 授权页登录方法可参考 [https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo](https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo)
 
 ### 方法说明
 
-- [基本规范](./docs/zh/基本规范.md) 
-- [自带方法](./docs/zh/自带方法.md) 
-- [用户管理](./docs/zh/用户管理.md) 
+- [基本规范](./docs/zh/基本规范.md)
+- [自带方法](./docs/zh/自带方法.md)
+- [用户管理](./docs/zh/用户管理.md)
 - [设备管理](./docs/zh/设备管理.md)
 - [家庭房间](./docs/zh/家庭房间.md)
-- [消息中心](./docs/zh/消息中心.md) 
-- [OAuth2.0](./docs/zh/OAuth2.0.md) 
+- [消息中心](./docs/zh/消息中心.md)
+- [OAuth2.0](./docs/zh/OAuth2.0.md)
 - [长连接控制](./docs/zh/长连接控制.md)
-- [局域网控制](./docs/zh/局域网控制.md) 
-- [其他](./docs/zh/其他.md) 
+- [局域网控制](./docs/zh/局域网控制.md)
+- [其他](./docs/zh/其他.md)
 
 ## 功能
 

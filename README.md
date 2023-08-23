@@ -24,7 +24,7 @@ npm i ewelink-api-next
 
 ### Example
 
-Set the 'type' and 'module' in package.json, otherwise an error will be reported
+#### ESM: Set {"type": "module"} in package.json
 
 ```typescript
 // eWeLink v2 API
@@ -122,6 +122,31 @@ try {
   console.info(error.message);
 }
 ```
+
+#### CommonJS: Use `require` to import（ewelink-api-next@^1.0.2）
+
+```javascript
+const eWeLink = require('ewelink-api-next').default
+
+const client = new eWeLink.WebAPI({
+    appId: 'xxx',
+    appSecret: 'xxx',
+    region: 'cn',
+    logObj: eWeLink.createLogger('eu'),
+  })
+
+;(async () => {
+  let response = await client.user.login({
+    account: 'xxx',
+    password: 'xxx',
+    areaCode: '+1',
+  })
+  console.info(JSON.stringify(response))
+})()
+
+```
+
+
 
 The login method for the authorization page can be referred to：[https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo](https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo)
 
