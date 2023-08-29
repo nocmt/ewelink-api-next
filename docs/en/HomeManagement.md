@@ -59,7 +59,7 @@ Response data parameters：
 | id	      | String	       | N	      |  The family id |         
 | name	      | String	       | N	      |  The family name |                            
 | index	      | Int	           | N	      |   Sequence number of the family  |     
-| roomList	  | Array<Object>  | Y	      |  The room list，see the[home.getFamily]interface description | 
+| roomList	  | Array\<Object\>  | Y	      |  The room list，see the[home.getFamily]interface description | 
 
 ## home.addRoom({familyId,name,index})
 
@@ -123,7 +123,7 @@ Params：
 
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :------------| :------- | :-------------------------------------------- |
-| familyId      | Array<Object>   | Y    | option, The family id. Default is the current family |
+| familyId      | Array\<Object\>   | Y    | option, The family id. Default is the current family |
 | idList        | String          | N    | The room id list |
 
 Response data parameters：{}
@@ -167,7 +167,7 @@ Params：
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :-------------| :------- | :-------------------------------------------- |
 | familyId    | String        |  Y       |  option, The family id. Default is the current family |
-| thingList	  | Array<Object> |  N	     |  The thing list  |                                
+| thingList	  | Array\<Object\> |  N	     |  The thing list  |                                
 
 thingList 列表 item 说明:
 

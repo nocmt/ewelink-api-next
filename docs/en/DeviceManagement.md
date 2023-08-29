@@ -4,9 +4,9 @@
 
 Params：:
 
-| Name        | Type | Allows Empty | Description            |
-| :-----------| :------- | :--------------- | :------------------------- |
-| deviceList  | Array<Object>  | N        | The things information|
+| Name       | Type          | Allows Empty | Description            |
+|:-----------|:--------------|:-------------|:-----------------------|
+| deviceList | Array\<Object\> | N            | The things information |
 
 deviceList  description： 
 
@@ -20,13 +20,13 @@ deviceList  description：
 | brandLogo	    | String	    | N	      |  Brand logo url |
 | showBrand	    | Boolean	    | N	      |  Whether to display the brand  |
 | productModel	| String	    | N	      |  Product model name |
-| devGroups	    | Array<Object>	| Y	      |  List of all the groups the device is in |
+| devGroups	    | Array\<Object\>	| Y	      |  List of all the groups the device is in |
 | tags       	| Object	    | Y	      |  Tag object, which stores a custom string, and the server is only responsible for transparent transmission  |
 | devConfig  	| Object	    | Y	      |  Device configuration from deviceConfig in the factorydevices list  |
 | settings	    | Object	    | Y	      |  User settings. Please refer to [Change device settings] interface description  |
 | family	    | Object	    | N	      |  Home of the device  |
 | sharedBy	    | Object	    | Y	      |  If the device is shared by others, it will have this attribute  |
-| shareTo	    | Array<Object>	| Y	      |  The list of shared user with whom the device has been shared |
+| shareTo	    | Array\<Object\>	| Y	      |  The list of shared user with whom the device has been shared |
 | devicekey	    | String	    | N	      |  Factory apikey of the device |                 
 | online	    |Boolean    	| N	      |  Online status  |                          
 | params	    |Object     	| Y       |  Status attributes of device  |                      
@@ -208,7 +208,7 @@ Params：
 
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :------------| :------- | :-------------------------------------------- |
-| thingList      | Array<Object>   | N    | The things information |
+| thingList      | Array\<Object\>   | N    | The things information |
 | timeout        | String          | Y    | The timeout. 0-8000ms, default is 0ms |
 
 thingList  description:
@@ -223,7 +223,7 @@ Response data parameter：
 
 | Name        | Type | Allows Empty | Description            |
 | :------------- | :------------ | :------- | :------------------------|
-| respList      | Array<Object>  | N        | List of responses from all things |
+| respList      | Array\<Object\>  | N        | List of responses from all things |
 
 respList description:
 
@@ -423,7 +423,7 @@ Params：
 | familyId	      | String	        |  Y	   |  option, The device group familyId |
 | roomId	      | String          |  Y	   |  option, The device group roomId  |
 | sort	          | Int             |  Y	   |  The device group sort. 1: positive sequence, 2: reverse sequence  |
-| deviceidList	  | Array<String>   |  Y	   |  The device group deviceidList  |
+| deviceidList	  | Array\<String\>   |  Y	   |  The device group deviceidList  |
 
 Response data parameter：
 
@@ -493,7 +493,7 @@ Params：
 | Name        | Type | Allows Empty | Description            |
 | :---------- | :------------| :------- | :------------- |
 | id              | String        |  N       |  The group id|                           
-| coverDeviceidList	  | Array<String> |  N	     |  The device group cover device id list |
+| coverDeviceidList	  | Array\<String\> |  N	     |  The device group cover device id list |
 
 Response data parameter：
 
@@ -640,9 +640,9 @@ deviceInfoList description：
 
 Response data parameter：
 
-| Name        | Type | Allows Empty | Description            |
-| :------------ | :------------| :------- | :------------- |                         
-| otaInfoList   | Array<Object>    |  N     | OTA information list, if the device has upgrade information, will be in this list  |           
+| Name        | Type            | Allows Empty | Description            |
+| :------------ |:----------------| :------- | :------------- |                         
+| otaInfoList   | Array\<Object\> |  N     | OTA information list, if the device has upgrade information, will be in this list  |           
 
 otaInfoList description：
 

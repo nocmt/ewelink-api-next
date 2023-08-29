@@ -8,16 +8,17 @@ Parameter type: Object
 
 Params:
 
-| Name | Type | Allows empty | Description                                                                                                         |:-------------------------------------------- |
-| redirectUrl | String | N        | The redirect URL after login                  |
-| state       | String | N        | The state, Similar to user ID, perform identification judgment when redirecting      |
-| grantType   | String | Y        | The grant type, default: `authorization_code` |
+| Name        | Type   | Allows empty | Description                                                                     |
+|:------------|:-------|:-------------|:--------------------------------------------------------------------------------|
+| redirectUrl | String | N            | The redirect URL after login                                                    |
+| state       | String | N            | The state, Similar to user ID, perform identification judgment when redirecting |
+| grantType   | String | Y            | The grant type, default: `authorization_code`                                   |
 
 Return：
 
-| Name | Type | Allows empty | Description                                                                                                         |
-| :--- | :----- | :------- | :------------ |
-| url  | String | N        | The login URL |
+| Name | Type   | Allows empty | Description   |
+|:-----|:-------|:-------------|:--------------|
+| url  | String | N            | The login URL |
 
 ## oauth.getToken({region, redirectUrl, code, grantType})
 

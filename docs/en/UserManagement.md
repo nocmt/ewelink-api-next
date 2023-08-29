@@ -20,7 +20,7 @@ Response data parameter:
 | Name | Type | Allows empty | Description                                                                                                         |
 | :----- | :------ | :------- | :--------------------------------------------------- |
 | user   | Object  | N        | User information, see [user.register] method description                |
-| at     | String  | N        | Access Token                                         |
+| at     | String  | N        | Access Token                                     |
 | rt     | String  | N        | Refresh Token                                        |
 | region | String  | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
 
@@ -56,9 +56,9 @@ Response data parameter:
 | Name | Type | Allows empty | Description                                                                                                         |
 | :----- | :------ | :------- | :--------------------------------------------------- |
 | user   | Object  | N        | User information, see [user.register] method description                |
-| at     | String  | N        | Access Token                                         |
+| at     | String  | N        | Access Token                                       |
 | rt     | String  | N        | Refresh Token                                        |
-| region |  String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
+| region | String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
 
 User description:
 
@@ -66,7 +66,7 @@ User description:
 | :------------- | :------ | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | countryCode    | String  | Y        | Telephone area code, starting with "+", such as "+86"                                                                                                                                                                                                                   |
 | phoneNumber    | String  | Y        | User's mobile phone number with phone area code format:+8615815725225                                                                                                                                                                                                            |
-| email          | String  | Y        | User email, user phone, and email will not be empty at the same time                                                                                                                                                                                                                  |
+| email          | String  | Y       | User email, user phone, and email will not be empty at the same time                                                                                                                                                                                                                  |
 | apikey         | String  | N        | User id                                                                                                                                                                                                                                              |
 | nickname       | String  | Y        | User nickname                                                                                                                                                                                                                                             |
 | accountLevel   | Number  | N        | Account level, 10=Free 20=Advanced 30=Pro                                                                                                                                                                                                                  |
@@ -138,7 +138,7 @@ Response data parameter:
 
 | Name | Type | Allows empty | Description                                                                                                         |
 | :----- | :------ | :------- | :--------------------------------------------------- |
-| region |  String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
+| region | String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
 
 ## user.getUserInfo()
 
@@ -153,7 +153,7 @@ Response data parameter:
 | Name | Type | Allows empty | Description                                                                                                         |
 | :----- | :------ | :------- | :--------------------------------------------------- |
 | user   | Object  | N        | User information, see [user.register] method description                    |
-| region |  String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
+| region | String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
 
 ## user.updateUserInfo({nickname, acceptEmailAd, accountConsult, timezone, language, lang, emailSubscription})
 
@@ -171,7 +171,7 @@ Params:
 | timezone                | Object  | Y        | Time zone information                                                                                       |
 | timezone.id             | String  | N        | time zone ID                                                                                        |
 | timezone.offset         | Number  | N        | Time zone offset                                                                                     |
-| language                | String  | Y        | APP 语言|
+| language                | String  | Y        | APP language|
 | lang                    | String  | Y        | Push language, cn or en                                                                          |
 | emailSubscription       | Object  | Y        | Email subscription information, if the field is empty or NULL, it means it will not be updated                                                  |
 | emailSubscription.email | String  | N        | email|
@@ -230,9 +230,9 @@ Response data parameter:
 | Name | Type | Allows empty | Description                                                                                                         |
 | :----- | :------ | :------- | :--------------------------------------------------- |
 | user   | Object  | N        | User information, see [user.register] method description                |
-| at     | String  | N        | Access Token                                         |
+| at     | String  | N        | Access Token                                        |
 | rt     | String  | N        | Refresh Token                                        |
-| region |  String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
+| region | String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
 
 ## user.smsLogin({phoneNumber, code, areaCode, lang})
 
@@ -254,6 +254,6 @@ Response data parameter:
 | Name | Type | Allows empty | Description                                                                                                         |
 | :----- | :------ | :------- | :--------------------------------------------------- |
 | user   | Object  | N        | User information, see [user.register] method description                |
-| at     | String  | N        | Access Token                                         |
+| at     | String  | N        | Access Token                                        |
 | rt     | String  | N        | Refresh Token                                        |
-| region |  String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
+| region | String | N        | User's region cn=China region as=Asia region us=Americas region eu=Europe region |
