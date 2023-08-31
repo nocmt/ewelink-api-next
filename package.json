@@ -1,6 +1,6 @@
 {
   "name": "ewelink-api-next",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CoolKit v2 API Official Library",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc && rm -rf dist/test && cp -r dist/src/* dist && rm -rf dist/src",
-    "build-tsup": "tsup src/index.ts --format esm,cjs --dts --clean && mv dist/index.js dist/index.mjs",
+    "build:tsup": "tsup src/index.ts --format esm,cjs --dts --clean && mv dist/index.js dist/index.mjs",
     "build:all": "rimraf dist && tsc",
     "test": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/*.test.ts --timeout 30000",
     "testJson": "cross-env TS_NODE_PROJECT='test/tsconfig.test.json' mocha test/*.test.ts --reporter json --reporter-option output=test.json",

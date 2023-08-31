@@ -1,5 +1,9 @@
 # CHANGELOG
 
+August 31, 2023 v1.0.2
+
+- Feat: Support for CommonJS module
+
 August 22, 2023 v1.0.1
 
 - Fix: Fix bug in device.getAllThingsAllPages() and user.refreshToken() method
