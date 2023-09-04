@@ -2,7 +2,7 @@ import { BaseWebAPI } from "../../WebAPI.js";
 import { sign } from "../../../utils/index.js";
 
 export type accountInfo = {
-  type: number | string;
+  type: number | string | "register" | "resetPwd" | "logout" | "SMSLogin";
   account: string;
 };
 
@@ -21,11 +21,22 @@ export class SendCode {
    * @beta
    */
   async sendCode(options: accountInfo) {
-    const body = {
-      type: options.type
+    const codeTypes: { [key: string]: number } = {
+      register: 0,
+      resetPwd: 1,
+      logout: 3,
+      SMSLogin: 4
     };
+
+    const body = {
+      type: options.type || 0
+    };
+
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}` as keyof typeof body] = options.account;
-    body["type"] = Number(options.type);
+
+    if (typeof options.type === "string" && options.type in codeTypes) {
+      body["type"] = codeTypes[options.type];
+    }
 
     return await this.root.request.post("/v2/user/verification-code", body, {
       headers: {

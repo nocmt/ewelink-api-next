@@ -1,7 +1,7 @@
 import { BaseWebAPI } from "../../WebAPI.js";
 
 export type deviceInfo = {
-  type: string | "replace" | "merge";
+  type?: string | "replace" | "merge";
   deviceId: string;
   tags: object;
 };
@@ -22,7 +22,7 @@ export class SetDeviceTags {
    */
   async setDeviceTags(options: deviceInfo) {
     const body = {
-      type: options.type,
+      type: options.type || "replace",
       deviceid: options.deviceId,
       tags: options.tags
     };
