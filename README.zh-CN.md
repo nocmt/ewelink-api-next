@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-1.0.2-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-1.0.3-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 [English](README.md) | 简体中文
 
@@ -171,7 +171,21 @@ const client = new eWeLink.WebAPI({
 - [x] 长连接控制
 - [x] 局域网控制
 
-## 贡献者
+## FAQ
+
+1、请求接口时出现 407 错误
+
+你当前使用的APPID可用的接口清单中不包括这个接口（受到应用类型的限制），比如：从eWeLink开发者中心创建的应用只能使用以下接口：
+
+![Supported API](SupportedAPI.png)
+
+2、请求首页、获取ThingList等接口 无法获取到设备数据
+
+原因是：从eWeLink开发者中心创建的应用只免费授权了 sonoff、SONOFF、嵩诺、coolkit 品牌的权限，其他品牌的授权需要得到制造商的同意（付费后商务沟通）。
+
+3、控制设备时返回 4002 错误
+
+设备离线或者控制指令错误，指令具体查阅：[UIID协议文档 - CoolKit开放平台 4.2](https://coolkit-technologies.github.io/eWeLink-API/#/zh-cmn/UIID%E5%8D%8F%E8%AE%AE)
 
 ## 修改日志
 

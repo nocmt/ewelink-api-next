@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-1.0.2-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-1.0.3-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 English | [简体中文](README.zh-CN.md)
 
@@ -163,7 +163,7 @@ The login method for the authorization page can be referred to：[https://github
 - [LAN control](./docs/en/LAN-Control.md)
 - [Other](./docs/en/Other.md)
 
-## Todo
+## Supported Features
 
 - [x] Homepage management
 - [x] User management
@@ -174,11 +174,26 @@ The login method for the authorization page can be referred to：[https://github
 - [x] WebSocket control
 - [x] LAN control
 
-## Contributors
-
 ## Change Log
 
 [CHANGELOG](CHANGELOG.md)
+
+
+## FAQ
+
+1. 407 error while requesting interface
+
+The list of available interfaces for the APPID you are currently using does not include this interface (limited by the application type). For example, applications created from the eWeLink developer center can only use the following interfaces:
+
+![Supported API](SupportedAPI.png)
+
+2. Unable to obtain device data through interfaces such as requesting homepage and get ThingList
+
+The reason is that applications created from the eWeLink developer center only have free authorization for brands such as sonoff, SONOFF, 嵩诺, and coolkit. Authorization for other brands requires the manufacturer's consent (after payment, business communication).
+
+3. 4002 error returned while controlling the device
+
+The device is offline or the control command is incorrect. Please refer to: [UIID Protocol - CoolKit Open Platform 4.2](https://coolkit-technologies.github.io/eWeLink-API/#/en/UIIDProtocol)
 
 ## Thanks
 
