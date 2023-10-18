@@ -144,7 +144,7 @@ declare class SMSLogin {
 }
 
 declare type accountInfo$3 = {
-    type: number | string;
+    type: number | string | "register" | "resetPwd" | "logout" | "SMSLogin";
     account: string;
 };
 interface SendCode extends BaseWebAPI {
@@ -975,7 +975,7 @@ declare class GetThings {
 }
 
 declare type thingInfo$2 = {
-    type: number | 1 | 2;
+    type?: number | string | 1 | 2 | "device" | "group";
     id: string;
     params?: string;
 };
@@ -986,7 +986,7 @@ declare class GetThingStatus {
      * Get Device Status
      *
      * @param options - The things information.
-     * @param options.type - The things type. 1: user's own device, 2: devices shared by others.
+     * @param options.type - The things type. 1: devices status, 2: groups status.
      * @param options.id - The things id.
      * @param options.params - option, The things params.
      * @returns response - Please refer to the online API documentation
@@ -1024,7 +1024,7 @@ declare class SetAllThingStatus {
 }
 
 declare type deviceInfo$2 = {
-    type: string | "replace" | "merge";
+    type?: string | "replace" | "merge";
     deviceId: string;
     tags: object;
 };
@@ -1108,7 +1108,7 @@ declare class SetShare {
 }
 
 declare type thingInfo = {
-    type: number | 1 | 2;
+    type?: number | string | 1 | 2 | "device" | "group";
     id: string;
     params: object;
 };
@@ -1119,7 +1119,7 @@ declare class SetThingStatus {
      * Update the status of individual devices or groups
      *
      * @param options - The things information.
-     * @param options.type - The things type. 1: user's own device, 2: devices shared by others.
+     * @param options.type - The things type. 1: devices status, 2: groups status.
      * @param options.id - The things id.
      * @param options.params - The things params.
      * @returns response - Please refer to the online API documentation

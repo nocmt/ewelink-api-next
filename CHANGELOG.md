@@ -1,5 +1,10 @@
 # CHANGELOG
 
+October 18th, 2023 v1.0.3
+
+- Feat: Modify the description of the type parameter in sendCode, setDeviceTags, setThingStatus, and getThingStatus, and support more explicit parameter content
+- Doc: README.md Add FAQ content
+
 August 31, 2023 v1.0.2
 
 - Feat: Support for CommonJS module

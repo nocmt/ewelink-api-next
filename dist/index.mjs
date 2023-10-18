@@ -336,11 +336,19 @@ var SendCode = class {
    * @beta
    */
   async sendCode(options) {
+    const codeTypes = {
+      register: 0,
+      resetPwd: 1,
+      logout: 3,
+      SMSLogin: 4
+    };
     const body = {
-      type: options.type
+      type: options.type || 0
     };
     body[`${options.account.indexOf("@") !== -1 ? "email" : "phoneNumber"}`] = options.account;
-    body["type"] = Number(options.type);
+    if (typeof options.type === "string" && options.type in codeTypes) {
+      body["type"] = codeTypes[options.type];
+    }
     return await this.root.request.post("/v2/user/verification-code", body, {
       headers: {
         "X-CK-Appid": this.root.appId || "",
@@ -1380,7 +1388,7 @@ var GetThingStatus = class {
    * Get Device Status
    *
    * @param options - The things information.
-   * @param options.type - The things type. 1: user's own device, 2: devices shared by others.
+   * @param options.type - The things type. 1: devices status, 2: groups status.
    * @param options.id - The things id.
    * @param options.params - option, The things params.
    * @returns response - Please refer to the online API documentation
@@ -1388,8 +1396,11 @@ var GetThingStatus = class {
    * @beta
    */
   async getThingStatus(options) {
+    if (typeof options.type === "string") {
+      options.type = options.type === "device" ? 1 : 2;
+    }
     const params = {
-      type: options.type,
+      type: options.type || 1,
       id: options.id,
       params: options?.params
     };
@@ -1449,7 +1460,7 @@ var SetDeviceTags = class {
    */
   async setDeviceTags(options) {
     const body = {
-      type: options.type,
+      type: options.type || "replace",
       deviceid: options.deviceId,
       tags: options.tags
     };
@@ -1544,7 +1555,7 @@ var SetThingStatus = class {
    * Update the status of individual devices or groups
    *
    * @param options - The things information.
-   * @param options.type - The things type. 1: user's own device, 2: devices shared by others.
+   * @param options.type - The things type. 1: devices status, 2: groups status.
    * @param options.id - The things id.
    * @param options.params - The things params.
    * @returns response - Please refer to the online API documentation
@@ -1552,8 +1563,11 @@ var SetThingStatus = class {
    * @beta
    */
   async setThingStatus(options) {
+    if (typeof options.type === "string") {
+      options.type = options.type === "device" ? 1 : 2;
+    }
     const body = {
-      type: options.type,
+      type: options.type || 1,
       id: options.id,
       params: options.params
     };

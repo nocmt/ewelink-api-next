@@ -1,7 +1,7 @@
 {
   "name": "ewelink-api-next",
-  "version": "1.0.2",
-  "description": "CoolKit v2 API Official Library",
+  "version": "1.0.3",
+  "description": "CoolKit v2 API Library",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -78,6 +78,7 @@
     "README.zh-CN.md",
     "package.json",
     "CHANGELOG.md",
-    "docs"
+    "docs",
+    "SupportedAPI.png"
   ]
 }
