@@ -1,6 +1,7 @@
 import "mocha";
 import { assert } from "chai";
 import { client } from "./testConfig.js";
+import { storage } from "./cache.js";
 
 describe("Family management test", function () {
   before(async function () {
@@ -30,7 +31,7 @@ describe("Family management test", function () {
   it("home.getFamily", async function () {
     const response = await client.home.getFamily({});
     assert.strictEqual(response.error, 0, "success");
-    client.storage.set("currentFamilyId", response.data.currentFamilyId);
+    storage.set("currentFamilyId", response.data.currentFamilyId);
   });
 
   it("home.addFamily", async function () {
@@ -39,23 +40,23 @@ describe("Family management test", function () {
       sort: 1
     });
     assert.strictEqual(response.error, 0, "success");
-    client.storage.set("tem_familyId", response.data.id);
+    storage.set("tem_familyId", response.data.id);
   });
 
   it("home.addRoom", async function () {
     const response = await client.home.addRoom({
-      familyId: client.storage.get("tem_familyId"),
+      familyId: storage.get("tem_familyId"),
       name: "room1",
       sort: 1
     });
     assert.strictEqual(response.error, 0, "success");
-    client.storage.set("tem_roomId", response.data.id);
+    storage.set("tem_roomId", response.data.id);
   });
 
   it("home.setFamily", async function () {
     const response = await client.home.setFamily({
       newName: "newName",
-      id: client.storage.get("tem_familyId")
+      id: storage.get("tem_familyId")
     });
     assert.strictEqual(response.error, 0, "success");
   });
@@ -63,7 +64,7 @@ describe("Family management test", function () {
   it("home.setRoom", async function () {
     const response = await client.home.setRoom({
       newName: "newName",
-      id: client.storage.get("tem_roomId")
+      id: storage.get("tem_roomId")
     });
     assert.strictEqual(response.error, 0, "success");
   });
@@ -71,7 +72,7 @@ describe("Family management test", function () {
   it("home.setThing", async function () {
     this.timeout(30000);
     const response = await client.home.setThing({
-      roomId: client.storage.get("tem_roomId"),
+      roomId: storage.get("tem_roomId"),
       newThingList: [],
       oldThingList: []
     });
@@ -80,15 +81,15 @@ describe("Family management test", function () {
 
   it("home.sortRoom", async function () {
     const response = await client.home.sortRoom({
-      familyId: client.storage.get("tem_familyId"),
-      idList: [client.storage.get("tem_roomId")]
+      familyId: storage.get("tem_familyId"),
+      idList: [storage.get("tem_roomId")]
     });
     assert.strictEqual(response.error, 0, "success");
   });
 
   it("home.sortThing", async function () {
     const response = await client.home.sortThing({
-      familyId: client.storage.get("tem_familyId"),
+      familyId: storage.get("tem_familyId"),
       thingList: []
     });
     assert.strictEqual(response.error, 0, "success");
@@ -96,20 +97,20 @@ describe("Family management test", function () {
 
   it("home.delRoom", async function () {
     const response = await client.home.delRoom({
-      id: client.storage.get("tem_roomId")
+      id: storage.get("tem_roomId")
     });
     assert.strictEqual(response.error, 0, "success");
-    client.storage.remove("tem_roomId");
+    storage.remove("tem_roomId");
   });
 
   it("home.delFamily", async function () {
     const response = await client.home.delFamily({
-      id: client.storage.get("tem_familyId"),
+      id: storage.get("tem_familyId"),
       deviceFamily: "62cf696966d517000933c73b",
       switchFamily: "62cf696966d517000933c73b"
     });
     assert.strictEqual(response.error, 0, "success");
-    client.storage.remove("tem_familyId");
+    storage.remove("tem_familyId");
   });
 
   it("message.getMessage", async function () {

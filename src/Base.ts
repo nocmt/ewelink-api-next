@@ -1,9 +1,5 @@
-// import { getToken } from "./utils/index.js";
-import { storage } from "./cache/index.js";
 import { AxiosInstance } from "axios";
 import { creatRequest } from "./utils/request.js";
-
-let _logger: any;
 
 export type eWeLinkBaseOptions = {
   appId: string;
@@ -26,13 +22,12 @@ export class eWeLinkBase {
   userApiKey: string = "";
   logObj?: any;
   request: AxiosInstance | any;
-  storage = storage;
 
   // constructor 是一种用于创建和初始化class创建的对象的特殊方法，类似于Python的__init__函数
   // constructor is a special method that is used to create and initialize class objects, similar to the Python __init__ function
   constructor(options?: eWeLinkBaseOptions) {
     if (!options) return;
-    _logger = this.logObj = options.logObj;
+    this.logObj = options.logObj;
     this.request =
       options.request ||
       creatRequest(
@@ -52,24 +47,6 @@ export class eWeLinkBase {
       this.request.defaults.baseURL = this.endpoint;
     }
   }
-
-  // syncLocalToken = (region: string, account: string) => {
-  //   this.region = region;
-  //   this.account = account;
-  //   this.at = getToken(region, account);
-  //   let createTime;
-  //   try {
-  //     createTime = (storage.get(region) || {})[account];
-  //     this.userApiKey = createTime.user.apikey;
-  //     this.rt = createTime.rt;
-  //     if (createTime && createTime[account]) {
-  //       createTime = createTime[account]?.createTime;
-  //     }
-  //   } catch (error) {
-  //     createTime = null;
-  //   }
-  //   return createTime;
-  // };
 
   /**
    * Set the URL for the request

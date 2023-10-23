@@ -34,21 +34,6 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// src/cache/index.ts
-var import_node_localstorage = require("node-localstorage");
-var localStorage = new import_node_localstorage.LocalStorage("cache");
-var storage = {
-  set(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  },
-  get(key) {
-    return JSON.parse(localStorage.getItem(key));
-  },
-  remove(key) {
-    localStorage.removeItem(key);
-  }
-};
-
 // src/utils/request.ts
 var import_axios = __toESM(require("axios"), 1);
 
@@ -142,7 +127,6 @@ var creatRequest = (config, logObj) => {
 };
 
 // src/Base.ts
-var _logger;
 var eWeLinkBase = class {
   // constructor 是一种用于创建和初始化class创建的对象的特殊方法，类似于Python的__init__函数
   // constructor is a special method that is used to create and initialize class objects, similar to the Python __init__ function
@@ -152,24 +136,6 @@ var eWeLinkBase = class {
     this.rt = "";
     this.account = "";
     this.userApiKey = "";
-    this.storage = storage;
-    // syncLocalToken = (region: string, account: string) => {
-    //   this.region = region;
-    //   this.account = account;
-    //   this.at = getToken(region, account);
-    //   let createTime;
-    //   try {
-    //     createTime = (storage.get(region) || {})[account];
-    //     this.userApiKey = createTime.user.apikey;
-    //     this.rt = createTime.rt;
-    //     if (createTime && createTime[account]) {
-    //       createTime = createTime[account]?.createTime;
-    //     }
-    //   } catch (error) {
-    //     createTime = null;
-    //   }
-    //   return createTime;
-    // };
     /**
      * Set the URL for the request
      *
@@ -196,7 +162,7 @@ var eWeLinkBase = class {
     };
     if (!options)
       return;
-    _logger = this.logObj = options.logObj;
+    this.logObj = options.logObj;
     this.request = options.request || creatRequest(
       {
         baseURL: this.endpoint,
@@ -2028,7 +1994,7 @@ var Ws = class extends eWeLinkBase {
 // src/web/Lan.ts
 var import_bonjour_service = require("bonjour-service");
 var import_crypto_js = __toESM(require("crypto-js"), 1);
-var _logger2;
+var _logger;
 var Lan = class {
   constructor(options) {
     this.selfApikey = "";
@@ -2124,7 +2090,7 @@ var Lan = class {
     };
     if (!options)
       return;
-    _logger2 = this.logObj = options.logObj;
+    _logger = this.logObj = options.logObj;
     this.request = options.request || creatRequest(void 0, this.logObj);
     this.selfApikey = options.selfApikey;
   }
@@ -2140,8 +2106,8 @@ var Lan = class {
   discovery(onDiscover, type = "ewelink") {
     const bonjourClient = new import_bonjour_service.Bonjour();
     bonjourClient.find({ type }, function(service) {
-      if (_logger2) {
-        _logger2.info("Found an eWeLink mDns server: ", service);
+      if (_logger) {
+        _logger.info("Found an eWeLink mDns server: ", service);
       }
       onDiscover(service);
     });
@@ -2273,8 +2239,8 @@ var Lan = class {
       }
       return await this.request.request(requestConfig);
     } catch (error) {
-      if (_logger2) {
-        _logger2.error(error);
+      if (_logger) {
+        _logger.error(error);
       }
       throw new Error("Request error, please check the network, or the device not online.");
     }

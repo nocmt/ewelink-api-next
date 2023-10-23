@@ -22,11 +22,6 @@ declare class eWeLinkBase {
     userApiKey: string;
     logObj?: any;
     request: AxiosInstance | any;
-    storage: {
-        set(key: string, value: any): void;
-        get(key: string): any;
-        remove(key: string): void;
-    };
     constructor(options?: eWeLinkBaseOptions);
     /**
      * Set the URL for the request

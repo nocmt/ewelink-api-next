@@ -1,6 +1,7 @@
 import "mocha";
 import { assert } from "chai";
 import { client } from "./testConfig.js";
+import { storage } from "./cache.js";
 
 describe("User management test", function () {
   it("user.getRegion", async function () {
@@ -14,8 +15,8 @@ describe("User management test", function () {
     this.timeout(10000);
     let response = await client.user.login({ account: "upymjh35902@chacuo.net", password: "12345678", areaCode: "+1" });
     assert.strictEqual(response.error, 0, "Login is successful");
-    client.storage.set("at", response.data.at);
-    client.storage.set("rt", response.data.rt);
+    storage.set("at", response.data.at);
+    storage.set("rt", response.data.rt);
   });
 
   it("user.register", async function () {
@@ -31,7 +32,7 @@ describe("User management test", function () {
   it("user.sendCode", async function () {
     let response = await client.user.sendCode({
       account: "upymjh35902@chacuo.net",
-      type: "1"
+      type: "resetPwd"
     });
     assert.strictEqual(response.error, 0, "success");
   });
@@ -43,14 +44,14 @@ describe("User management test", function () {
 
   it("user.getUserInfo", async function () {
     this.timeout(20000);
-    client.at = client.storage.get("at");
+    client.at = storage.get("at");
     let response = await client.user.getUserInfo();
     assert.strictEqual(response.error, 0, "success");
   });
 
   it("user.updateUserInfo", async function () {
     this.timeout(10000);
-    client.at = client.storage.get("at");
+    client.at = storage.get("at");
     let response = await client.user.updateUserInfo({ nickname: "test" });
     assert.strictEqual(response.error, 0, "success");
   });
@@ -66,7 +67,7 @@ describe("User management test", function () {
 
   it("user.changePwd", async function () {
     this.timeout(10000);
-    client.at = client.storage.get("at");
+    client.at = storage.get("at");
     let response = await client.user.changePwd({
       oldPassword: "12345678",
       newPassword: "12345678"
@@ -76,9 +77,9 @@ describe("User management test", function () {
 
   it("user.refreshToken", async function () {
     this.timeout(10000);
-    client.rt = client.storage.get("rt");
+    client.rt = storage.get("rt");
     let response = await client.user.refreshToken({
-      rt: client.storage.get("rt")
+      rt: storage.get("rt")
     });
     assert.strictEqual(response.error, 0, "success");
   });
@@ -86,6 +87,6 @@ describe("User management test", function () {
   it("user.logout", async function () {
     let response = await client.user.logout();
     assert.strictEqual(response.error, 0, "success");
-    client.storage.remove("at");
+    storage.remove("at");
   });
 });
