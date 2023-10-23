@@ -187,6 +187,10 @@ const client = new eWeLink.WebAPI({
 
 设备离线或者控制指令错误，指令具体查阅：[UIID协议文档 - CoolKit开放平台 4.2](https://coolkit-technologies.github.io/eWeLink-API/#/zh-cmn/UIID%E5%8D%8F%E8%AE%AE)
 
+4、如何获取自己的apikey？
+
+如果你没有登录、获取自己账号信息的接口权限，那么可以调用 GET@/v2/family、GET@/v2/device/thing、POST@/v2/device/thing等接口间接获取，家庭和设备都会关联在你的用户账号下，字段名称是 "apikey"。
+
 ## 修改日志
 
 [修改日志](CHANGELOG.md)

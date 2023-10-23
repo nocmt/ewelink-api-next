@@ -181,19 +181,23 @@ The login method for the authorization page can be referred to：[https://github
 
 ## FAQ
 
-1. 407 error while requesting interface
+Q: Why does the request return 407 error while requesting interface?
 
-The list of available interfaces for the APPID you are currently using does not include this interface (limited by the application type). For example, applications created from the eWeLink developer center can only use the following interfaces:
+A: The list of available interfaces for the APPID you are currently using does not include this interface (limited by the application type). For example, applications created from the eWeLink developer center can only use the following interfaces:
 
 ![Supported API](SupportedAPI.png)
 
-2. Unable to obtain device data through interfaces such as requesting homepage and get ThingList
+Q: Unable to obtain device data through interfaces such as requesting homepage and get ThingList
 
-The reason is that applications created from the eWeLink developer center only have free authorization for brands such as sonoff, SONOFF, 嵩诺, and coolkit. Authorization for other brands requires the manufacturer's consent (after payment, business communication).
+A: The reason is that applications created from the eWeLink developer center only have free authorization for brands such as sonoff, SONOFF, 嵩诺, and coolkit. Authorization for other brands requires the manufacturer's consent (after payment, business communication).
 
-3. 4002 error returned while controlling the device
+Q: 4002 error returned while controlling the device
 
-The device is offline or the control command is incorrect. Please refer to: [UIID Protocol - CoolKit Open Platform 4.2](https://coolkit-technologies.github.io/eWeLink-API/#/en/UIIDProtocol)
+A: The device is offline or the control command is incorrect. Please refer to: [UIID Protocol - CoolKit Open Platform 4.2](https://coolkit-technologies.github.io/eWeLink-API/#/en/UIIDProtocol)
+
+Q: How to obtain one's apikey?
+
+A: If you do not have the interface permission to log in and obtain your account information, you can indirectly obtain it by calling interfaces such as GET@/v2/family, GET@/v2/device/thing and POST@/v2/device/thing, etc. Both home and device will be associated with your user account, and the field name is "apikey".
 
 ## Thanks
 
