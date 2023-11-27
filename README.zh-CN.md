@@ -1,4 +1,4 @@
-# [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
+# [ewelink-api-next](https://github.com/nocmt/ewelink-api-next)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
@@ -145,7 +145,7 @@ const client = new eWeLink.WebAPI({
 })()
 ```
 
-授权页登录方法可参考 [https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo](https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo)
+授权页登录方法可参考 [https://github.com/nocmt/eWeLinkOAuthLoginDemo](https://github.com/nocmt/eWeLinkOAuthLoginDemo)
 
 ### 方法说明
 

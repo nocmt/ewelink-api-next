@@ -68,10 +68,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coolkit-carl/ewelink-api-next.git"
+    "url": "git+https://github.com/nocmt/ewelink-api-next.git"
   },
   "bugs": {
-    "url": "https://github.com/coolkit-carl/ewelink-api-next/issues"
+    "url": "https://github.com/nocmt/ewelink-api-next/issues"
   },
   "files": [
     "dist",

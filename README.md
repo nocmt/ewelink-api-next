@@ -1,4 +1,4 @@
-# [ewelink-api-next](https://github.com/coolkit-carl/ewelink-api-next)
+# [ewelink-api-next](https://github.com/nocmt/ewelink-api-next)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
@@ -148,7 +148,7 @@ const client = new eWeLink.WebAPI({
 
 
 
-The login method for the authorization page can be referred to：[https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo](https://github.com/coolkit-carl/eWeLinkOAuthLoginDemo)
+The login method for the authorization page can be referred to：[https://github.com/nocmt/eWeLinkOAuthLoginDemo](https://github.com/nocmt/eWeLinkOAuthLoginDemo)
 
 ### Method Description
 
