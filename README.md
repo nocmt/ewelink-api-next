@@ -2,7 +2,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-18.7.0-pewter.svg?logo=Node.js&link=https://nodejs.org/cn)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yanhaijing/jslib-base/blob/master/LICENSE)
-![Version](https://img.shields.io/badge/Version-1.0.3-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
+![Version](https://img.shields.io/badge/Version-1.0.x-orange.svg?logo=SemVer&link=https://nodejs.org/cn)
 
 English | [简体中文](README.zh-CN.md)
 

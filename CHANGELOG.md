@@ -1,25 +1,29 @@
 # CHANGELOG
 
+February 27th, 2024 v1.0.4
+
+- Fix: Update dependent versions
+
 October 18th, 2023 v1.0.3
 
 - Feat: Modify the description of the type parameter in sendCode, setDeviceTags, setThingStatus, and getThingStatus, and support more explicit parameter content
 - Doc: README.md Add FAQ content
 
-August 31, 2023 v1.0.2
+August 31th, 2023 v1.0.2
 
 - Feat: Support for CommonJS module
 
-August 22, 2023 v1.0.1
+August 22th, 2023 v1.0.1
 
 - Fix: Fix bug in device.getAllThingsAllPages() and user.refreshToken() method
 
-August 21, 2023 v1.0.0
+August 21th, 2023 v1.0.0
 
 - Refactor: other.dispatch(region: string)、change user.setUserInfo to user.updateUserInfo
 - Refactor: user.logout() Cancel at parameter transfer
 - Feat: New document description, open source project
 
-August 4, 2023 v0.0.8
+August 4th, 2023 v0.0.8
 
 - Feat: Add responseTime in response
 - Fix: Error modifying getRegion
