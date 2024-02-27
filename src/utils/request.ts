@@ -29,7 +29,7 @@ export const creatRequest = (config?: AxiosRequestConfig, logObj?: any): AxiosIn
   // 请求拦截
   // Request interception
   instance.interceptors.request.use(
-    (req: AxiosRequestConfig) => {
+    (req: any) => {
       if (["post", "put"].includes(req.method || "")) {
         if (req.headers) {
           req.headers["Content-Type"] = "application/json";
