@@ -4,7 +4,7 @@ import * as log4js from 'log4js';
 import WebSocket, { ErrorEvent, MessageEvent } from 'ws';
 import { Service, Bonjour } from 'bonjour-service';
 
-declare type eWeLinkBaseOptions = {
+type eWeLinkBaseOptions = {
     appId: string;
     appSecret: string;
     region: string;
@@ -63,7 +63,7 @@ declare class GetRegion {
     }): Promise<any>;
 }
 
-declare type accountInfo$6 = {
+type accountInfo$6 = {
     account: string;
     password: string;
     areaCode: string;
@@ -88,7 +88,7 @@ declare class Login {
     login(options: accountInfo$6): Promise<any>;
 }
 
-declare type accountInfo$5 = {
+type accountInfo$5 = {
     account: string;
     password: string;
     areaCode: string;
@@ -113,7 +113,7 @@ declare class Register {
     register(options: accountInfo$5): Promise<any>;
 }
 
-declare type accountInfo$4 = {
+type accountInfo$4 = {
     phoneNumber: string;
     areaCode: string;
     code: string;
@@ -138,7 +138,7 @@ declare class SMSLogin {
     smsLogin(options: accountInfo$4): Promise<any>;
 }
 
-declare type accountInfo$3 = {
+type accountInfo$3 = {
     type: number | string | "register" | "resetPwd" | "logout" | "SMSLogin";
     account: string;
 };
@@ -159,7 +159,7 @@ declare class SendCode {
     sendCode(options: accountInfo$3): Promise<any>;
 }
 
-declare type accountInfo$2 = {
+type accountInfo$2 = {
     account: string;
     newPassword: string;
     code: string;
@@ -183,7 +183,7 @@ declare class ResetPwd {
     resetPwd(options: accountInfo$2): Promise<any>;
 }
 
-declare type accountInfo$1 = {
+type accountInfo$1 = {
     oldPassword: string;
     newPassword: string;
 };
@@ -218,7 +218,7 @@ declare class GetUserInfo {
     getUserInfo(): Promise<any>;
 }
 
-declare type userInfo = {
+type userInfo = {
     nickname?: string;
     acceptEmailAd?: boolean;
     accountConsult?: true | null;
@@ -255,7 +255,7 @@ declare class UpdateUserInfo {
     updateUserInfo(options: userInfo): Promise<any>;
 }
 
-declare type accountInfo = {
+type accountInfo = {
     rt?: string;
 };
 interface RefreshToken extends BaseWebAPI {
@@ -288,7 +288,7 @@ declare class Logout {
     logout(): Promise<any>;
 }
 
-declare type baseInfo$d = {
+type baseInfo$d = {
     code: string;
 };
 interface DeleteAccount extends BaseWebAPI {
@@ -314,7 +314,7 @@ declare class User {
 interface User extends GetRegion, Login, Register, SMSLogin, SendCode, ResetPwd, ChangePwd, GetUserInfo, UpdateUserInfo, RefreshToken, Logout, DeleteAccount {
 }
 
-declare type homePageInfo$1 = {
+type homePageInfo$1 = {
     lang?: "en" | "cn";
     clientInfo?: {
         model?: string;
@@ -367,7 +367,7 @@ declare class HomePage {
     homePage(options: homePageInfo$1): Promise<any>;
 }
 
-declare type baseInfo$c = {
+type baseInfo$c = {
     name: string;
     sort: number | 1 | 2;
     roomNameList?: string[];
@@ -389,7 +389,7 @@ declare class AddFamily {
     addFamily(options: baseInfo$c): Promise<any>;
 }
 
-declare type familyInfo = {
+type familyInfo = {
     familyId: string;
     name: string;
     sort: number | 1 | 2;
@@ -411,7 +411,7 @@ declare class AddRoom {
     addRoom(options: familyInfo): Promise<any>;
 }
 
-declare type baseInfo$b = {
+type baseInfo$b = {
     id: string;
     deviceFamily: string;
     switchFamily: string;
@@ -433,7 +433,7 @@ declare class DelFamily {
     delFamily(options: baseInfo$b): Promise<any>;
 }
 
-declare type baseInfo$a = {
+type baseInfo$a = {
     id: string;
 };
 interface DelRoom extends BaseWebAPI {
@@ -451,7 +451,7 @@ declare class DelRoom {
     delRoom(options: baseInfo$a): Promise<any>;
 }
 
-declare type baseInfo$9 = {
+type baseInfo$9 = {
     lang?: "en" | "cn";
 };
 interface GetFamily extends BaseWebAPI {
@@ -469,7 +469,7 @@ declare class GetFamily {
     getFamily(options: baseInfo$9): Promise<any>;
 }
 
-declare type baseInfo$8 = {
+type baseInfo$8 = {
     id?: string;
     newName: string;
 };
@@ -490,7 +490,7 @@ declare class SetFamily {
     setFamily(options: baseInfo$8): Promise<any>;
 }
 
-declare type baseInfo$7 = {
+type baseInfo$7 = {
     id: string;
     newName: string;
 };
@@ -511,7 +511,7 @@ declare class SetRoom {
     setRoom(options: baseInfo$7): Promise<any>;
 }
 
-declare type baseInfo$6 = {
+type baseInfo$6 = {
     roomId: string;
     oldThingList: string[];
     newThingList: string[];
@@ -534,7 +534,7 @@ declare class SetThing {
     setThing(options: baseInfo$6): Promise<any>;
 }
 
-declare type baseInfo$5 = {
+type baseInfo$5 = {
     familyId?: string;
     idList: string[];
 };
@@ -555,7 +555,7 @@ declare class SortRoom {
     sortRoom(options: baseInfo$5): Promise<any>;
 }
 
-declare type baseInfo$4 = {
+type baseInfo$4 = {
     familyId?: string;
     thingList: Array<{
         itemType?: string;
@@ -582,7 +582,7 @@ declare class SortThing {
     sortThing(options: baseInfo$4): Promise<any>;
 }
 
-declare type baseInfo$3 = {
+type baseInfo$3 = {
     id: string;
 };
 interface SwitchFamily extends BaseWebAPI {
@@ -609,7 +609,7 @@ declare class Home {
 interface Home extends HomePage, AddFamily, AddRoom, DelFamily, DelRoom, GetFamily, SetFamily, SetRoom, SetThing, SortRoom, SortThing, SwitchFamily {
 }
 
-declare type thingInfo$6 = {
+type thingInfo$6 = {
     familyId?: string;
     lang?: "en" | "cn";
     num?: number | 30;
@@ -662,7 +662,7 @@ declare class GetAllThings {
     }>;
 }
 
-declare type deviceInfo$8 = {
+type deviceInfo$8 = {
     name?: string;
     deviceId: string;
     settings?: {
@@ -703,7 +703,7 @@ declare class AddDevice {
     addDevice(options: deviceInfo$8): Promise<any>;
 }
 
-declare type groupInfo$4 = {
+type groupInfo$4 = {
     name: string;
     mainDeviceId: string;
     familyId?: string;
@@ -731,7 +731,7 @@ declare class AddGroup {
     addGroup(options: groupInfo$4): Promise<any>;
 }
 
-declare type deviceInfo$7 = {
+type deviceInfo$7 = {
     name: string;
     id: string;
     familyId?: string;
@@ -757,7 +757,7 @@ declare class AddGSMDevice {
     addGSMDevice(options: deviceInfo$7): Promise<any>;
 }
 
-declare type groupInfo$3 = {
+type groupInfo$3 = {
     id: string;
     coverDeviceidList: string[];
 };
@@ -778,7 +778,7 @@ declare class CoverGroupDeviceList {
     coverGroupDeviceList(options: groupInfo$3): Promise<any>;
 }
 
-declare type deviceInfo$6 = {
+type deviceInfo$6 = {
     id: string;
 };
 interface DelDevice extends BaseWebAPI {
@@ -797,7 +797,7 @@ declare class DelDevice {
     delDevice(options: deviceInfo$6): Promise<any>;
 }
 
-declare type deviceInfo$5 = {
+type deviceInfo$5 = {
     newName?: string;
     deviceId: string;
     newRoomId?: string;
@@ -819,7 +819,7 @@ declare class SetDeviceInfo {
     setDeviceInfo(options: deviceInfo$5): Promise<any>;
 }
 
-declare type groupInfo$2 = {
+type groupInfo$2 = {
     id: string;
 };
 interface DelGroup extends BaseWebAPI {
@@ -838,7 +838,7 @@ declare class DelGroup {
     delGroup(options: groupInfo$2): Promise<any>;
 }
 
-declare type thingInfo$5 = {
+type thingInfo$5 = {
     deviceId: string;
 };
 interface DelOperationHistory extends BaseWebAPI {
@@ -857,7 +857,7 @@ declare class DelOperationHistory {
     delOperationHistory(options: thingInfo$5): Promise<any>;
 }
 
-declare type deviceInfo$4 = {
+type deviceInfo$4 = {
     deviceId: string;
     apiKey: string;
 };
@@ -878,7 +878,7 @@ declare class DelShare {
     delShare(options: deviceInfo$4): Promise<any>;
 }
 
-declare type baseInfo$2 = {
+type baseInfo$2 = {
     lang?: "cn" | "en";
 };
 interface GetGroups extends BaseWebAPI {
@@ -897,7 +897,7 @@ declare class GetGroups {
     getGroups(options: baseInfo$2): Promise<any>;
 }
 
-declare type thingInfo$4 = {
+type thingInfo$4 = {
     deviceId: string;
     from?: string;
     num?: number | 30;
@@ -920,7 +920,7 @@ declare class GetOperationHistory {
     getOperationHistory(options: thingInfo$4): Promise<any>;
 }
 
-declare type deviceInfo$3 = {
+type deviceInfo$3 = {
     deviceInfoList: Array<{
         deviceId: string;
         model: string;
@@ -946,7 +946,7 @@ declare class GetOTAInfo {
     getOTAInfo(options: deviceInfo$3): Promise<any>;
 }
 
-declare type thingInfo$3 = {
+type thingInfo$3 = {
     thingList: {
         itemType: Number | 1 | 2 | 3;
         id: string;
@@ -969,7 +969,7 @@ declare class GetThings {
     getThings(options: thingInfo$3): Promise<any>;
 }
 
-declare type thingInfo$2 = {
+type thingInfo$2 = {
     type?: number | string | 1 | 2 | "device" | "group";
     id: string;
     params?: string;
@@ -991,7 +991,7 @@ declare class GetThingStatus {
     getThingStatus(options: thingInfo$2): Promise<any>;
 }
 
-declare type thingInfo$1 = {
+type thingInfo$1 = {
     thingList: Array<{
         type: number | 1 | 2;
         id: string;
@@ -1018,7 +1018,7 @@ declare class SetAllThingStatus {
     setAllThingStatus(options: thingInfo$1): Promise<any>;
 }
 
-declare type deviceInfo$2 = {
+type deviceInfo$2 = {
     type?: string | "replace" | "merge";
     deviceId: string;
     tags: object;
@@ -1040,7 +1040,7 @@ declare class SetDeviceTags {
     setDeviceTags(options: deviceInfo$2): Promise<any>;
 }
 
-declare type groupInfo$1 = {
+type groupInfo$1 = {
     newName: string;
     id: string;
 };
@@ -1060,7 +1060,7 @@ declare class SetGroup {
     setGroup(options: groupInfo$1): Promise<any>;
 }
 
-declare type groupInfo = {
+type groupInfo = {
     id: string;
     params: object;
 };
@@ -1080,7 +1080,7 @@ declare class SetGroupStatus {
     setGroupStatus(options: groupInfo): Promise<any>;
 }
 
-declare type deviceInfo$1 = {
+type deviceInfo$1 = {
     deviceId: string;
     apiKey: string;
     permit: number | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 15;
@@ -1102,7 +1102,7 @@ declare class SetShare {
     setShare(options: deviceInfo$1): Promise<any>;
 }
 
-declare type thingInfo = {
+type thingInfo = {
     type?: number | string | 1 | 2 | "device" | "group";
     id: string;
     params: object;
@@ -1124,7 +1124,7 @@ declare class SetThingStatus {
     setThingStatus(options: thingInfo): Promise<any>;
 }
 
-declare type deviceInfo = {
+type deviceInfo = {
     user: {
         countryCode: string;
         phoneNumber?: string;
@@ -1164,7 +1164,7 @@ declare class Device {
 interface Device extends GetAllThings, AddDevice, AddGroup, AddGSMDevice, CoverGroupDeviceList, DelDevice, DelGroup, DelOperationHistory, DelShare, GetGroups, GetOperationHistory, GetOTAInfo, GetThings, GetThingStatus, SetAllThingStatus, SetDeviceTags, SetDeviceInfo, SetGroup, SetGroupStatus, SetShare, SetThingStatus, Share {
 }
 
-declare type homePageInfo = {
+type homePageInfo = {
     familyId?: string;
     from?: string;
     num?: number | 30;
@@ -1216,7 +1216,7 @@ declare class Other {
 interface Other extends Dispatch {
 }
 
-declare type loginPageInfo = {
+type loginPageInfo = {
     redirectUrl: string;
     grantType?: string | "authorization_code";
     state: string;
@@ -1239,7 +1239,7 @@ declare class CreateLoginUrl {
     createLoginUrl(options: loginPageInfo): string;
 }
 
-declare type baseInfo$1 = {
+type baseInfo$1 = {
     region: string;
     redirectUrl: string;
     code: string;
@@ -1286,11 +1286,11 @@ declare class WebAPI extends eWeLinkBase {
 interface WebAPI {
 }
 
-declare type baseInfo = {
+type baseInfo = {
     region?: string | "cn" | "as" | "us" | "eu" | "test";
     fullUrl?: string;
 };
-declare type connectInfo = {
+type connectInfo = {
     region?: string | "cn" | "as" | "us" | "eu" | "test";
     fullUrl?: string;
     at: string;
@@ -1363,7 +1363,7 @@ declare class Ws extends eWeLinkBase {
 interface Ws {
 }
 
-declare type serverOptions = {
+type serverOptions = {
     method: string | "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
     ip: string;
     port: string;
@@ -1375,7 +1375,7 @@ declare type serverOptions = {
     iv?: string;
     selfApikey?: string;
 };
-declare type LanOptions = {
+type LanOptions = {
     selfApikey: string;
     logObj?: any;
     request?: string;
