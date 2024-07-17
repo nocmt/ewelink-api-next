@@ -1220,6 +1220,7 @@ type loginPageInfo = {
     redirectUrl: string;
     grantType?: string | "authorization_code";
     state: string;
+    showQRCode?: boolean;
 };
 interface CreateLoginUrl extends BaseWebAPI {
 }
@@ -1232,6 +1233,7 @@ declare class CreateLoginUrl {
      * @param options.redirectUrl - The redirect URL after login
      * @param options.grantType - option, The grant type, default: `authorization_code`
      * @param options.state - The state
+     * @param options.showQRCode - option, default: `false`, whether to show QR code
      * @returns loginUrl - which is a URL for OAuth login
      *
      * @beta

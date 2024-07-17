@@ -6,6 +6,7 @@ export type loginPageInfo = {
   redirectUrl: string;
   grantType?: string | "authorization_code";
   state: string;
+  showQRCode?: boolean;
 };
 
 export interface CreateLoginUrl extends BaseWebAPI {}
@@ -19,6 +20,7 @@ export class CreateLoginUrl {
    * @param options.redirectUrl - The redirect URL after login
    * @param options.grantType - option, The grant type, default: `authorization_code`
    * @param options.state - The state
+   * @param options.showQRCode - option, default: `false`, whether to show QR code
    * @returns loginUrl - which is a URL for OAuth login
    *
    * @beta
@@ -32,6 +34,7 @@ export class CreateLoginUrl {
       state: options.state,
       nonce: nonce(),
       seq: seq.toString(),
+      showQRCode: options.showQRCode ?? null,
       authorization: sign(`${this.root.appId ?? ""}_${seq}`, this.root.appSecret ?? "")
     };
     return (

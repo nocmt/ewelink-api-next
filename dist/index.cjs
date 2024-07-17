@@ -1722,6 +1722,7 @@ var CreateLoginUrl = class {
    * @param options.redirectUrl - The redirect URL after login
    * @param options.grantType - option, The grant type, default: `authorization_code`
    * @param options.state - The state
+   * @param options.showQRCode - option, default: `false`, whether to show QR code
    * @returns loginUrl - which is a URL for OAuth login
    *
    * @beta
@@ -1735,6 +1736,7 @@ var CreateLoginUrl = class {
       state: options.state,
       nonce: nonce(),
       seq: seq.toString(),
+      showQRCode: options.showQRCode ?? null,
       authorization: sign(`${this.root.appId ?? ""}_${seq}`, this.root.appSecret ?? "")
     };
     return (`https://c2ccdn.coolkit.cc/oauth/index.html?` + Object.keys(params).map((key) => `${key}=${params[key]}`).join("&")).replace("&auion", "&authorization");
