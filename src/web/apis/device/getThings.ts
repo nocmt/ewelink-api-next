@@ -4,7 +4,7 @@ export type thingInfo = {
   thingList: {
     itemType: Number | 1 | 2 | 3;
     id: string;
-  };
+  }[];
 };
 
 export interface GetThings extends BaseWebAPI {}
