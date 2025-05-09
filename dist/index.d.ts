@@ -950,7 +950,7 @@ type thingInfo$3 = {
     thingList: {
         itemType: Number | 1 | 2 | 3;
         id: string;
-    };
+    }[];
 };
 interface GetThings extends BaseWebAPI {
 }
